@@ -1,15 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 
 // components declaration
+import DocumentMeta from 'react-document-meta'
 import Header from '../../components/header'
 import Footer from '../../components/footer'
 
 export default class PageFrame extends Component {
   render () {
-    const { children } = this.props
+    const { children, meta } = this.props
 
     return (
       <div className={'container-with-footer'}>
+        <DocumentMeta {...meta} />
         <div className={'container-content'}>
           <Header />
           <div className={'container'}>
@@ -25,5 +27,9 @@ export default class PageFrame extends Component {
 }
 
 PageFrame.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.oneOf([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node)
+  ]),
+  meta: PropTypes.object
 }

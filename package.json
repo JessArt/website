@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dev": "NODE_ENV=development webpack --colors --config ./tools/webpack-server.config.js"
+    "build:dev": "NODE_ENV=development webpack --colors --config ./tools/webpack-server.config.js",
+    "build:prod": "NODE_ENV=production webpack --colors --config ./tools/webpack-server.config.js && node tools/build.js"
   },
   "author": "Seva Zaikov <seva.zaikov@gmail.com>",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "mobx": "^2.3.4",
     "pug": "^2.0.0-beta3",
     "react": "^15.2.0",
+    "react-document-meta": "^2.0.3",
     "react-dom": "^15.2.0",
     "react-router": "^2.5.2",
     "webpack-dev-server": "^1.14.1"

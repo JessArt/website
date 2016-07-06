@@ -2,10 +2,60 @@ doctype html
 html(lang="en")
   head
     title Jess Zaikova gallery
-    meta(charset="utf-8")
+    meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width,initial-scale=1,user-scalable=no")
+    meta(name="author", content="Jess Zaikova")
+    meta(name="copyright", content="Copyright 2015 by SPB TV AG")
+    meta(name="og:type", type="website")
+    meta(name="og:image", content="https://scontent.xx.fbcdn.net/v/t1.0-9/945019_809515499069819_6367960141797682949_n.jpg?oh=5d33301680a99fe82b051252e6ed293e&oe=57F05CE5")
+    meta(name="og:site_name", content="Jess.Gallery")
+    meta(name="og:locale", content="en_GB")
+    meta(name="twitter:card", content="summary_large_image")
+    meta(name="twitter:site", content="@jessellisart")
+    meta(name="twitter:title", content="Jess.Gallery")
+    meta(name="twitter:description", content="Jess Zaikova art and photos, tutorials and videos!")
+    != meta
+
+    link(rel="stylesheet", href="styles.css")
 
   body
     #app
       != data
 
   script(src="client.js")
+
+  unless dev
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-80410904-1', 'auto');
+      ga('send', 'pageview');
+
+    script.
+      (function (d, w, c) {
+          (w[c] = w[c] || []).push(function() {
+              try {
+                  w.yaCounter38362750 = new Ya.Metrika({
+                      id:38362750,
+                      clickmap:true,
+                      trackLinks:true,
+                      accurateTrackBounce:true
+                  });
+              } catch(e) { }
+          });
+
+          var n = d.getElementsByTagName("script")[0],
+              s = d.createElement("script"),
+              f = function () { n.parentNode.insertBefore(s, n); };
+          s.type = "text/javascript";
+          s.async = true;
+          s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+          if (w.opera == "[object Opera]") {
+              d.addEventListener("DOMContentLoaded", f, false);
+          } else { f(); }
+      })(document, window, "yandex_metrika_callbacks");

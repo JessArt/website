@@ -6,7 +6,8 @@ const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&t
 
 const variables = require('../src/scripts/shared/variables')
 
-module.exports = ({ dev }) => {
+module.exports = function getConfig (params) {
+  const dev = params.dev
   console.log('VARIABLES:')
   console.log(variables)
   const postCSSConfig = function () {
@@ -51,7 +52,11 @@ module.exports = ({ dev }) => {
     new webpack.HotModuleReplacementPlugin()
   ]
 
-  const buildPlugins = []
+  const buildPlugins = [
+    new ExtractTextPlugin('styles.css'),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  ]
 
   const cssLoader = dev
     ? 'style-loader!css-loader!postcss-loader'
@@ -69,7 +74,7 @@ module.exports = ({ dev }) => {
       .concat(devEntries)
       .concat('./src/scripts/client/index.js'),
     output: {
-      path: path.resolve(cwd, 'build'),
+      path: path.resolve(cwd, 'build/public'),
       publicPath: '',
       filename: 'client.js'
     },

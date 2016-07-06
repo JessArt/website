@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const config = require('./webpack.config.js')({ dev: false })
+const config = require('./webpack-client.config.js')({ dev: false })
 
 const compiler = webpack(config)
 

@@ -17,8 +17,20 @@ export default class HomePage extends Component {
       return <PromoSection type={type} style={style} position={position} />
     })
 
+    const meta = {
+      title: 'Jess Zaikova Gallery',
+      description: 'Jess Zaikova art and photography',
+      canonical: 'http://jess.gallery',
+      meta: {
+        charset: 'utf-8',
+        name: {
+          keywords: 'art, drawing, paint, photo, photography'
+        }
+      }
+    }
+
     return (
-      <PageFrame>
+      <PageFrame meta={meta}>
         <div className={styles.sectionsContainer}>
           {sections}
         </div>

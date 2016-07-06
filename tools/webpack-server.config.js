@@ -43,10 +43,15 @@ const commonLoaders = [
 
 const config = {
   name: 'server-side rendering',
+  devtool: 'sourcemap',
   entry: {
     server: './src/scripts/server/index.js'
   },
   target: 'node',
+  node: {
+    __filename: true,
+    __dirname: true
+  },
   output: {
     // The output directory as absolute path
     path: path.join(__dirname, '..', 'build'),
@@ -69,7 +74,7 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      __DEV__: true
+      __DEV__: process.env.NODE_ENV === 'development'
     })
   ],
   externals: nodeModules
