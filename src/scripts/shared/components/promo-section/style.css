@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  min-height: 200px;
+
+  &.bright {
+    background-color: $color-primary;
+  }
+
+  &.dark {
+    background-color: $color-primary-dark;
+  }
+}
+
+.logoContainer {
+  flex: 0 0 200px;
+
+  &.right {
+    order: 2;
+  }
+}
+
+.image {
+  display: block;
+  width: 100%;
+}
+
+.textContainer {
+  flex: 1 1 auto;
+  text-align: center;
+
+  &.left {
+    order: 1;
+  }
+
+  &.dark {
+    color: $color-primary;
+  }
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.description {
+  font-size: 24px;
+  padding: 0 20px;
+}

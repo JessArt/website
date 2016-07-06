@@ -1,11 +1,45 @@
 const webpack = require('webpack')
 const path = require('path')
 const cwd = process.cwd()
-const autoprefixer = require('autoprefixer')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
 
+const variables = require('../src/scripts/shared/variables')
+
 module.exports = ({ dev }) => {
+  console.log('VARIABLES:')
+  console.log(variables)
+  const postCSSConfig = function () {
+    return [
+      require('postcss-import')({
+        path: path.join(__dirname, '..', 'src', 'scripts', 'shared'),
+        // addDependencyTo is used for hot-reloading in webpack
+        addDependencyTo: webpack
+      }),
+      // Note: you must set postcss-mixins before simple-vars and nested
+      require('postcss-mixins')(),
+      require('postcss-simple-vars')({
+        // to allow hot reload:
+        // https://github.com/postcss/postcss-simple-vars
+        variables
+      }),
+      // Unwrap nested rules like how Sass does it
+      require('postcss-nested')(),
+      //  parse CSS and add vendor prefixes to CSS rules
+      require('autoprefixer')({
+        browsers: ['last 2 versions', 'IE > 8']
+      }),
+      require('postcss-modules')({
+        generateScopedName: '[name]__[local]___[hash:base64:5]'
+      }),
+      // A PostCSS plugin to console.log() the messages registered by other
+      // PostCSS plugins
+      require('postcss-reporter')({
+        clearMessages: true
+      })
+    ]
+  }
+
   const devEntries = dev
     ? [
       // For hot style updates
@@ -63,16 +97,19 @@ module.exports = ({ dev }) => {
         {
           test: /\.json$/,
           loader: 'json'
+        },
+        {
+          test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+          loader: 'url',
+          query: {
+            name: '[hash].[ext]',
+            limit: 10000
+          }
         }
       ]
     },
     plugins: dev ? devPlugins : buildPlugins,
-    postcss: [
-      autoprefixer,
-      require('postcss-modules')({
-        generateScopedName: '[name]__[local]___[hash:base64:5]'
-      })
-    ]
+    postcss: postCSSConfig
   }
 
   return config

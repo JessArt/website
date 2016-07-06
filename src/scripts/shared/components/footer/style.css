@@ -1,0 +1,10 @@
+.container {
+  padding: 20px 0;
+  background: $color-primary-dark;
+  color: $color-primary;
+  text-align: center;
+}
+
+.email {
+  color: #fff;
+}
