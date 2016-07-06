@@ -18,11 +18,14 @@
   color: $color-primary;
 }
 
-.links {
+.linksContainer {
   background-color: rgb(115, 115, 115);
+}
+
+.links {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
 }
@@ -34,6 +37,11 @@
   font-weight: bold;
   margin-right: 17px;
   text-decoration: none;
+  transition: color 0.4s;
+
+  &:hover {
+    color: $color-primary;
+  }
 }
 
 .external {

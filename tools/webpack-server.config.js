@@ -58,6 +58,10 @@ const config = {
   module: {
     loaders: commonLoaders.concat([
       {
+        test: /\/.pug$/,
+        loader: 'pug-loader'
+      },
+      {
         test: /\.css$/,
         loader: 'css/locals?module&localIdentName=[name]__[local]___[hash:base64:5]'
       }
