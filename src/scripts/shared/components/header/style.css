@@ -1,5 +1,5 @@
 .titleContainer {
-
+  height: 70px;
 }
 
 .backgroundContainer {
@@ -8,18 +8,26 @@
 }
 
 .title {
-  background-color: rgba(115, 115, 115, 0.65);
+  background-color: rgba(58, 58, 58, 0.45);
   margin: 0;
-  font-size: 70px;
+  font-size: 60px;
   text-transform: uppercase;
 }
 
+.titleLink {
+  text-decoration: none;
+}
+
+.noncolored {
+  color: #fff;
+}
+
 .colored {
-  color: $color-primary;
+  color: $color-primary-dark;
 }
 
 .linksContainer {
-  background-color: rgb(115, 115, 115);
+  background-color: $color-primary-dark;
 }
 
 .links {
@@ -31,7 +39,7 @@
 }
 
 .link {
-  color: $color-primary-dark;
+  color: #fff;
   text-transform: uppercase;
   font-size: 24px;
   font-weight: bold;

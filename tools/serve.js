@@ -1,7 +1,8 @@
 const WebpackDevServer = require('webpack-dev-server')
 const webpack = require('webpack')
-const config = require('./webpack.config.js')({ dev: true })
+const config = require('./webpack-client.config.js')({ dev: true })
 
+config.entry.unshift("webpack-dev-server/client?http://localhost:8080/", "webpack/hot/dev-server");
 const compiler = webpack(config)
 const server = new WebpackDevServer(compiler, {
   // webpack-dev-server options
@@ -16,18 +17,18 @@ const server = new WebpackDevServer(compiler, {
 
   // Set this as true if you want to access dev server from arbitrary url.
   // This is handy if you are using a html5 router.
-  historyApiFallback: false,
+  historyApiFallback: true,
 
   // Set this if you want to enable gzip compression for assets
-  compress: true,
+  // compress: true,
 
   // Set this if you want webpack-dev-server to delegate a single path to an arbitrary server.
   // Use "*" to proxy all paths to the specified server.
   // This is useful if you want to get rid of 'http://localhost:8080/' in script[src],
   // and has many other use cases (see https://github.com/webpack/webpack-dev-server/pull/127 ).
-  proxy: {
-    '*': 'http://localhost:9090'
-  },
+  // proxy: {
+  //   '*': 'http://localhost:9090'
+  // },
 
   // pass [static options](http://expressjs.com/en/4x/api.html#express.static) to inner express server
   staticOptions: {

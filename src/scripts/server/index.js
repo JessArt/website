@@ -13,6 +13,9 @@ import { match, RouterContext } from 'react-router'
 import routes from '../shared/router/routes'
 import DocumentMeta from 'react-document-meta'
 
+import { Provider } from 'mobx-react'
+import * as stores from '../shared/store'
+
 const viewPath = path.join(process.cwd(), 'src', 'scripts', 'views', 'index.pug')
 const compiledFn = pug.compileFile(viewPath, {})
 
@@ -38,7 +41,8 @@ if (__DEV__) {
   app.use(express.static(path.join(__dirname, '..', '..', '..', 'build', 'public')))
 }
 
-app.use('*', (req, res, next) => {
+app.use((req, res, next) => {
+  console.log('!!!!!!!!!!!!!!!!!', req.url);
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message)
@@ -48,7 +52,11 @@ app.use('*', (req, res, next) => {
       // You can also check renderProps.components or renderProps.routes for
       // your "not found" component or route respectively, and send a 404 as
       // below, if you're using a catch-all route.
-      const data = renderToString(<RouterContext {...renderProps} />)
+      const data = renderToString(
+        <Provider {...stores}>
+          <RouterContext {...renderProps} />
+        </Provider>
+      )
       const meta = DocumentMeta.renderAsHTML()
       res.send(compiledFn({
         title: 'Hey',

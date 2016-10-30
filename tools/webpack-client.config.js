@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const cwd = process.cwd()
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
+// const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
 
 const variables = require('../src/scripts/shared/variables')
 
@@ -44,8 +44,7 @@ module.exports = function getConfig (params) {
   const devEntries = dev
     ? [
       // For hot style updates
-      'webpack/hot/dev-server',
-      hotMiddlewareScript
+      'webpack/hot/dev-server'
     ] : []
 
   const devPlugins = [
@@ -91,8 +90,10 @@ module.exports = function getConfig (params) {
           // Reason why we put this here instead of babelrc
           // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
           query: {
-            presets: ['react-hmre', 'es2015', 'react', 'stage-2'],
-            plugins: ['transform-decorators-legacy', 'transform-object-assign']
+            presets: []
+            .concat(dev ? 'react-hmre' : [])
+            .concat(['react', 'es2015', 'stage-1']),
+            plugins: ['transform-decorators-legacy']
           }
         },
         {

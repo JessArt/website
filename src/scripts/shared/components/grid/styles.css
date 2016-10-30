@@ -1,0 +1,10 @@
+.container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.element {
+  display: inline-block;
+  height: 225px;
+  margin: 5px;
+}

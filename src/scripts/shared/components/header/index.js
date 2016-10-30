@@ -20,14 +20,16 @@ export default class Header extends Component {
         <div className={styles.backgroundContainer}>
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>
-              <div className={'container'}>
-                <span className={styles.colored}>
-                  {'Jess'}
-                </span>
-                <span>
-                  {'Zaikova'}
-                </span>
-              </div>
+              <Link className={styles.titleLink} to={{ pathname: '/' }}>
+                <div className={'container'}>
+                  <span className={styles.colored}>
+                    {'Jess'}
+                  </span>
+                  <span className={styles.noncolored}>
+                    {'Zaikova'}
+                  </span>
+                </div>
+              </Link>
             </h2>
           </div>
         </div>

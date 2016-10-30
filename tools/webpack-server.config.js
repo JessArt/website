@@ -22,8 +22,8 @@ const commonLoaders = [
     // Reason why we put this here instead of babelrc
     // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
     query: {
-      presets: ['es2015', 'react', 'stage-2'],
-      plugins: ['transform-decorators-legacy', 'transform-object-assign']
+      presets: ['es2015', 'react', 'stage-1'],
+      plugins: ['transform-decorators-legacy']
     },
     // exclude: /(node_modules|bower_components)/
     include: path.join(__dirname, '..', 'src'),
@@ -45,7 +45,10 @@ const config = {
   name: 'server-side rendering',
   devtool: 'sourcemap',
   entry: {
-    server: './src/scripts/server/index.js'
+    server: [
+      'isomorphic-fetch',
+      './src/scripts/server/index.js'
+    ]
   },
   target: 'node',
   node: {

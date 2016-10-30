@@ -9,7 +9,7 @@ export default class Footer extends Component {
     return (
       <div className={styles.container}>
         <div className={'container'}>
-          <div>
+          <div className={styles.content}>
             {'Copyright Jess Zaikova '}
             {(new Date()).getFullYear()}
           </div>

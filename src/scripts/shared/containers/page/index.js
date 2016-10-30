@@ -14,7 +14,7 @@ export default class PageFrame extends Component {
         <DocumentMeta {...meta} />
         <div className={'container-content'}>
           <Header />
-          <div className={'container'}>
+          <div className={'container container__rel'}>
             {children}
           </div>
         </div>
@@ -27,7 +27,7 @@ export default class PageFrame extends Component {
 }
 
 PageFrame.propTypes = {
-  children: PropTypes.oneOf([
+  children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
   ]),
