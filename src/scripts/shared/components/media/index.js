@@ -17,7 +17,7 @@ export default class Media extends Component {
 
     return (
       <div className={styles.container}>
-        <Link className={styles.link} to={{}}>
+        <Link className={styles.link} to={{ pathname: `/media/${item.id}`, query: { type: item.type } }}>
           <img className={styles.image} alt={item.title} src={item.small_url} />
           <div className={styles.overlay}>
             <div className={styles.title}>

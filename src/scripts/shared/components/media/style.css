@@ -1,6 +1,7 @@
 .container {
   position: relative;
   height: 100%;
+  overflow: hidden;
 }
 
 .link {
@@ -31,6 +32,8 @@
 
 .title {
   position: absolute;
+  width: 90%;
+  text-align: left;
   bottom: 0;
   color: #fff;
   padding: 5px 8px;

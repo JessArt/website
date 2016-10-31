@@ -1,0 +1,62 @@
+.imageContainer {
+  background: $color-primary-dark;
+  position: relative;
+}
+
+.backLink {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.bannerContainer {
+  width: 60%;
+  margin: auto;
+  padding: 30px 0;
+}
+
+.banner {
+  width: 100%;
+  display: block;
+}
+
+.textContainer {
+  padding: 15px;
+  min-height: 300px;
+  border-top: 1px solid transparent;
+  background: #fff;
+}
+
+.arrow {
+  position: absolute;
+  opacity: 0.5;
+  top: 0;
+  bottom: 0;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  font-size: 20px;
+  line-height: 0;
+
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.left {
+    left: 0;
+  }
+
+  &.right {
+    right: 0;
+  }
+}
+
+.loaderContainer {
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

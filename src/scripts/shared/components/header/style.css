@@ -66,3 +66,56 @@
   display: block;
   width: 100%;
 }
+
+.smallHeader {
+  padding: 15px 25px;
+  background: $color-primary-dark;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.smallTitle {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 20px;
+
+  span {
+    border-bottom: 1px solid;
+  }
+
+  .coloured {
+    color: $color-primary;
+  }
+}
+
+.smallLinks {
+  display: flex;
+}
+
+.smallLink {
+  color: #fff;
+  margin: 0 5px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  font-size: 20px;
+
+  &:hover {
+    border-bottom-color: #fff;
+  }
+}
+
+.smallExternal {
+  display: flex;
+}
+
+.smallIconContainer {
+  width: 22px;
+  height: 22px;
+  margin-right: 7px;
+}
+
+.smallIcon {
+  display: block;
+  width: 100%;
+}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 // components declaration
 import { Link } from 'react-router'
@@ -14,7 +14,11 @@ import tumblrIcon from './images/tumblr.png'
 import twitterIcon from './images/twitter.png'
 
 export default class Header extends Component {
-  render () {
+  static propTypes = {
+    small: PropTypes.bool
+  };
+
+  renderBigHeader() {
     return (
       <div className={styles.container}>
         <div className={styles.backgroundContainer}>
@@ -67,5 +71,54 @@ export default class Header extends Component {
         </div>
       </div>
     )
+  }
+
+  renderSmallHeader() {
+    return (
+      <div className={styles.smallHeader}>
+        <Link to={{ pathname: '/' }} className={styles.smallTitle}>
+          <span className={styles.coloured}>
+            {'Jess'}
+          </span>
+          <span>
+            {'Zaikova'}
+          </span>
+        </Link>
+        <div className={styles.smallLinks}>
+          <Link className={styles.smallLink} to={{ pathname: '/art' }}>
+            {'Art'}
+          </Link>
+          <Link className={styles.smallLink} to={{ pathname: '/photo' }}>
+            {'Photo'}
+          </Link>
+          <Link className={styles.smallLink} to={{ pathname: '/bio' }}>
+            {'Bio'}
+          </Link>
+          <Link className={styles.smallLink} to={{ pathname: '/contact' }}>
+            {'Contact'}
+          </Link>
+        </div>
+        <div className={styles.smallExternal}>
+          <a className={styles.smallIconContainer} href={'http://jessellisart.tumblr.com'} target={'_blank'}>
+            <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
+          </a>
+          <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessellisart'} target={'_blank'}>
+            <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
+          </a>
+          <a className={styles.smallIconContainer} href={'http://www.flickr.com/jessellisart'} target={'_blank'}>
+            <img className={styles.smallIcon} src={flickrIcon} alt={'My Flickr account'} />
+          </a>
+          <a className={styles.smallIconContainer} href={'http://www.twitter.com/jessellisart'} target={'_blank'}>
+            <img className={styles.smallIcon} src={twitterIcon} alt={'My Twitter account'} />
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  render () {
+    const { small } = this.props;
+
+    return small ? this.renderSmallHeader() : this.renderBigHeader();
   }
 }

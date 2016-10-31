@@ -2,7 +2,7 @@ const WebpackDevServer = require('webpack-dev-server')
 const webpack = require('webpack')
 const config = require('./webpack-client.config.js')({ dev: true })
 
-config.entry.unshift("webpack-dev-server/client?http://localhost:8080/", "webpack/hot/dev-server");
+// config.entry.unshift("webpack-dev-server/client?http://localhost:8080/", "webpack/hot/dev-server");
 const compiler = webpack(config)
 const server = new WebpackDevServer(compiler, {
   // webpack-dev-server options

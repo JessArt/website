@@ -44,11 +44,17 @@ module.exports = function getConfig (params) {
   const devEntries = dev
     ? [
       // For hot style updates
+      'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/dev-server'
     ] : []
 
   const devPlugins = [
-    new webpack.HotModuleReplacementPlugin()
+    // Webpack 1.0
+    new webpack.optimize.OccurenceOrderPlugin(),
+    // Webpack 2.0 fixed this mispelling
+    // new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
   ]
 
   const buildPlugins = [
@@ -74,7 +80,7 @@ module.exports = function getConfig (params) {
       .concat('./src/scripts/client/index.js'),
     output: {
       path: path.resolve(cwd, 'build/public'),
-      publicPath: '',
+      publicPath: '/',
       filename: 'client.js'
     },
     module: {
