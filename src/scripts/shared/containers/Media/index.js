@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
+// router declaration
+import { browserHistory } from 'react-router';
+
 // mobx declaration
 import { observer } from 'mobx-react';
 
@@ -21,9 +24,35 @@ export default class MediaPage extends Component {
     return stores.store.fetchImages({ params: { type }});
   }
 
+  constructor(props) {
+    super(props);
+
+    this.handleKeys = this._handleKeys.bind(this);
+  }
+
   componentDidMount() {
     const { location: { query: { type } }, store } = this.props;
     store.fetchImages({ params: { type } });
+
+    document.addEventListener('keydown', this.handleKeys);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeys);
+  }
+
+  _handleKeys(e) {
+    const { params: { id }, location: { query: { type } }, store } = this.props;
+    const items = store.getData(type);
+    const index = items.findIndex((x) => x.id === id);
+    const item = items[index];
+    const previous = items[index - 1];
+    const next = items[index + 1];
+    if (e.keyCode === 37 && previous) {
+      browserHistory.push({ pathname: `/media/${previous.id}`, query: { type: previous.type } });
+    } else if (e.keyCode === 39 && next) {
+      browserHistory.push({ pathname: `/media/${next.id}`, query: { type: next.type } });
+    }
   }
 
   getItem() {

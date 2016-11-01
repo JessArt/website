@@ -6,7 +6,7 @@ import Loader from '../loader';
 
 // utils declaration
 import { preload } from 'pic-loader';
-import { wait } from 'delounce';
+import { delay } from 'delounce';
 
 // styles declaration
 import './style.css';
@@ -29,7 +29,7 @@ export default class MediaBanner extends Component {
         this.setState({ isLoading: true });
 
         const fn = preload(props.item.big_url);
-        wait({ fn, time: 300 })
+        delay({ fn, time: 200 })
           .then(() => {
             if (this.props.item && this.props.item.id === props.item.id) {
               this.setState({ isLoading: false });
