@@ -6,6 +6,7 @@ import Loader from '../loader';
 
 // utils declaration
 import { preload } from 'pic-loader';
+import { wait } from 'delounce';
 
 // styles declaration
 import './style.css';
@@ -27,11 +28,13 @@ export default class MediaBanner extends Component {
       if (!this.props.item || this.props.item.id !== props.item.id) {
         this.setState({ isLoading: true });
 
-        preload(props.item.big_url).then(() => {
-          if (this.props.item && this.props.item.id === props.item.id) {
-            this.setState({ isLoading: false });
-          }
-        });
+        const fn = preload(props.item.big_url);
+        wait({ fn, time: 300 })
+          .then(() => {
+            if (this.props.item && this.props.item.id === props.item.id) {
+              this.setState({ isLoading: false });
+            }
+          });
       }
     }
     // props.item.id
@@ -60,6 +63,15 @@ export default class MediaBanner extends Component {
       ? <div className={styles.loaderContainer}><Loader white /></div>
       : <img className={styles.banner} src={item.big_url} alt={item.title} />;
 
+    const isVisible = !isLoading && item;
+    const originalLink = (
+      <a className={styles.originalLink}
+         style={{ visibility: isVisible ? 'visible' : 'hidden'}}
+         href={isVisible ? item.big_url: ''} target="_blank">
+        {'Click to get big version'}
+      </a>
+    );
+
     return (
       <div className={styles.container}>
         <div className={styles.imageContainer}>
@@ -68,6 +80,7 @@ export default class MediaBanner extends Component {
             {content}
           </div>
           {rightLink}
+          {originalLink}
         </div>
         <div className={`${styles.textContainer} container`}>
           <h2 className={styles.title}>
