@@ -24,6 +24,9 @@ html(lang="en")
     #app
       != data
 
+  script.
+    window.__INITIAL_DATA__ = !{state}
+
   script(src="/client.js")
 
   unless dev

@@ -37,8 +37,6 @@ export default class MediaBanner extends Component {
           });
       }
     }
-    // props.item.id
-    // this.props.item.id
   }
 
   render() {

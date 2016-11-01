@@ -71,7 +71,7 @@ module.exports = function getConfig (params) {
 
   const config = {
     // eval - Each module is executed with eval and //@ sourceURL.
-    devtool: 'eval',
+    devtool: dev ? 'eval' : 'source-maps',
     // The configuration for the client
     name: 'browser',
     entry: []
@@ -120,7 +120,12 @@ module.exports = function getConfig (params) {
         }
       ]
     },
-    plugins: dev ? devPlugins : buildPlugins,
+    plugins: []
+      .concat(dev ? devPlugins : buildPlugins)
+      .concat(new webpack.DefinePlugin({
+        __DEV__: dev,
+        __SERVER__: false
+      })),
     postcss: postCSSConfig
   }
 

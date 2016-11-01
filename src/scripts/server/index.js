@@ -14,7 +14,7 @@ import routes from '../shared/router/routes'
 import DocumentMeta from 'react-document-meta'
 
 import { Provider } from 'mobx-react'
-import * as stores from '../shared/store'
+import { createStores } from '../shared/store'
 
 const viewPath = path.join(process.cwd(), 'src', 'scripts', 'views', 'index.pug')
 const compiledFn = pug.compileFile(viewPath, {})
@@ -65,6 +65,7 @@ app.use((req, res, next) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
+      const stores = createStores()
       Promise
         .all(fetchData(renderProps, stores))
         .then(() => {
@@ -76,10 +77,22 @@ app.use((req, res, next) => {
               <RouterContext {...renderProps} />
             </Provider>
           )
+
+          const storeState = Object.keys(stores).reduce((state, key) => {
+            const store = stores[key];
+
+            if (store && store.serialize) {
+              state[key] = store.serialize();
+            }
+
+            return state;
+          }, {});
+
           const meta = DocumentMeta.renderAsHTML()
           res.send(compiledFn({
             title: 'Hey',
             message: 'Hello there!',
+            state: JSON.stringify(storeState).replace(/'/g, "\\'"),
             meta,
             data,
             dev: __DEV__

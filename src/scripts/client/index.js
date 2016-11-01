@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from '../shared/router/routes'
 import { Provider } from 'mobx-react'
-import * as stores from '../shared/store'
+import { createStores } from '../shared/store'
+const stores = createStores();
 
 import '../shared/styles/common.css'
 

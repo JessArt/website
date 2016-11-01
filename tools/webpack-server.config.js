@@ -3,6 +3,8 @@ const path = require('path')
 const fs = require('fs')
 
 const nodeModules = {}
+
+const DEV = process.env.NODE_ENV !== 'production';
 fs.readdirSync('node_modules')
   .filter((x) => {
     return ['.bin'].indexOf(x) === -1
@@ -43,7 +45,7 @@ const commonLoaders = [
 
 const config = {
   name: 'server-side rendering',
-  devtool: 'sourcemap',
+  devtool: DEV ? 'eval' : 'source-map',
   entry: {
     server: [
       'isomorphic-fetch',
@@ -77,7 +79,8 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      __DEV__: process.env.NODE_ENV === 'development'
+      __DEV__: DEV,
+      __SERVER__: true
     })
   ],
   externals: nodeModules
