@@ -46,11 +46,8 @@ export default class Header extends Component {
               <Link to={{ pathname: '/photo' }} className={styles.link}>
                 {'Photography'}
               </Link>
-              <Link to={{ pathname: '/bio' }} className={styles.link}>
-                {'Bio'}
-              </Link>
-              <Link to={{ pathname: '/contact' }} className={styles.link}>
-                {'Contact'}
+              <Link to={{ pathname: '/about' }} className={styles.link}>
+                {'About me'}
               </Link>
             </div>
             <div className={styles.external}>
@@ -91,11 +88,8 @@ export default class Header extends Component {
           <Link className={styles.smallLink} to={{ pathname: '/photo' }}>
             {'Photo'}
           </Link>
-          <Link className={styles.smallLink} to={{ pathname: '/bio' }}>
-            {'Bio'}
-          </Link>
-          <Link className={styles.smallLink} to={{ pathname: '/contact' }}>
-            {'Contact'}
+          <Link className={styles.smallLink} to={{ pathname: '/about' }}>
+            {'About me'}
           </Link>
         </div>
         <div className={styles.smallExternal}>

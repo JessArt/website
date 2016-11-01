@@ -1,0 +1,28 @@
+.container {
+  background: #fff;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  min-height: 500px;
+  max-width: 740px;
+  padding-left: 60px;
+  padding-right: 60px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 40px;
+  margin-left: -2.5px;
+  line-height: 1.04;
+  letter-spacing: -.028em;
+}
+
+.paragraph {
+  font-size: 21px;
+  line-height: 1.58;
+  letter-spacing: -.003em;
+  margin-bottom: 29px;
+}
