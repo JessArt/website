@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node tools/serve",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "NODE_ENV=development webpack --colors --config ./tools/webpack-server.config.js",
     "build:prod": "NODE_ENV=production webpack --colors --config ./tools/webpack-server.config.js && node tools/build.js"
