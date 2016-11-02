@@ -78,6 +78,7 @@
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0,0,0,.5);
 
   @media (max-width: 680px) {
     display: initial;

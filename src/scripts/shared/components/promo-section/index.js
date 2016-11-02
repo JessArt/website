@@ -9,9 +9,9 @@ import './style.css'
 
 // assets declaration
 import artImage from './images/art.jpg'
-import photoImage from './images/photo.jpg'
+import photoImage from './images/photo2.jpg'
 import blogImage from './images/blog.jpg'
-import contactImage from './images/contact.jpg'
+import contactImage from './images/contact2.jpg'
 
 const config = {
   art: {
