@@ -9,7 +9,6 @@ import Loader from '../../components/loader'
 import Grid from '../../components/grid'
 import Media from '../../components/media'
 
-
 @observer(['store'])
 export default class ArtPage extends Component {
   static willRender(stores, props) {
@@ -39,7 +38,7 @@ export default class ArtPage extends Component {
       </Grid>
     )
     return (
-      <PageFrame>
+      <PageFrame small>
         {content}
       </PageFrame>
     );

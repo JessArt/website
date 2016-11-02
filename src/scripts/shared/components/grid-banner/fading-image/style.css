@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+}
+
+.currentImage {
+  width: 100%;
+  display: block;
+}
+
+.lastImage {
+  position: absolute;
+  z-index: 1;
+}
