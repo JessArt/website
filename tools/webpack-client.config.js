@@ -124,7 +124,12 @@ module.exports = function getConfig (params) {
       .concat(dev ? devPlugins : buildPlugins)
       .concat(new webpack.DefinePlugin({
         __DEV__: dev,
-        __SERVER__: false
+        __SERVER__: false,
+        'process.env': {
+          BROWSER: true,
+          // This has effect on the react lib size
+          NODE_ENV: JSON.stringify(dev ?  'development' : 'production'),
+        },
       })),
     postcss: postCSSConfig
   }

@@ -80,7 +80,11 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       __DEV__: DEV,
-      __SERVER__: true
+      __SERVER__: true,
+      'process.env': {
+        // This has effect on the react lib size
+        NODE_ENV: JSON.stringify(DEV ?  'development' : 'production'),
+      }
     })
   ],
   externals: nodeModules
