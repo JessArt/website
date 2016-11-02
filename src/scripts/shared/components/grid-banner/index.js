@@ -85,7 +85,7 @@ export default class GridBanner extends Component {
           <div onClick={this.rearrange.bind(this)}>
             Click to rearrange
           </div>
-          <div onClick={this.changeImages.bind(this, -1)}>
+          <div onClick={this.changeImages.bind(this, 1)}>
             Add one image
           </div>
         </div>
