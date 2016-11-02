@@ -1,5 +1,10 @@
+.container {
+  margin-top: 50px;
+}
+
 .sectionsContainer {
   margin: 70px 0 100px;
   display: flex;
+  flex-wrap: wrap;
   position: relative;
 }

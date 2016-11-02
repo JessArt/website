@@ -1,4 +1,5 @@
 .imageContainer {
+  padding-top: 60px;
   background: $color-primary-dark;
   position: relative;
 }
@@ -13,11 +14,28 @@
   height: 70vh;
   margin: auto;
   padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 968px) {
+    height: 60vh;
+  }
+
+  @media (max-width: 768px) {
+    height: 55vh;
+    max-width: 70%;
+  }
+
+  @media (max-width: 430px) {
+    height: 40vh;
+    max-width: 75%;
+  }
 }
 
 .banner {
   max-width: 100%;
-  height: 100%;
+  max-height: 100%;
   margin: 0 auto;
   display: block;
 }
@@ -54,6 +72,10 @@
 
   &.right {
     right: 0;
+  }
+
+  @media (max-width: 430px) {
+    width: 40px;
   }
 }
 

@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react';
 
 // components declaration
 import { Link } from 'react-router';
-import FadingImage from './fading-image'
+import FadingImage from './fading-image';
 
 // style declaration
 import './style.css';
 import styles from './style.css.json';
 
 // utility declaration
-import { random, shuffle } from 'lodash';
+import { random, shuffle, sample } from 'lodash';
 
 export default class GridBanner extends Component {
   static propTypes = {
@@ -28,7 +28,8 @@ export default class GridBanner extends Component {
     clearInterval(this.timer);
     this.timer = setTimeout(() => {
       this.forceUpdate();
-    }, 5000);
+      this.startTransition();
+    }, 2225000);
   }
 
   componentWillUnmount() {
@@ -56,12 +57,23 @@ export default class GridBanner extends Component {
     });
   }
 
+  renderMobileVersion(items) {
+    const item = sample(items)
+    return (
+      <div className={styles.mobileContainer} onClick={this.rearrange.bind(this)}>
+        <FadingImage url={sample(items).small_url} />
+      </div>
+    );
+  }
+
   render() {
     const { number } = this.state;
     const { items } = this.props;
-    const images = shuffle(items)
+    const processedItems = shuffle(items)
       .filter(x => Boolean(x.originalWidth) && x.originalWidth > x.originalHeight)
-      .slice(0, number).map((item, i) => {
+      .slice(0, number)
+
+    const images = processedItems.map((item, i) => {
         const leftPosition = random(0, 80);
         const topPosition = random(0, 250);
         const width = random(150, 250);
@@ -76,17 +88,20 @@ export default class GridBanner extends Component {
     });
 
     return (
-      <div className={styles.container}>
-        {images}
-        <div className={styles.rearrange}>
-          <div onClick={this.changeImages.bind(this, -1)}>
-            Remove one image
-          </div>
-          <div onClick={this.rearrange.bind(this)}>
-            Click to rearrange
-          </div>
-          <div onClick={this.changeImages.bind(this, 1)}>
-            Add one image
+      <div>
+        {this.renderMobileVersion(processedItems)}
+        <div className={styles.container}>
+          {images}
+          <div className={styles.rearrange}>
+            <div onClick={this.changeImages.bind(this, -1)}>
+              Remove one image
+            </div>
+            <div onClick={this.rearrange.bind(this)}>
+              Click to rearrange
+            </div>
+            <div onClick={this.changeImages.bind(this, 1)}>
+              Add one image
+            </div>
           </div>
         </div>
       </div>

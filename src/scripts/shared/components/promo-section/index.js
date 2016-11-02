@@ -33,7 +33,7 @@ const config = {
     description: 'Visit tumblr or facebook to watch the progress of my art from sketches to finished pieces.'
   },
   contact: {
-    link: '/contact',
+    link: '/about',
     image: contactImage,
     title: 'Contacts',
     description: 'Contact me by e-mail or through facebook to set up a commission for a drawing, photoshoot, or combination of both.'

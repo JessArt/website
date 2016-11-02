@@ -1,13 +1,18 @@
 .container {
+  position: relative;
   width: 100%;
 }
 
 .currentImage {
   width: 100%;
   display: block;
+  transition: opacity 0.5s;
 }
 
 .lastImage {
   position: absolute;
+  width: 100%;
+  top: 0;
   z-index: 1;
+  transition: opacity 0.5s;
 }

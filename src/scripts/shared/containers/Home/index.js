@@ -60,9 +60,11 @@ export default class HomePage extends Component {
 
     return (
       <PageFrame small meta={meta}>
-        {banner}
-        <div className={styles.sectionsContainer}>
-          {sections}
+        <div className={styles.container}>
+          {banner}
+          <div className={styles.sectionsContainer}>
+            {sections}
+          </div>
         </div>
       </PageFrame>
     )

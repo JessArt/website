@@ -21,6 +21,15 @@
   position: relative;
   color: #000;
 
+  @media (max-width: 768px) {
+    flex-basis: 50%;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 560px) {
+    flex-basis: 100%;
+  }
+
   &:hover {
     position: static;
     .expand {

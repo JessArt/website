@@ -1,6 +1,6 @@
 .container {
   background: #fff;
-  padding-top: 1px;
+  padding-top: 30px;
   padding-bottom: 1px;
   min-height: 500px;
   max-width: 740px;
@@ -8,6 +8,16 @@
   padding-right: 60px;
   width: 100%;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @media (max-width: 430px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
 
 .title {

@@ -13,6 +13,11 @@
 .image {
   height: 100%;
   display: block;
+
+  @media (max-width: 430px) {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .overlay {

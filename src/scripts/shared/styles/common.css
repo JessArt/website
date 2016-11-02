@@ -4,6 +4,10 @@ body {
   background: $color-primary;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 :global .container {
   max-width: $container;
   margin: 0 auto;

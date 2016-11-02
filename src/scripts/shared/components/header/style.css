@@ -68,11 +68,20 @@
 }
 
 .smallHeader {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2;
   padding: 15px 25px;
   background: $color-primary-dark;
   color: #fff;
   display: flex;
   justify-content: space-between;
+  box-sizing: border-box;
+
+  @media (max-width: 680px) {
+    display: initial;
+  }
 }
 
 .smallTitle {
@@ -80,17 +89,92 @@
   text-transform: uppercase;
   font-size: 20px;
 
-  span {
+  > span {
     border-bottom: 1px solid;
   }
 
   .coloured {
     color: $color-primary;
   }
+
+  @media (max-width: 680px) {
+    display: block;
+    text-align: center;
+  }
+}
+
+.hamburger {
+  display: none;
+
+  user-select: none;
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  cursor: pointer;
+
+  > span {
+    height: 2px;
+    background: #b1b9bd;
+    margin-bottom: 4px;
+    display: block;
+    width: 22px;
+    transition: all .2s;
+    position: relative;
+  }
+
+  &.active {
+    > span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 6px;
+    }
+
+    > span:nth-child(2) {
+      opacity: 0;
+    }
+
+    > span:nth-child(3) {
+      transform: rotate(-45deg);
+      top: -6px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    display: block;
+  }
+}
+
+.hamburgerMenu {
+  display: none;
+
+  background: $color-primary-dark;
+  padding-top: 15px;
+  @media (max-width: 680px) {
+    display: block;
+  }
+}
+
+.menuRow {
+  color: #fff;
+  padding: 10px;
+  background: $color-primary-dark;
+  border-bottom: 1px solid $color-primary;
+
+  &.list {
+    display: flex;
+    .smallIconContainer {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+  }
 }
 
 .smallLinks {
   display: flex;
+
+  @media (max-width: 680px) {
+    display: none;
+  }
 }
 
 .smallLink {
@@ -100,13 +184,17 @@
   transition: border-color 0.2s;
   font-size: 20px;
 
-  &:hover {
+  &:hover, &.active {
     border-bottom-color: #fff;
   }
 }
 
 .smallExternal {
   display: flex;
+
+  @media (max-width: 680px) {
+    display: none;
+  }
 }
 
 .smallIconContainer {
