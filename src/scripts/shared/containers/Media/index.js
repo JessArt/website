@@ -73,18 +73,32 @@ export default class MediaPage extends Component {
     if (item) {
       const meta = {
         title: item.title,
-        keywords: (item.description || '').split(' ').join(', '),
         description: item.description,
-        'og:title': item.title,
-        'og:url': `http://jess.gallery/media/${item.id}?type=${item.type}`,
-        'og:image': item.small_url,
-        'og:image:type': 'image/jpeg',
-        'og:description': item.description
+        meta: {
+          name: {
+            keywords: (item.description || '').split(' ').join(', ')
+          },
+          itemProp: {
+            name: 'The Name or Title Here',
+            description: 'This is the page description',
+            image: 'http://example.com/image.jpg'
+          },
+          property: {
+            'og:title': item.title,
+            'og:url': `http://jess.gallery/media/${item.id}?type=${item.type}`,
+            'og:image': item.small_url,
+            'og:image:type': 'image/jpeg',
+            'og:description': item.description
+          }
+        },
+        auto: {
+          ograph: true
+        }
       };
 
       if (item.originalWidth && item.originalHeight) {
-        meta['og:image:width'] = 500;
-        meta['og:image:height'] = 500 / (item.originalWidth / item.originalHeight);
+        meta.meta.property['og:image:width'] = 500;
+        meta.meta.property['og:image:height'] = 500 / (item.originalWidth / item.originalHeight);
       }
 
       return meta;
@@ -122,6 +136,7 @@ export default class MediaPage extends Component {
     const isLoading = store.isLoading(type);
     const content = isLoading ? this.renderLoader() : this.renderItem();
     const meta = this.createMeta();
+    console.log(meta)
     return (
       <PageFrame small wide meta={meta}>
         {content}
