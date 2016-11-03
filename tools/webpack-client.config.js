@@ -3,7 +3,7 @@ const path = require('path')
 const cwd = process.cwd()
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 // const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const variables = require('../src/scripts/shared/variables')
 
 module.exports = function getConfig (params) {
@@ -60,7 +60,14 @@ module.exports = function getConfig (params) {
   const buildPlugins = [
     new ExtractTextPlugin('styles.css'),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin(),
+    // Copy directory contents to {output}/to/directory/
+    new CopyWebpackPlugin([
+      {
+        from: path.join(__dirname, '..', 'src', 'scripts', 'assets', 'favicons'),
+        to: path.join(__dirname, '..', 'build', 'public')
+      }
+    ])
   ]
 
   const cssLoader = dev
