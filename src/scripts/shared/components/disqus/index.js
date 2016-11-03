@@ -1,39 +1,46 @@
 import React, { PropTypes, Component } from 'react';
 
+let id = null;
+
 export default class DisqusComments extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired
   };
 
+  constructor(props) {
+    super(props);
+
+    if (id) {
+      this.setNewComment(id);
+    } else {
+      id = props.id;
+    }
+  }
+
   shouldComponentUpdate(props) {
-    return props.id !== this.props.id;
+    if (props.id !== id) this.setNewComment(props.id);
+
+    return false;
+  }
+
+  setNewComment(id) {
+    if (typeof window === 'object' && window.DISQUS) {
+      id = props.id;
+      window.DISQUS.reset({
+        reload: true,
+        config: function () {
+          this.page.identifier = id;
+          this.page.url = `http://jess.gallery/${props.id}`;
+        }
+      });
+    }
   }
 
   render() {
     const { id } = this.props;
-    const html = `
-    <div id="disqus_thread"></div>
-    <script>
-
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-    var disqus_config = function () {
-      this.page.url = 'http://jess.gallery';  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = '${id}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    (function() { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script');
-      s.src = '//jesszaikova.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    `;
 
     return (
-      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <div id={'disqus_thread'} />
     );
   }
 }
