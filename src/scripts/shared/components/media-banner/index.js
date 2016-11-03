@@ -16,7 +16,8 @@ export default class MediaBanner extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
     previous: PropTypes.object,
-    next: PropTypes.object
+    next: PropTypes.object,
+    comments: PropTypes.element
   };
 
   state = {
@@ -41,7 +42,7 @@ export default class MediaBanner extends Component {
 
   render() {
     const { isLoading } = this.state;
-    const { item, previous, next } = this.props;
+    const { item, previous, next, comments } = this.props;
 
     const leftLink = previous ? (
       <Link to={{ pathname: `/media/${previous.id}`, query: { type: previous.type } }}
@@ -70,6 +71,12 @@ export default class MediaBanner extends Component {
       </a>
     );
 
+    const commentsMarkup = comments ? (
+      <div className={styles.comments}>
+        {comments}
+      </div>
+    ) : null;
+
     return (
       <div className={styles.container}>
         <div className={styles.imageContainer}>
@@ -81,11 +88,14 @@ export default class MediaBanner extends Component {
           {originalLink}
         </div>
         <div className={`${styles.textContainer} container`}>
-          <h2 className={styles.title}>
-            {item.title}
-          </h2>
-          <div className={styles.description}>
-            {item.description}
+          <div className={styles.text}>
+            <h2 className={styles.title}>
+              {item.title}
+            </h2>
+            <div className={styles.description}>
+              {item.description}
+            </div>
+            {commentsMarkup}
           </div>
         </div>
       </div>

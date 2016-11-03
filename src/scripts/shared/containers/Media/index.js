@@ -99,8 +99,7 @@ export default class MediaPage extends Component {
 
     return item ? (
       <div>
-        <MediaBanner item={item} previous={previous} next={next} />
-        <Disqus id={`${type}/${id}`} />
+        <MediaBanner item={item} previous={previous} next={next} comments={<Disqus id={`${type}/${id}`} />} />
       </div>
     ) : this.renderLoader();
   }

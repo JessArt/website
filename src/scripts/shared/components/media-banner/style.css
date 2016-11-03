@@ -47,6 +47,11 @@
   background: #fff;
 }
 
+.text {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .arrow {
   position: absolute;
   opacity: 0.5;

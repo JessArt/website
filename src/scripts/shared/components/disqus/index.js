@@ -5,8 +5,8 @@ export default class DisqusComments extends Component {
     id: PropTypes.string.isRequired
   };
 
-  shouldComponentUpdate() {
-    return false;
+  shouldComponentUpdate(props) {
+    return props.id !== this.props.id;
   }
 
   render() {
