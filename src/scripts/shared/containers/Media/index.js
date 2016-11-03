@@ -1,3 +1,5 @@
+/* global __SERVER__ */
+
 import React, { Component, PropTypes } from 'react';
 
 // router declaration
@@ -97,7 +99,7 @@ export default class MediaPage extends Component {
     const previous = items[index - 1];
     const next = items[index + 1];
 
-    const url = `http://jess.gallery/${pathname}${search}`;
+    const url = `http://jess.gallery/#!${pathname}${search}`;
 
     return item ? (
       <div>
@@ -105,7 +107,7 @@ export default class MediaPage extends Component {
           item={item}
           previous={previous}
           next={next}
-          comments={<Disqus id={`${type}/${id}`} url={url} title={item.title} />} />
+          comments={!__SERVER__ && <Disqus id={`${type}/${id}`} url={url} title={item.title} />} />
       </div>
     ) : this.renderLoader();
   }
