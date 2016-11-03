@@ -90,16 +90,22 @@ export default class MediaPage extends Component {
   }
 
   renderItem() {
-    const { params: { id }, location: { query: { type } }, store } = this.props;
+    const { params: { id }, location: { pathname, search, query: { type } }, store } = this.props;
     const items = store.getData(type);
     const index = items.findIndex((x) => x.id === id);
     const item = items[index];
     const previous = items[index - 1];
     const next = items[index + 1];
 
+    const url = `http://jess.gallery/${pathname}${search}`;
+
     return item ? (
       <div>
-        <MediaBanner item={item} previous={previous} next={next} comments={<Disqus id={`${type}/${id}`} />} />
+        <MediaBanner
+          item={item}
+          previous={previous}
+          next={next}
+          comments={<Disqus id={`${type}/${id}`} url={url} title={item.title} />} />
       </div>
     ) : this.renderLoader();
   }

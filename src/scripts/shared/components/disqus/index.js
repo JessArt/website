@@ -4,33 +4,36 @@ let id = null;
 
 export default class DisqusComments extends Component {
   static propTypes = {
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
   };
 
   constructor(props) {
     super(props);
 
     if (id) {
-      this.setNewComment(id);
+      this.setNewComment(props);
     } else {
       id = props.id;
     }
   }
 
   shouldComponentUpdate(props) {
-    if (props.id !== id) this.setNewComment(props.id);
+    if (props.id !== id) this.setNewComment(props);
 
     return false;
   }
 
-  setNewComment(id) {
+  setNewComment({ id: newId, url, title }) {
     if (typeof window === 'object' && window.DISQUS) {
-      id = props.id;
+      id = newId;
       window.DISQUS.reset({
         reload: true,
         config: function () {
           this.page.identifier = id;
-          this.page.url = `http://jess.gallery/${props.id}`;
+          this.page.url = url;
+          this.page.title = title;
         }
       });
     }
