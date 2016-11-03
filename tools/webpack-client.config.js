@@ -82,6 +82,7 @@ module.exports = function getConfig (params) {
     // The configuration for the client
     name: 'browser',
     entry: []
+      .concat('isomorphic-fetch')
       .concat('babel-polyfill')
       .concat(devEntries)
       .concat('./src/scripts/client/index.js'),
