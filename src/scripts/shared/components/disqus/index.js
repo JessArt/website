@@ -86,16 +86,18 @@ export default class DisqusThread extends Component {
   };
 
   componentDidMount() {
-    this.loadDisqus();
+    this.loadDisqus(this.props);
   }
 
-  componentDidUpdate() {
-    this.loadDisqus();
+  shouldComponentUpdate(props) {
+    this.loadDisqus(props);
+
+    return false;
   }
 
   render() {
     return (
-      <div {...this.props}>
+      <div>
         <div id="disqus_thread"/>
         <noscript>
           <span>
@@ -110,7 +112,7 @@ export default class DisqusThread extends Component {
     );
   }
 
-  addDisqusScript() {
+  addDisqusScript(initialProps) {
     if (__disqusAdded) {
       return;
     }
@@ -127,13 +129,13 @@ export default class DisqusThread extends Component {
     __disqusAdded = true;
   }
 
-  loadDisqus() {
+  loadDisqus(initialProps) {
     const props = {};
 
     // Extract Disqus props that were supplied to this component
     DISQUS_CONFIG.forEach((prop) => {
-      if (!!this.props[prop]) {
-        props[prop] = this.props[prop];
+      if (!!initialProps[prop]) {
+        props[prop] = initialProps[prop];
       }
     });
 
@@ -155,7 +157,7 @@ export default class DisqusThread extends Component {
       });
     } else { // Otherwise add Disqus to the page
       copyProps(window, props, 'disqus_');
-      this.addDisqusScript();
+      this.addDisqusScript(initialProps);
     }
   }
 }
