@@ -10,6 +10,7 @@ import { observer } from 'mobx-react';
 import PageFrame from '../page';
 import MediaBanner from '../../components/media-banner';
 import Loader from '../../components/loader';
+import Disqus from '../../components/disqus';
 
 @observer(['store'])
 export default class MediaPage extends Component {
@@ -97,7 +98,10 @@ export default class MediaPage extends Component {
     const next = items[index + 1];
 
     return item ? (
-      <MediaBanner item={item} previous={previous} next={next} />
+      <div>
+        <MediaBanner item={item} previous={previous} next={next} />
+        <Disqus id={`${type}/${id}`} />
+      </div>
     ) : this.renderLoader();
   }
 
