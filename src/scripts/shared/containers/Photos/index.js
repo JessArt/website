@@ -19,6 +19,37 @@ export default class ArtPage extends Component {
     this.props.store.fetchImages({ params: { type: 'photo' }})
   }
 
+  createMeta() {
+    const title = 'Jess\' Photos';
+    const description = 'Photos made during my travels in different countries';
+    const meta = {
+      title,
+      description,
+      meta: {
+        name: {
+          keywords: 'photos, travel, usa, russia, prague'
+        },
+        itemProp: {
+          name: title,
+          description,
+          image: 'http://static.jess.gallery/photo_og.jpg'
+        },
+        property: {
+          'og:title': title,
+          'og:url': 'http://jess.gallery/photo',
+          'og:image': 'http://static.jess.gallery/photo_og.jpg',
+          'og:image:type': 'image/jpeg',
+          'og:description': description
+        }
+      },
+      auto: {
+        ograph: true
+      }
+    }
+
+    return meta
+  }
+
   render() {
     const isLoading = this.props.store.isLoading('photo')
     const photos = this.props.store.getData('photo')
@@ -37,8 +68,11 @@ export default class ArtPage extends Component {
         {photosElements}
       </Grid>
     )
+
+    const meta = this.createMeta()
+
     return (
-      <PageFrame small>
+      <PageFrame small meta={meta}>
         {content}
       </PageFrame>
     );

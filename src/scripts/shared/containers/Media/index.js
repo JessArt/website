@@ -79,14 +79,14 @@ export default class MediaPage extends Component {
             keywords: (item.description || '').split(' ').join(', ')
           },
           itemProp: {
-            name: 'The Name or Title Here',
-            description: 'This is the page description',
-            image: 'http://example.com/image.jpg'
+            name: item.title,
+            description: item.description,
+            image: item.big_url
           },
           property: {
             'og:title': item.title,
             'og:url': `http://jess.gallery/media/${item.id}?type=${item.type}`,
-            'og:image': item.small_url,
+            'og:image': item.big_url,
             'og:image:type': 'image/jpeg',
             'og:description': item.description
           }

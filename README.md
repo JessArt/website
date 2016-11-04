@@ -1,6 +1,5 @@
 # Overview
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+This is a source code for web application at [jess.gallery](http://jess.gallery).
 
-
-This is a SPA application built with React
+There is no sensitive information in this repository, so it is fully opened.

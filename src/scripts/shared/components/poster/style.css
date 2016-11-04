@@ -1,0 +1,45 @@
+.bannerContainer {
+  position: relative;
+}
+
+.banner {
+  width: 100%;
+
+  @media (max-width: 900px) {
+    position: absolute;
+    height: 100%;
+    width: auto;
+  }
+}
+
+.bannerOverlay {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding-top: 130px;
+
+  @media (max-width: 960px) {
+    padding-top: 100px;
+  }
+
+  @media (max-width: 900px) {
+    position: relative;
+  }
+
+  @media (max-width: 800px) {
+    padding-top: 70px;
+  }
+
+  @media (max-width: 680px) {
+    padding-top: 50px;
+  }
+
+  @media (max-width: 430px) {
+    padding-top: 60px;
+  }
+}

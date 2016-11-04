@@ -1,3 +1,60 @@
+.poster {
+  max-width: 800px;
+  margin: 30px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 50px;
+
+  > div {
+    flex: 1;
+
+    @media (max-width: 680px) {
+      text-align: center;
+      flex-basis: 100%;
+      padding: 0 25px 50px;
+
+      &:last-child {
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.learn {
+  text-decoration: underline;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 40px;
+  cursor: pointer;
+  padding-bottom: 30px;
+}
+
+.feedbackTitle {
+  margin-top: 0;
+  font-size: 24px;
+
+  @media (max-width: 680px) {
+    text-align: center;
+  }
+}
+
+.description {
+  line-height: 1.584;
+  font-size: 18px;
+
+  @media (max-width: 680px) {
+    font-size: 16px;
+  }
+}
+
+.feedback {
+  padding-left: 70px;
+
+  @media (max-width: 680px) {
+    padding-left: 0;
+  }
+}
+
 .container {
   background: #fff;
   padding-top: 30px;
@@ -25,9 +82,14 @@
   font-weight: 700;
   font-style: normal;
   font-size: 40px;
-  margin-left: -2.5px;
+  margin-top: 0;
+  margin-bottom: 50px;
   line-height: 1.04;
   letter-spacing: -.028em;
+
+  @media (max-width: 680px) {
+    margin-top: 30px;
+  }
 }
 
 .paragraph {
