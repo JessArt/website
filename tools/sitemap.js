@@ -44,11 +44,11 @@ function createPath(path) {
 
 function loadImages(type) {
   return new Promise((resolve, reject) => {
-    request(`http://cms.jess.gallery/v1/api/images?type=${type}`, function(err, res) {
+    request(`http://cms.jess.gallery/v1/api/images?type=${type}`, function(err, res, body) {
       if (err) {
         reject(err);
       } else {
-        resolve(res);
+        resolve(JSON.parse(body));
       }
     });
   });
@@ -74,7 +74,7 @@ function createImage(params) {
 }
 
 function build() {
-  const root = builder.create('root', {version: '1.0', encoding: 'UTF-8' });
+  const root = builder.create('xml', {version: '1.0', encoding: 'UTF-8' });
 
   const urlset = root.ele('urlset', {
     xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
@@ -83,7 +83,7 @@ function build() {
 
   staticLinks.forEach(link => {
     const url = urlset.ele('url');
-    url.ele('loc', null, createPath(link));
+    url.ele('loc', null, createPath(link.path));
     if (link.lastmod) {
       url.ele('lastmod', null, link.lastmod);
     }
