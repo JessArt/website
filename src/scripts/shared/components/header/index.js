@@ -19,11 +19,16 @@ export default class Header extends Component {
   };
 
   state = {
-    menu: false
+    menu: false,
+    order: true
   }
 
   toggleMenu() {
     this.setState({ menu: !this.state.menu });
+  }
+
+  hideOrder() {
+    this.setState({ order: false });
   }
 
   renderBigHeader() {
@@ -82,83 +87,98 @@ export default class Header extends Component {
   }
 
   renderSmallHeader() {
-    const { menu } = this.state;
+    const { menu, order } = this.state;
 
     return (
       <div className={styles.smallHeader}>
-        <div className={`${styles.hamburger} ${menu ? styles.active: ''}`} onClick={this.toggleMenu.bind(this)}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <Link to={{ pathname: '/' }} className={styles.smallTitle}>
-          <span className={styles.coloured}>
-            {'Jess'}
-          </span>
-          <span>
-            {'Zaikova'}
-          </span>
-        </Link>
-        <div className={styles.smallLinks}>
-          <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/art' }}>
-            {'Art'}
+        <div className={styles.smallRow}>
+          <div className={`${styles.hamburger} ${menu ? styles.active: ''}`} onClick={this.toggleMenu.bind(this)}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <Link to={{ pathname: '/' }} className={styles.smallTitle}>
+            <span className={styles.coloured}>
+              {'Jess'}
+            </span>
+            <span>
+              {'Zaikova'}
+            </span>
           </Link>
-          <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/photo' }}>
-            {'Photo'}
-          </Link>
-          <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/music' }}>
-            {'Music'}
-          </Link>
-          <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/about' }}>
-            {'About'}
-          </Link>
-        </div>
-        <div className={styles.smallExternal}>
-          <a className={styles.smallIconContainer} href={'http://jessellisart.tumblr.com'} target={'_blank'}>
-            <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
-          </a>
-          <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessellisart'} target={'_blank'}>
-            <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
-          </a>
-          <a className={styles.smallIconContainer} href={'http://www.flickr.com/jessellisart'} target={'_blank'}>
-            <img className={styles.smallIcon} src={flickrIcon} alt={'My Flickr account'} />
-          </a>
-          <a className={styles.smallIconContainer} href={'http://www.twitter.com/jessellisart'} target={'_blank'}>
-            <img className={styles.smallIcon} src={twitterIcon} alt={'My Twitter account'} />
-          </a>
-        </div>
-        {menu &&
-          <div className={styles.hamburgerMenu}>
-            <div className={styles.menuRow}>
-              <Link className={styles.smallLink} to={{ pathname: '/art' }}>
-                {'Art'}
-              </Link>
+          <div className={styles.smallLinks}>
+            <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/art' }}>
+              {'Art'}
+            </Link>
+            <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/photo' }}>
+              {'Photo'}
+            </Link>
+            <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/music' }}>
+              {'Music'}
+            </Link>
+            <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/about' }}>
+              {'About'}
+            </Link>
+          </div>
+          <div className={styles.smallExternal}>
+            <a className={styles.smallIconContainer} href={'http://jessellisart.tumblr.com'} target={'_blank'}>
+              <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
+            </a>
+            <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessellisart'} target={'_blank'}>
+              <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
+            </a>
+            <a className={styles.smallIconContainer} href={'http://www.flickr.com/jessellisart'} target={'_blank'}>
+              <img className={styles.smallIcon} src={flickrIcon} alt={'My Flickr account'} />
+            </a>
+            <a className={styles.smallIconContainer} href={'http://www.twitter.com/jessellisart'} target={'_blank'}>
+              <img className={styles.smallIcon} src={twitterIcon} alt={'My Twitter account'} />
+            </a>
+          </div>
+          {menu &&
+            <div className={styles.hamburgerMenu}>
+              <div className={styles.menuRow}>
+                <Link className={styles.smallLink} to={{ pathname: '/art' }}>
+                  {'Art'}
+                </Link>
+              </div>
+              <div className={styles.menuRow}>
+                <Link className={styles.smallLink} to={{ pathname: '/photo' }}>
+                  {'Photo'}
+                </Link>
+              </div>
+              <div className={styles.menuRow}>
+                <Link className={styles.smallLink} to={{ pathname: '/music' }}>
+                  {'Music'}
+                </Link>
+              </div>
+              <div className={styles.menuRow}>
+                <Link className={styles.smallLink} to={{ pathname: '/about' }}>
+                  {'About'}
+                </Link>
+              </div>
+              <div className={`${styles.menuRow} ${styles.list}`}>
+                <a className={styles.smallIconContainer} href={'http://jessellisart.tumblr.com'} target={'_blank'}>
+                  <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
+                </a>
+                <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessellisart'} target={'_blank'}>
+                  <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
+                </a>
+                <a className={styles.smallIconContainer} href={'http://www.flickr.com/jessellisart'} target={'_blank'}>
+                  <img className={styles.smallIcon} src={flickrIcon} alt={'My Flickr account'} />
+                </a>
+                <a className={styles.smallIconContainer} href={'http://www.twitter.com/jessellisart'} target={'_blank'}>
+                  <img className={styles.smallIcon} src={twitterIcon} alt={'My Twitter account'} />
+                </a>
+              </div>
+            </div>}
+          </div>
+          {order && <Link
+            className={styles.order}
+            to={{ pathname: '/about', query: { write: true } }}>
+            {'I am available for commissions! Prints are also available.'}
+            <div className={styles.close} onClick={this.hideOrder.bind(this)}>
+              {'x'}
             </div>
-            <div className={styles.menuRow}>
-              <Link className={styles.smallLink} to={{ pathname: '/photo' }}>
-                {'Photo'}
-              </Link>
-            </div>
-            <div className={styles.menuRow}>
-              <Link className={styles.smallLink} to={{ pathname: '/about' }}>
-                {'About me'}
-              </Link>
-            </div>
-            <div className={`${styles.menuRow} ${styles.list}`}>
-              <a className={styles.smallIconContainer} href={'http://jessellisart.tumblr.com'} target={'_blank'}>
-                <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
-              </a>
-              <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessellisart'} target={'_blank'}>
-                <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
-              </a>
-              <a className={styles.smallIconContainer} href={'http://www.flickr.com/jessellisart'} target={'_blank'}>
-                <img className={styles.smallIcon} src={flickrIcon} alt={'My Flickr account'} />
-              </a>
-              <a className={styles.smallIconContainer} href={'http://www.twitter.com/jessellisart'} target={'_blank'}>
-                <img className={styles.smallIcon} src={twitterIcon} alt={'My Twitter account'} />
-              </a>
-            </div>
-          </div>}
+          </Link>}
       </div>
     );
   }

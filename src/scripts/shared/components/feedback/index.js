@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 // components declaration
 import Button from '../button';
@@ -11,6 +11,10 @@ import styles from './style.css.json';
 import { post } from '../../utils/fetch';
 
 export default class FeedbackForm extends Component {
+  static propTypes = {
+    focus: PropTypes.bool
+  };
+
   state = {
     name: '',
     nameError: '',
@@ -20,6 +24,14 @@ export default class FeedbackForm extends Component {
     messageError: '',
     isSending: false,
     isSent: false
+  }
+
+  componentDidMount() {
+    const { focus } = this.props;
+
+    if (focus && this._input) {
+      this._input.focus();
+    }
   }
 
   verify() {
@@ -63,6 +75,7 @@ export default class FeedbackForm extends Component {
         <form onSubmit={this.onSubmit.bind(this)}>
           <div className={styles.inputContainer}>
             <input
+              ref={node => this._input = node}
               placeholder={'Name'}
               className={`${styles.input} ${nameError ? styles.error : ''}`}
               type="text"
@@ -93,7 +106,7 @@ export default class FeedbackForm extends Component {
 
     return (
       <div className={styles.sent}>
-        {'Thank you for your response! I appreciate it very much – and will return to you as soon as possible!'}
+        {'Thank you for your response! I appreciate it very much – and will write back as soon as possible!'}
       </div>
     );
   }

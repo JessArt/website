@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 // components declaration
 import PageFrame from '../page';
@@ -13,6 +13,10 @@ import styles from './style.css.json';
 import contactImage from './images/contact1.jpg';
 
 export default class AboutPage extends Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired
+  }
+
   learnMore() {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     if (this._paragraph) {
@@ -54,6 +58,7 @@ export default class AboutPage extends Component {
   }
 
   render() {
+    const { location: { query: { write } } } = this.props;
     const meta = this.createMeta()
     return (
       <PageFrame small wide meta={meta}>
@@ -70,9 +75,9 @@ export default class AboutPage extends Component {
             </div>
             <div className={styles.feedback}>
               <h4 className={styles.feedbackTitle}>
-                {'Drop me a line!'}
+                {'Drop me a line for orders, info, or just to say hey!'}
               </h4>
-              <Feedback />
+              <Feedback focus={write} />
             </div>
           </div>
           <div className={styles.learn} onClick={this.learnMore.bind(this)}>

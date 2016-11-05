@@ -64,11 +64,11 @@ export default class MediaBanner extends Component {
 
     const isVisible = !isLoading && item;
     const originalLink = (
-      <a className={styles.originalLink}
+      <Link className={styles.originalLink}
          style={{ visibility: isVisible ? 'visible' : 'hidden'}}
-         href={isVisible ? item.big_url: ''} target="_blank">
-        {'Click to get big version'}
-      </a>
+         to={{ pathname: '/about', query: { write: true } }}>
+        {'Want your own?'}
+      </Link>
     );
 
     const commentsMarkup = comments ? (
