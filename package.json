@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node tools/serve",
+    "sitemap": "node tools/sitemap",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "NODE_ENV=development webpack --colors --config ./tools/webpack-server.config.js",
     "build:prod": "NODE_ENV=production webpack --colors --config ./tools/webpack-server.config.js && node tools/build.js"
@@ -53,10 +54,12 @@
     "postcss-reporter": "^1.4.1",
     "postcss-simple-vars": "^3.0.0",
     "pug-loader": "^1.0.2",
+    "request": "^2.78.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.12.1"
+    "webpack-hot-middleware": "^2.12.1",
+    "xmlbuilder": "^8.2.2"
   }
 }
