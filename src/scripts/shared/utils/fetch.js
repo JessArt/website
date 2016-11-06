@@ -2,7 +2,7 @@ function augmentURL(url, params) {
   const queryParams = Object
     .keys(params)
     .map(key => {
-      const value = params[key];
+      const value = params[key]
       return `${key}=${encodeURIComponent(value)}`
     })
     .join('&')

@@ -14,7 +14,7 @@
   "plugins": ["react", "import"],
   "rules": {
     "no-cond-assign": ["error", "always"],
-    "class-methods-use-this": 2,
+    "class-methods-use-this": 0,
     "arrow-parens": 0,
     "complexity": ["error", 6],
     "max-len": ["error", { "code": 100, "ignoreStrings": true }],
@@ -23,7 +23,6 @@
     "no-alert": 2,
     "no-fallthrough": 2,
     "no-implicit-globals": 2,
-    "no-magic-numbers": ["error", { "ignoreArrayIndexes": true, "enforceConst": true }],
     "no-with": 2,
     "radix": "error",
     "no-unused-vars": 2,
@@ -35,7 +34,7 @@
     "prefer-template": 2,
     "prefer-const": 2,
 
-    "react/jsx-no-bind": 2,
+    "react/jsx-no-bind": 1,
     "react/jsx-filename-extension": 0,
     "react/react-in-jsx-scope": 2,
     "react/no-unused-prop-types": 1,
@@ -54,6 +53,6 @@
     "import/no-unresolved": 2,
     "import/no-duplicates": 2,
     "import/no-mutable-exports": 2,
-    "import/max-dependencies": ["error", {"max": 10}]
+    "import/max-dependencies": ["error", {"max": 20}]
   }
 }

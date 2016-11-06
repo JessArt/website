@@ -1,19 +1,20 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 // components declaration
-import Button from '../button';
+import Button from '../button'
 
 // style declaration
-import './style.css';
-import styles from './style.css.json';
+import './style.css'
+import styles from './style.css.json'
 
 // utils declaration
-import { post } from '../../utils/fetch';
+import { autobind } from 'core-decorators'
+import { post } from '../../utils/fetch'
 
 export default class FeedbackForm extends Component {
   static propTypes = {
     focus: PropTypes.bool
-  };
+  }
 
   state = {
     name: '',
@@ -27,55 +28,72 @@ export default class FeedbackForm extends Component {
   }
 
   componentDidMount() {
-    const { focus } = this.props;
+    const { focus } = this.props
 
     if (focus && this._input) {
-      this._input.focus();
+      this._input.focus()
     }
   }
 
   verify() {
-    const { name, email, message } = this.state;
+    const { name, message } = this.state
 
-    const nameError = name.length > 2 ? '' : 'Please enter at least 2 characters';
-    const emailError = '';
-    const messageError = message.length > 5 ? '' : 'Please enter at least 5 characters';
+    const MIN_NAME_LENGTH = 2
+    const MIN_MESSAGE_LENGTH = 5
+    const nameError = name.length > MIN_NAME_LENGTH ? '' : 'Please enter at least 2 characters'
+    const emailError = ''
+    const messageError = message.length > MIN_MESSAGE_LENGTH ? '' : 'Please enter at least 5 characters'
 
-    const newState = { nameError, emailError, messageError };
-    const result = !(nameError || emailError || messageError);
+    const newState = { nameError, emailError, messageError }
+    const result = !(nameError || emailError || messageError)
 
-    return new Promise(res => this.setState(newState, () => res(result)));
+    return new Promise(res => this.setState(newState, () => res(result)))
   }
 
+  @autobind
   onSubmit(e) {
-    e.preventDefault();
-    const { name, email, message } = this.state;
+    e.preventDefault()
+    const { name, email, message } = this.state
 
     this.verify().then(res => {
       if (res) {
-        const feedback = { name, email, message };
+        const feedback = { name, email, message }
         this.setState({ isSending: true }, () => {
           post('http://cms.jess.gallery/v1/api/feedback', { params: feedback })
-            .then(() => this.setState({ isSent: true }));
+            .then(() => this.setState({ isSent: true }))
         })
 
       }
-    });
+    })
+  }
+
+  @autobind
+  refInput(node) {
+    this._input = node
   }
 
   handleValue(key, e) {
-    this.setState({ [key]: e.target.value, [`${key}Error`]: '' });
+    this.setState({ [key]: e.target.value, [`${key}Error`]: '' })
   }
 
   render() {
-    const { isSending, isSent, name, nameError, email, emailError, message, messageError } = this.state;
+    const {
+      isSending,
+      isSent,
+      name,
+      nameError,
+      email,
+      emailError,
+      message,
+      messageError
+    } = this.state
 
     if (!isSent) {
       return (
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form onSubmit={this.onSubmit}>
           <div className={styles.inputContainer}>
             <input
-              ref={node => this._input = node}
+              ref={this.refInput}
               placeholder={'Name'}
               className={`${styles.input} ${nameError ? styles.error : ''}`}
               type="text"
@@ -101,13 +119,13 @@ export default class FeedbackForm extends Component {
             {isSending ? 'Sending...' : 'Send'}
           </Button>
         </form>
-      );
+      )
     }
 
     return (
       <div className={styles.sent}>
         {'Thank you for your response! I appreciate it very much – and will write back as soon as possible!'}
       </div>
-    );
+    )
   }
 }

@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+
 const DISQUS_CONFIG = [
   'shortname', 'identifier', 'title', 'url', 'category_id', 'onNewComment'
-];
-let __disqusAdded = false;
+]
+let __disqusAdded = false
 
 function copyProps(context, props, prefix = '') {
   Object.keys(props).forEach((prop) => {
-    context[prefix + prop] = props[prop];
-  });
+    context[prefix + prop] = props[prop]
+  })
 
   if (typeof props.onNewComment === 'function') {
-    context[prefix + 'config'] = function config() {
+    context[`${prefix}config`] = function config() {
       this.callbacks.onNewComment = [
         function handleNewComment(comment) {
-          props.onNewComment(comment);
+          props.onNewComment(comment)
         }
-      ];
-    };
+      ]
+    }
   }
 }
 
@@ -74,7 +75,7 @@ export default class DisqusThread extends Component {
      * user comments and replies and run a script after a comment is posted.
      */
     onNewComment: React.PropTypes.func
-  };
+  }
 
   static defaultProps = {
     shortname: null,
@@ -83,16 +84,16 @@ export default class DisqusThread extends Component {
     url: null,
     category_id: null,
     onNewComment: null
-  };
+  }
 
   componentDidMount() {
-    this.loadDisqus(this.props);
+    this.loadDisqus(this.props)
   }
 
   shouldComponentUpdate(props) {
-    this.loadDisqus(props);
+    this.loadDisqus(props)
 
-    return false;
+    return false
   }
 
   render() {
@@ -106,39 +107,39 @@ export default class DisqusThread extends Component {
           </span>
         </noscript>
       </div>
-    );
+    )
   }
 
-  addDisqusScript(initialProps) {
+  addDisqusScript() {
     if (__disqusAdded) {
-      return;
+      return
     }
 
-    const child = this.disqus = document.createElement('script');
+    const child = this.disqus = document.createElement('script')
     const parent = document.getElementsByTagName('head')[0] ||
-                 document.getElementsByTagName('body')[0];
+                 document.getElementsByTagName('body')[0]
 
-    child.async = true;
-    child.type = 'text/javascript';
-    child.src = '//jesszaikova.disqus.com/embed.js';
+    child.async = true
+    child.type = 'text/javascript'
+    child.src = '//jesszaikova.disqus.com/embed.js'
 
-    parent.appendChild(child);
-    __disqusAdded = true;
+    parent.appendChild(child)
+    __disqusAdded = true
   }
 
   loadDisqus(initialProps) {
-    const props = {};
+    const props = {}
 
     // Extract Disqus props that were supplied to this component
     DISQUS_CONFIG.forEach((prop) => {
       if (!!initialProps[prop]) {
-        props[prop] = initialProps[prop];
+        props[prop] = initialProps[prop]
       }
-    });
+    })
 
     // Always set URL
     if (!props.url || !props.url.length) {
-      props.url = window.location.href;
+      props.url = window.location.href
     }
 
     // If Disqus has already been added, reset it
@@ -146,66 +147,66 @@ export default class DisqusThread extends Component {
       DISQUS.reset({
         reload: true,
         config: function config() {
-          copyProps(this.page, props);
+          copyProps(this.page, props)
 
           // Disqus needs hashbang URL, see https://help.disqus.com/customer/portal/articles/472107
-          // this.page.url = this.page.url.replace(/#/, '') + '#!newthread';
+          // this.page.url = this.page.url.replace(/#/, '') + '#!newthread'
         }
-      });
+      })
     } else { // Otherwise add Disqus to the page
-      copyProps(window, props, 'disqus_');
-      this.addDisqusScript(initialProps);
+      copyProps(window, props, 'disqus_')
+      this.addDisqusScript(initialProps)
     }
   }
 }
 
 
-// import React, { PropTypes, Component } from 'react';
+// import React, { PropTypes, Component } from 'react'
 //
-// let id = null;
+// let id = null
 //
 // export default class DisqusComments extends Component {
 //   static propTypes = {
 //     id: PropTypes.string.isRequired,
 //     url: PropTypes.string.isRequired,
 //     title: PropTypes.string.isRequired
-//   };
+//   }
 //
 //   constructor(props) {
-//     super(props);
+//     super(props)
 //
 //     if (id) {
-//       this.setNewComment(props);
+//       this.setNewComment(props)
 //     } else {
-//       id = props.id;
+//       id = props.id
 //     }
 //   }
 //
 //   shouldComponentUpdate(props) {
-//     if (props.id !== id) this.setNewComment(props);
+//     if (props.id !== id) this.setNewComment(props)
 //
-//     return false;
+//     return false
 //   }
 //
 //   setNewComment({ id: newId, url, title }) {
 //     if (typeof window === 'object' && window.DISQUS) {
-//       id = newId;
+//       id = newId
 //       window.DISQUS.reset({
 //         reload: true,
 //         config: function () {
-//           this.page.identifier = id;
-//           this.page.url = url;
-//           this.page.title = title;
+//           this.page.identifier = id
+//           this.page.url = url
+//           this.page.title = title
 //         }
-//       });
+//       })
 //     }
 //   }
 //
 //   render() {
-//     const { id } = this.props;
+//     const { id } = this.props
 //
 //     return (
 //       <div id={'disqus_thread'} />
-//     );
+//     )
 //   }
 // }

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react'
 
 // mobx declaration
 import { observer } from 'mobx-react'
@@ -11,8 +11,8 @@ import Media from '../../components/media'
 
 @observer(['store'])
 export default class ArtPage extends Component {
-  static willRender(stores, props) {
-    return stores.store.fetchImages({ params: { type: 'photo' }});
+  static willRender(stores) {
+    return stores.store.fetchImages({ params: { type: 'photo' }})
   }
 
   componentDidMount() {
@@ -20,8 +20,8 @@ export default class ArtPage extends Component {
   }
 
   createMeta() {
-    const title = 'Jess\' Photos';
-    const description = 'Photos made during my travels in different countries';
+    const title = 'Jess\' Photos'
+    const description = 'Photos made during my travels in different countries'
     const meta = {
       title,
       description,
@@ -75,6 +75,6 @@ export default class ArtPage extends Component {
       <PageFrame small meta={meta}>
         {content}
       </PageFrame>
-    );
+    )
   }
 }

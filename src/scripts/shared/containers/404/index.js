@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 // components declaration
-import { Link } from 'react-router';
-import PageFrame from '../page';
-import Poster from '../../components/poster';
+import { Link } from 'react-router'
+import PageFrame from '../page'
+import Poster from '../../components/poster'
 
 // style declaration
-import './style.css';
-import styles from './style.css.json';
+import './style.css'
+import styles from './style.css.json'
 
 export default class NotFound extends Component {
   render() {
@@ -27,6 +27,6 @@ export default class NotFound extends Component {
           </div>
         </Poster>
       </PageFrame>
-    );
+    )
   }
 }
