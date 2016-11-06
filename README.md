@@ -4,6 +4,8 @@
 
 This is a source code for web application at [jess.gallery](http://jess.gallery).
 
+![Example](example.jpg)
+
 There is no sensitive information in this repository, so it is fully opened – feel free to run and play with it. Unfortunately, there is no documentation for API, but you can look at the code [here](https://github.com/JessArt/CMS-API).
 
 ## Start
@@ -13,6 +15,26 @@ npm run start # starts a webpack-dev-server
 ```
 
 There is also a nodemon if you want to serve files from actual express.js server, like in production, but I don't feel it is a super helpful feature (it adds some delay).
+
+To build the project:
+```shell
+npm run build:prod
+```
+
+## Linting
+
+I use [eslint](https://github.com/eslint/eslint) with fully custom rules. It can be run via command:
+```shell
+npm run eslint
+```
+
+## Testing
+
+I use [ava](https://github.com/avajs/ava) library. For now there are almost no tests, because components and the single store are the only subjects for testing.
+
+```shell
+npm run test
+```
 
 ## Libraries
 
