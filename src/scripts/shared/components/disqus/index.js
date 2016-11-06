@@ -105,9 +105,6 @@ export default class DisqusThread extends Component {
             <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
           </span>
         </noscript>
-        <a href="http://disqus.com" className="dsq-brlink">
-          Blog comments powered by <span className="logo-disqus">Disqus</span>.
-        </a>
       </div>
     );
   }

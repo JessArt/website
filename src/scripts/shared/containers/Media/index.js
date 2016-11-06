@@ -113,7 +113,7 @@ export default class MediaPage extends Component {
     const previous = items[index - 1];
     const next = items[index + 1];
 
-    const url = `http://jess.gallery/#!${pathname}${search}`;
+    const url = `http://jess.gallery/${pathname}${search}`;
 
     return item ? (
       <div>
