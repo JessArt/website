@@ -1,9 +1,9 @@
 const webpack = require('webpack')
 const path = require('path')
+
 const cwd = process.cwd()
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-// const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const variables = require('../src/scripts/shared/variables')
 
 module.exports = function getConfig (params) {
@@ -136,8 +136,8 @@ module.exports = function getConfig (params) {
         'process.env': {
           BROWSER: true,
           // This has effect on the react lib size
-          NODE_ENV: JSON.stringify(dev ?  'development' : 'production'),
-        },
+          NODE_ENV: JSON.stringify(dev ?  'development' : 'production')
+        }
       })),
     postcss: postCSSConfig
   }
