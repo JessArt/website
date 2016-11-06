@@ -111,7 +111,7 @@ function build() {
         url.ele('loc', null, createPath(`/media/${value.id}?type=${value.type}`))
         createImage({ elem: url, value })
 
-        url.ele('lastmod', null, 'monthly')
+        url.ele('changefreq', null, 'monthly')
         url.ele('priority', null, 0.5)
       })
 
