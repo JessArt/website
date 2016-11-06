@@ -13,22 +13,37 @@ import flickrIcon from './images/flickr.png'
 import tumblrIcon from './images/tumblr.png'
 import twitterIcon from './images/twitter.png'
 
+let hideOrder = false;
+
 export default class Header extends Component {
   static propTypes = {
     small: PropTypes.bool
   };
 
-  state = {
-    menu: false,
-    order: true
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      menu: false,
+      order: hideOrder ? false : true
+    };
   }
 
   toggleMenu() {
     this.setState({ menu: !this.state.menu });
   }
 
-  hideOrder() {
+  hideOrder(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    hideOrder = true;
     this.setState({ order: false });
+
+    return false;
+  }
+
+  order() {
+    hideOrder = true;
   }
 
   renderBigHeader() {
@@ -173,6 +188,7 @@ export default class Header extends Component {
           </div>
           {order && <Link
             className={styles.order}
+            onClick={this.order.bind(this)}
             to={{ pathname: '/about', query: { write: true } }}>
             {'I am available for commissions! Prints are also available.'}
             <div className={styles.close} onClick={this.hideOrder.bind(this)}>

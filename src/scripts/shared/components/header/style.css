@@ -86,6 +86,10 @@
   padding: 15px 25px;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 680px) {
+    display: initial;
+  }
 }
 
 .smallTitle {
@@ -221,11 +225,24 @@
   flex: 0 0 100%;
   background: $color-primary2;
   position: relative;
+
+  @media (max-width: 680px) {
+    padding: 5px 40px;
+  }
 }
 
 .close {
   color: '#fff';
   position: absolute;
   right: 10px;
-  top: 5px;
+  top: -5px;
+  font-size: 20px;
+  padding: 5px;
+
+  @media (max-width: 680px) {
+    padding: 20px;
+    right: -10px;
+    top: -15px;
+    font-size: 30px;
+  }
 }
