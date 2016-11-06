@@ -35,7 +35,7 @@ const fetchData = (renderProps, store) => {
     .filter(Boolean)
     .map(willRender => {
       return willRender(store, renderProps)
-    });
+    })
 }
 
 if (__DEV__) {
@@ -53,12 +53,12 @@ if (__DEV__) {
 }
 
 if (__DEV__) {
-  app.use(express.static(process.cwd() + '/build'))
+  app.use(express.static(path.join(process.cwd(), 'build')))
 } else {
   app.use(express.static(path.join(__dirname, '..', '..', '..', 'build', 'public')))
 }
 
-app.use((req, res, next) => {
+app.use((req, res) => {
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message)
@@ -79,14 +79,14 @@ app.use((req, res, next) => {
           )
 
           const storeState = Object.keys(stores).reduce((state, key) => {
-            const store = stores[key];
+            const store = stores[key]
 
             if (store && store.serialize) {
-              state[key] = store.serialize();
+              state[key] = store.serialize()
             }
 
-            return state;
-          }, {});
+            return state
+          }, {})
 
           const meta = DocumentMeta.renderAsHTML()
           res.send(compiledFn({

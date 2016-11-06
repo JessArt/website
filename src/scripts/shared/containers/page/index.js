@@ -14,7 +14,7 @@ export default class PageFrame extends Component {
     meta: PropTypes.object,
     small: PropTypes.bool,
     wide: PropTypes.bool
-  };
+  }
 
   render () {
     const { children, meta, small, wide } = this.props
@@ -23,7 +23,7 @@ export default class PageFrame extends Component {
       <div className={'container container__rel'}>
         {children}
       </div>
-    );
+    )
 
     return (
       <div className={'container-with-footer'}>

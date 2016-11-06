@@ -56,7 +56,7 @@ export default class PromoSection extends Component {
            </h4>
         </div>
       </div>
-    );
+    )
 
     const invisibleMarkup = (
       <div className={styles.expand}>
@@ -74,7 +74,7 @@ export default class PromoSection extends Component {
           </div>
         </div>
       </div>
-    );
+    )
 
     return link.startsWith('http') ? (
       <a className={styles.wrapper} href={link} target="_blank">

@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
-import './style.css';
-import styles from './style.css.json';
+import './style.css'
+import styles from './style.css.json'
 
 export default class Button extends Component {
   static propTypes = {
@@ -13,12 +13,12 @@ export default class Button extends Component {
   };
 
   render() {
-    const { children, type, className, ...props } = this.props;
+    const { children, className, ...props } = this.props
 
     return (
       <button className={`${styles.button} ${className ? className : ''}`} {...props}>
         {children}
       </button>
-    );
+    )
   }
 }

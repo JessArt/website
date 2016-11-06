@@ -29,10 +29,12 @@ export default class HomePage extends Component {
   render () {
     const { store } = this.props
     const sections = ['art', 'photo', 'blog', 'contact'].map((type, i) => {
-      const isEven = i % 2 === 0
+      const EVEN_DIVIDER = 2
+      const EVEN_REMINDER = 0
+      const isEven = i % EVEN_DIVIDER === EVEN_REMINDER
       const style = isEven ? 'bright' : 'dark'
       const position = isEven ? 'left' : 'right'
-      return <PromoSection type={type} style={style} position={position} />
+      return <PromoSection key={type} type={type} style={style} position={position} />
     })
 
     const meta = {

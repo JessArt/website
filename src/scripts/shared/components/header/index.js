@@ -7,43 +7,48 @@ import { Link } from 'react-router'
 import styles from './style.css.json'
 import './style.css'
 
+// utils declaration
+import { autobind } from 'core-decorators'
+
 // assets declaration
 import fbIcon from './images/fb.png'
 import flickrIcon from './images/flickr.png'
 import tumblrIcon from './images/tumblr.png'
 import twitterIcon from './images/twitter.png'
 
-let hideOrder = false;
+let hideOrder = false
 
 export default class Header extends Component {
   static propTypes = {
     small: PropTypes.bool
-  };
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       menu: false,
       order: hideOrder ? false : true
-    };
+    }
   }
 
+  @autobind
   toggleMenu() {
-    this.setState({ menu: !this.state.menu });
+    this.setState({ menu: !this.state.menu })
   }
 
+  @autobind
   hideOrder(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    hideOrder = true;
-    this.setState({ order: false });
+    e.preventDefault()
+    e.stopPropagation()
+    hideOrder = true
+    this.setState({ order: false })
 
-    return false;
+    return false
   }
 
   order() {
-    hideOrder = true;
+    hideOrder = true
   }
 
   renderBigHeader() {
@@ -102,15 +107,17 @@ export default class Header extends Component {
   }
 
   renderSmallHeader() {
-    const { menu, order } = this.state;
+    const { menu, order } = this.state
 
     return (
       <div className={styles.smallHeader}>
         <div className={styles.smallRow}>
-          <div className={`${styles.hamburger} ${menu ? styles.active: ''}`} onClick={this.toggleMenu.bind(this)}>
-            <span></span>
-            <span></span>
-            <span></span>
+          <div
+            className={`${styles.hamburger} ${menu ? styles.active: ''}`}
+            onClick={this.toggleMenu}>
+            <span />
+            <span />
+            <span />
           </div>
           <Link to={{ pathname: '/' }} className={styles.smallTitle}>
             <span className={styles.coloured}>
@@ -188,20 +195,20 @@ export default class Header extends Component {
           </div>
           {order && <Link
             className={styles.order}
-            onClick={this.order.bind(this)}
+            onClick={this.order}
             to={{ pathname: '/about', query: { write: true } }}>
             {'I am available for commissions! Prints are also available.'}
-            <div className={styles.close} onClick={this.hideOrder.bind(this)}>
+            <div className={styles.close} onClick={this.hideOrder}>
               {'x'}
             </div>
           </Link>}
       </div>
-    );
+    )
   }
 
   render () {
-    const { small } = this.props;
+    const { small } = this.props
 
-    return small ? this.renderSmallHeader() : this.renderBigHeader();
+    return small ? this.renderSmallHeader() : this.renderBigHeader()
   }
 }

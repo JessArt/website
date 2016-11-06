@@ -1,17 +1,17 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 
 // style declaration
-import './style.css';
-import styles from './style.css.json';
+import './style.css'
+import styles from './style.css.json'
 
 export default class Poster extends Component {
   static propTypes = {
     image: PropTypes.string,
     children: PropTypes.element
-  };
+  }
 
   render() {
-    const { image, children } = this.props;
+    const { image, children } = this.props
 
     return (
       <div className={styles.bannerContainer}>
@@ -20,6 +20,6 @@ export default class Poster extends Component {
           {children}
         </div>
       </div>
-    );
+    )
   }
 }
