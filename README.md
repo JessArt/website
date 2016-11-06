@@ -4,7 +4,7 @@
 
 This is a source code for web application at [jess.gallery](http://jess.gallery).
 
-![Example](example.jpg)
+[![Example](example.jpg)](http://jess.gallery)
 
 There is no sensitive information in this repository, so it is fully opened – feel free to run and play with it. Unfortunately, there is no documentation for API, but you can look at the code [here](https://github.com/JessArt/CMS-API).
 
