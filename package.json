@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node tools/serve",
     "sitemap": "node tools/sitemap",
+    "eslint": "eslint src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "NODE_ENV=development webpack --colors --config ./tools/webpack-server.config.js",
     "build:prod": "NODE_ENV=production webpack --colors --config ./tools/webpack-server.config.js && node tools/build.js"
@@ -30,6 +31,7 @@
   "devDependencies": {
     "autoprefixer": "^6.3.7",
     "babel-core": "^6.10.4",
+    "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-class-properties": "^6.18.0",
     "babel-plugin-transform-decorators": "^6.13.0",
@@ -42,6 +44,9 @@
     "babel-preset-stage-2": "^6.11.0",
     "copy-webpack-plugin": "^4.0.0",
     "css-loader": "^0.23.1",
+    "eslint": "^3.9.1",
+    "eslint-plugin-import": "^2.1.0",
+    "eslint-plugin-react": "^6.6.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "json-loader": "^0.5.4",
