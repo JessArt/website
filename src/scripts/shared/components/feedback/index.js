@@ -59,7 +59,7 @@ export default class FeedbackForm extends Component {
       if (res) {
         const feedback = { name, email, message }
         this.setState({ isSending: true }, () => {
-          post('http://cms.jess.gallery/v1/api/feedback', { params: feedback })
+          post('/v1/api/feedback', { params: feedback })
             .then(() => this.setState({ isSent: true }))
         })
 

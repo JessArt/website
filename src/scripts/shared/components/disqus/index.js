@@ -103,7 +103,7 @@ export default class DisqusThread extends Component {
         <noscript>
           <span>
             Please enable JavaScript to view the
-            <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+            <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
           </span>
         </noscript>
       </div>

@@ -52,12 +52,12 @@ export default class AboutPage extends Component {
         itemProp: {
           name: title,
           description,
-          image: 'http://static.jess.gallery/contact_og.jpg'
+          image: '//static.jess.gallery/contact_og.jpg'
         },
         property: {
           'og:title': title,
-          'og:url': 'http://jess.gallery/about',
-          'og:image': 'http://static.jess.gallery/contact_og.jpg',
+          'og:url': '//jess.gallery/about',
+          'og:image': '//static.jess.gallery/contact_og.jpg',
           'og:image:type': 'image/jpeg',
           'og:description': description
         }

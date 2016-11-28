@@ -48,7 +48,7 @@ export class Store {
       return Promise.resolve()
     } else {
       this.images[type].loading = true
-      const promise = get('http://cms.jess.gallery/v1/api/images', { params })
+      const promise = get('/v1/api/images', { params })
       return delay({ fn: promise, time: 500 })
         .then((rawRes) => {
           const res = rawRes.map(x => {

@@ -84,7 +84,7 @@ export default class MediaPage extends Component {
           },
           property: {
             'og:title': item.title,
-            'og:url': `http://jess.gallery/media/${item.id}?type=${item.type}`,
+            'og:url': `//jess.gallery/media/${item.id}?type=${item.type}`,
             'og:image': item.big_url,
             'og:image:type': 'image/jpeg',
             'og:description': item.description
@@ -112,7 +112,7 @@ export default class MediaPage extends Component {
     const previous = items[index - 1]
     const next = items[index + 1]
 
-    const url = `http://jess.gallery/${pathname}${search}`
+    const url = `//jess.gallery/${pathname}${search}`
 
     return item ? (
       <div>

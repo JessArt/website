@@ -33,12 +33,12 @@ export default class ArtPage extends Component {
         itemProp: {
           name: title,
           description,
-          image: 'http://static.jess.gallery/art_og.jpg'
+          image: '//static.jess.gallery/art_og.jpg'
         },
         property: {
           'og:title': title,
-          'og:url': 'http://jess.gallery/art',
-          'og:image': 'http://static.jess.gallery/art_og.jpg',
+          'og:url': '//jess.gallery/art',
+          'og:image': '//static.jess.gallery/art_og.jpg',
           'og:image:type': 'image/jpeg',
           'og:description': description
         }

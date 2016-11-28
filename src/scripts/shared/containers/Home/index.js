@@ -40,7 +40,7 @@ export default class HomePage extends Component {
     const meta = {
       title: 'Jess Zaikova Gallery',
       description: 'Jess Zaikova art and photography',
-      canonical: 'http://jess.gallery',
+      canonical: '//jess.gallery',
       meta: {
         charset: 'utf-8',
         name: {

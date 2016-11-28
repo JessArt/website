@@ -43,12 +43,12 @@ export default class MusicPage extends Component {
         itemProp: {
           name: title,
           description,
-          image: 'http://static.jess.gallery/music_og.jpg'
+          image: '//static.jess.gallery/music_og.jpg'
         },
         property: {
           'og:title': title,
-          'og:url': 'http://jess.gallery/music',
-          'og:image': 'http://static.jess.gallery/music_og.jpg',
+          'og:url': '//jess.gallery/music',
+          'og:image': '//static.jess.gallery/music_og.jpg',
           'og:image:type': 'image/jpeg',
           'og:description': description
         }

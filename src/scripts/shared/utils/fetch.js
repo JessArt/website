@@ -1,3 +1,13 @@
+import isNode from 'detect-node'
+
+const API = 'cms.jess.gallery'
+
+function constructPrefix() {
+  const prefix = isNode ? 'https' : location.protocol
+
+  return `${prefix}//${API}`
+}
+
 function augmentURL(url, params) {
   const queryParams = Object
     .keys(params)
@@ -7,7 +17,9 @@ function augmentURL(url, params) {
     })
     .join('&')
 
-  return `${url}${queryParams.length ? '?' :''}${queryParams}`
+  const prefix = constructPrefix()
+
+  return `${prefix}${url}${queryParams.length ? '?' :''}${queryParams}`
 }
 
 function checkStatus(response) {
@@ -37,7 +49,7 @@ export function get(url, { params }) {
 }
 
 export function post(url, { params }) {
-  return fetch(url, {
+  return fetch(`${constructPrefix()}${url}`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

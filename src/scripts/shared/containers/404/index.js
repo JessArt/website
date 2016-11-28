@@ -13,7 +13,7 @@ export default class NotFound extends Component {
   render() {
     return (
       <PageFrame small wide>
-        <Poster image={'http://static.jess.gallery/c0e4abbc-aab0-4639-8c7b-63d478aa41d2_1200.jpg'}>
+        <Poster image={'//static.jess.gallery/c0e4abbc-aab0-4639-8c7b-63d478aa41d2_1200.jpg'}>
           <div className={styles.container}>
             <h2 className={styles.title}>
               Not found!
