@@ -3,7 +3,7 @@ import isNode from 'detect-node'
 const API = 'cms.jess.gallery'
 
 function constructPrefix() {
-  const prefix = isNode ? 'https' : location.protocol
+  const prefix = isNode ? 'http:' : location.protocol
 
   return `${prefix}//${API}`
 }
