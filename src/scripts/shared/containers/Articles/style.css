@@ -1,0 +1,19 @@
+.container {
+  min-height: calc(100vh - 100px);
+  padding: 100px 150px!important;
+}
+
+.article {
+}
+
+.title {
+  font-size: 20px;
+}
+
+.subtitle {
+  margin-top: -15px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: rgba(0,0,0,.44);
+  font-style: italic;
+}

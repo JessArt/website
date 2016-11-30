@@ -10,10 +10,10 @@ import Grid from '../../components/grid'
 import Media from '../../components/media'
 
 
-@observer(['store'])
+@observer(['images'])
 export default class ArtPage extends Component {
   static willRender(stores) {
-    return stores.store.fetchImages({ params: { type: 'art' }})
+    return stores.images.fetchImages({ params: { type: 'art' }})
   }
 
   componentDidMount() {

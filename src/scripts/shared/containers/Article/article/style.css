@@ -1,0 +1,17 @@
+.slider {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+
+}
+
+.imageWrapper {
+  width: auto;
+  height: 225px;
+  margin: 10px;
+  img {
+    max-width: 100%!important;
+    max-height: 100%;
+  }
+}

@@ -1,8 +1,11 @@
-import { Store } from './store'
+import { ImagesStore } from './images'
+import { ArticlesStore } from './articles'
 
 export function createStores() {
-  const store = new Store()
+  const images = new ImagesStore()
+  const articles = new ArticlesStore()
   return {
-    store
+    images,
+    articles
   }
 }

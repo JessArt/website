@@ -58,6 +58,19 @@ if (__DEV__) {
   app.use(express.static(path.join(__dirname, '..', '..', '..', 'build', 'public')))
 }
 
+app.use('*', (req, res, next) => {
+  console.log(123)
+  const fromDisqus = req.baseUrl.match(/(.+)#!\/(.+)/)
+  console.log(fromDisqus, typeof req.path, req.path, req.url, req.baseUrl, req.originalUrl)
+
+  if (fromDisqus) {
+    res.redirect(302, `${fromDisqus[1]}${fromDisqus[2]}`)
+    return
+  }
+
+  next()
+})
+
 app.use((req, res) => {
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {

@@ -14,20 +14,20 @@ import GridBanner from '../../components/grid-banner'
 import styles from './style.css.json'
 import './style.css'
 
-@observer(['store'])
+@observer(['images'])
 export default class HomePage extends Component {
   static propTypes = {
-    store: PropTypes.object
+    images: PropTypes.object
   }
 
   componentDidMount() {
-    const { store } = this.props
-    store.fetchImages({ params: { type: 'art'}})
-    store.fetchImages({ params: { type: 'photo'}})
+    const { images } = this.props
+    images.fetchImages({ params: { type: 'art'}})
+    images.fetchImages({ params: { type: 'photo'}})
   }
 
   render () {
-    const { store } = this.props
+    const { images } = this.props
     const sections = ['art', 'photo', 'blog', 'contact'].map((type, i) => {
       const EVEN_DIVIDER = 2
       const EVEN_REMINDER = 0
@@ -49,10 +49,10 @@ export default class HomePage extends Component {
       }
     }
 
-    const isArtLoading = store.isLoading('art')
-    const isPhotosLoading = store.isLoading('photo')
-    const art = store.getData('art')
-    const photos = store.getData('photo')
+    const isArtLoading = images.isLoading('art')
+    const isPhotosLoading = images.isLoading('photo')
+    const art = images.getData('art')
+    const photos = images.getData('photo')
 
     const banner = isArtLoading || isPhotosLoading || (art.length === 0 && photos.length === 0) ? (
       <Loader />

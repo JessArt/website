@@ -4,6 +4,8 @@ import { Router, IndexRoute, Route, browserHistory } from 'react-router'
 import App from '../containers/App'
 import Home from '../containers/Home'
 import Art from '../containers/Art'
+import Articles from '../containers/Articles'
+import Article from '../containers/Article'
 import Photos from '../containers/Photos'
 import Media from '../containers/Media'
 import Music from '../containers/Music'
@@ -16,6 +18,8 @@ export default (
       <IndexRoute component={Home} />
       <Route path={'art'} component={Art} />
       <Route path={'photo'} component={Photos} />
+      <Route path={'articles'} component={Articles} />
+      <Route path={'articles/:id'} component={Article} />
       <Route path={'media/:id'} component={Media} />
       <Route path={'music'} component={Music} />
       <Route path={'about'} component={About} />

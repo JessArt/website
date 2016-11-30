@@ -9,13 +9,13 @@ function constructPrefix() {
 }
 
 function augmentURL(url, params) {
-  const queryParams = Object
+  const queryParams = params ? Object
     .keys(params)
     .map(key => {
       const value = params[key]
       return `${key}=${encodeURIComponent(value)}`
     })
-    .join('&')
+    .join('&') : ''
 
   const prefix = constructPrefix()
 
@@ -36,7 +36,7 @@ function parseJSON(response) {
   return response.json()
 }
 
-export function get(url, { params }) {
+export function get(url, { params } = {}) {
   return fetch(augmentURL(url, params), {
     method: 'GET',
     headers: {

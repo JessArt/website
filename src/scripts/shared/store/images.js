@@ -1,13 +1,13 @@
-/* global __SERVER__ */
-
 import { delay, wait } from 'delounce'
 import { preload } from 'pic-loader'
-import { observable, transaction, toJS } from 'mobx'
+import { observable, transaction } from 'mobx'
+import Base from './base'
 import { get } from '../utils/fetch'
 
-export class Store {
+export class ImagesStore extends Base {
   constructor() {
-    let initialValue = {
+    super('images')
+    const initialValue = {
       art: {
         data: [],
         loading: false,
@@ -20,34 +20,26 @@ export class Store {
       }
     }
 
-    if (!__SERVER__ && window.__INITIAL_DATA__ && window.__INITIAL_DATA__.store) {
-      initialValue = window.__INITIAL_DATA__.store
-    }
-
-    this.images = observable(initialValue)
-  }
-
-  serialize() {
-    return toJS(this.images)
+    this.data = observable(this.initialValue || initialValue)
   }
 
   isLoading(type) {
-    return this.images[type].loading
+    return this.data[type].loading
   }
 
   getData(type) {
-    return this.images[type].data || []
+    return this.data[type].data || []
   }
 
   fetchImages({ params }) {
     const type = params.type
 
-    const isLoading = this.images[type].loading
-    const isLoaded = Boolean(this.images[type].data.length)
+    const isLoading = this.data[type].loading
+    const isLoaded = Boolean(this.data[type].data.length)
     if (isLoading || isLoaded) {
       return Promise.resolve()
     } else {
-      this.images[type].loading = true
+      this.data[type].loading = true
       const promise = get('/v1/api/images', { params })
       return delay({ fn: promise, time: 500 })
         .then((rawRes) => {
@@ -64,8 +56,8 @@ export class Store {
           return wait({ fn, time: 1000 })
             .then(() => {
               transaction(() => {
-                this.images[type].data = res
-                this.images[type].loading = false
+                this.data[type].data = res
+                this.data[type].loading = false
               })
             })
         })
