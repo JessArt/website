@@ -51,8 +51,8 @@ export default class ArtPage extends Component {
   }
 
   render() {
-    const isLoading = true // this.props.images.isLoading('photo')
-    const photos = [] // this.props.images.getData('photo')
+    const isLoading = this.props.images.isLoading('photo')
+    const photos = this.props.images.getData('photo')
     const photosElements = (photos || []).map(x => {
       return (
         <Media key={x.id} item={x} />
