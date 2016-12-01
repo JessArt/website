@@ -36,12 +36,13 @@ export class ImagesStore extends Base {
 
     const isLoading = this.data[type].loading
     const isLoaded = Boolean(this.data[type].data.length)
+
     if (isLoading || isLoaded) {
       return Promise.resolve()
     } else {
       this.data[type].loading = true
       const promise = get('/v1/api/images', { params })
-      return delay({ fn: promise, time: 500 })
+      return delay({ fn: promise, time: 200 })
         .then((rawRes) => {
           const res = rawRes.map(x => {
             return {

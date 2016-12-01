@@ -14,8 +14,8 @@ export default class Footer extends Component {
             {(new Date()).getFullYear()}
           </div>
           <div>
-            <a className={styles.email} href={'mailto:business@jess.gallery'}>
-              {'business@jess.gallery'}
+            <a className={styles.email} href={'mailto:jess.zaikova@gmail.com'}>
+              {'jess.zaikova@gmail.com'}
             </a>
             {' for all queries'}
           </div>

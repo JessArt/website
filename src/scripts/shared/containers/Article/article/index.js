@@ -28,10 +28,13 @@ export default class Article extends Component {
     const touchedImages = []
     for (const image of images) {
       if (!touchedImages.includes(image)) {
-        const { collection } = checkEl({ collection: [image], touched: touchedImages, element: image })
+        const { collection } = checkEl({
+          collection: [image],
+          touched: touchedImages,
+          element: image
+        })
 
         if (collection.length > 1) {
-          // console.log('111111', collection)
           this.createSlider(collection)
         }
       }

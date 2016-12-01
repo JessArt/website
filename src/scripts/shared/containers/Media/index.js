@@ -135,7 +135,6 @@ export default class MediaPage extends Component {
     const isLoading = store.isLoading(type)
     const content = isLoading ? this.renderLoader() : this.renderItem()
     const meta = this.createMeta()
-    console.log(meta)
     return (
       <PageFrame small wide meta={meta}>
         {content}

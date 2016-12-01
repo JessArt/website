@@ -11,13 +11,15 @@ import styles from './style.css.json'
 
 @observer(['articles'])
 export default class ArticlesPage extends Component {
+  static willRender(stores) {
+    return stores.articles.fetchArticles()
+  }
+
   componentDidMount() {
     this.props.articles.fetchArticles()
   }
 
   renderArticle(article) {
-    console.log(article)
-
     return (
       <div className={styles.article} key={article.ID}>
         <h2 className={styles.title}>

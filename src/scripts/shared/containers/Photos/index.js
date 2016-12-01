@@ -16,7 +16,7 @@ export default class ArtPage extends Component {
   }
 
   componentDidMount() {
-    this.props.store.fetchImages({ params: { type: 'photo' }})
+    this.props.images.fetchImages({ params: { type: 'photo' }})
   }
 
   createMeta() {
@@ -51,8 +51,8 @@ export default class ArtPage extends Component {
   }
 
   render() {
-    const isLoading = this.props.store.isLoading('photo')
-    const photos = this.props.store.getData('photo')
+    const isLoading = true // this.props.images.isLoading('photo')
+    const photos = [] // this.props.images.getData('photo')
     const photosElements = (photos || []).map(x => {
       return (
         <Media key={x.id} item={x} />

@@ -7,19 +7,27 @@ export class ArticlesStore extends Base {
     super('articles')
     const initialValue = {
       loading: false,
-      articles: null
+      articles: [],
+      error: null
     }
     this.data = observable(this.initialValue || initialValue)
   }
 
   fetchArticles() {
-    this.data.loading = true
-    get('/v1/api/articles')
-      .then(res => {
-        transaction(() => {
-          this.data.loading = false
-          this.data.articles = res
+    const isLoading = this.data.loading
+    const isLoaded = Boolean(this.data.articles.length)
+
+    if (isLoading || isLoaded) {
+      return Promise.resolve()
+    } else {
+      this.data.loading = true
+      return get('/v1/api/articles')
+        .then(res => {
+          transaction(() => {
+            this.data.loading = false
+            this.data.articles = res
+          })
         })
-      })
+      }
   }
 }

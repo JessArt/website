@@ -9,7 +9,6 @@ import Loader from '../../components/loader'
 import Grid from '../../components/grid'
 import Media from '../../components/media'
 
-
 @observer(['images'])
 export default class ArtPage extends Component {
   static willRender(stores) {
@@ -17,7 +16,7 @@ export default class ArtPage extends Component {
   }
 
   componentDidMount() {
-    this.props.store.fetchImages({ params: { type: 'art' }})
+    this.props.images.fetchImages({ params: { type: 'art' }})
   }
 
   createMeta() {
@@ -52,9 +51,9 @@ export default class ArtPage extends Component {
   }
 
   render() {
-    const { store } = this.props
-    const isLoading = store.isLoading('art')
-    const photos = store.getData('art')
+    const { images } = this.props
+    const isLoading = images.isLoading('art')
+    const photos = images.getData('art')
     const photosElements = photos.map(x => {
       return (
         <Media key={x.id} item={x} />
