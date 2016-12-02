@@ -20,12 +20,43 @@ export default class ArticlesPage extends Component {
     this.props.articles.fetchArticles()
   }
 
+  createMeta() {
+    const title = 'Jess\' Zaikova Travel Articles'
+    const description = 'Travel articles of Jess Zaikova around the world. USA, Russia, Czech, Prague, Serbia and much more!'
+    const meta = {
+      title,
+      description,
+      meta: {
+        name: {
+          keywords: 'jess zaikova, travel, blog, articles, russia, czech, prague, USA, travel blog'
+        },
+        itemProp: {
+          name: title,
+          description,
+          image: '//static.jess.gallery/photo_og.jpg'
+        },
+        property: {
+          'og:title': title,
+          'og:url': '//jess.gallery/travel',
+          'og:image': '//static.jess.gallery/photo_og.jpg',
+          'og:image:type': 'image/jpeg',
+          'og:description': description
+        }
+      },
+      auto: {
+        ograph: true
+      }
+    }
+
+    return meta
+  }
+
   renderArticle(article) {
     console.log(article)
 
     return (
       <div className={styles.article} key={article.ID}>
-        <Link to={{ pathname: `/articles/${article.ID}` }}>
+        <Link to={{ pathname: `/travel/${article.ID}` }}>
           <h2 className={styles.title}>
             {article.Title}
           </h2>
@@ -39,8 +70,9 @@ export default class ArticlesPage extends Component {
 
   render() {
     const { articles: { data: { loading, articles } } } = this.props
+    const meta = this.createMeta()
     return (
-      <PageFrame small>
+      <PageFrame small meta={meta}>
         <div className={`container ${styles.container}`} style={{ background: '#fff' }}>
           <div className={styles.content}>
             {loading && <Loader />}

@@ -45,7 +45,7 @@ export default class HomePage extends Component {
       meta: {
         charset: 'utf-8',
         name: {
-          keywords: 'art, drawing, paint, photo, photography'
+          keywords: 'jess zaikova, art, drawing, paint, photo, photography, travel, blog, travel blog'
         }
       }
     }

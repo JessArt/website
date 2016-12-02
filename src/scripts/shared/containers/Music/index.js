@@ -38,7 +38,7 @@ export default class MusicPage extends Component {
       description,
       meta: {
         name: {
-          keywords: 'music, guitar, tutorial, youtube, bio'
+          keywords: 'jess zaikova, music, guitar, tutorial, youtube, bio, order paint'
         },
         itemProp: {
           name: title,

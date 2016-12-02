@@ -28,7 +28,7 @@ export default class ArtPage extends Component {
       description,
       meta: {
         name: {
-          keywords: 'photos, travel, usa, russia, prague'
+          keywords: 'jess zaikova, photos, travel, usa, russia, prague'
         },
         itemProp: {
           name: title,

@@ -48,7 +48,7 @@ export default class AboutPage extends Component {
       description,
       meta: {
         name: {
-          keywords: 'about, bio, story, feedback, contact'
+          keywords: 'jess zaikova, about, bio, story, feedback, contact, order paint, order draw'
         },
         itemProp: {
           name: title,

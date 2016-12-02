@@ -75,7 +75,7 @@ export default class MediaPage extends Component {
         description: item.description,
         meta: {
           name: {
-            keywords: (item.description || '').split(' ').join(', ')
+            keywords: item.keywords
           },
           itemProp: {
             name: item.title,

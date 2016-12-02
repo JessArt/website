@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, IndexRoute, Route, browserHistory } from 'react-router'
+import { Router, IndexRoute, Route, browserHistory, Redirect } from 'react-router'
 
 import App from '../containers/App'
 import Home from '../containers/Home'
@@ -18,8 +18,10 @@ export default (
       <IndexRoute component={Home} />
       <Route path={'art'} component={Art} />
       <Route path={'photo'} component={Photos} />
-      <Route path={'articles'} component={Articles} />
-      <Route path={'articles/:id'} component={Article} />
+      <Redirect from={'articles'} to={'travel'} />
+      <Redirect from={'articles/:id'} to={'travel/:id'} />
+      <Route path={'travel'} component={Articles} />
+      <Route path={'travel/:id'} component={Article} />
       <Route path={'media/:id'} component={Media} />
       <Route path={'music'} component={Music} />
       <Route path={'about'} component={About} />

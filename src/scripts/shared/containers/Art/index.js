@@ -28,7 +28,7 @@ export default class ArtPage extends Component {
       description,
       meta: {
         name: {
-          keywords: 'art, painting, drawing, graphite, charcoal'
+          keywords: 'jess zaikova, art, painting, drawing, graphite, charcoal, order paint'
         },
         itemProp: {
           name: title,
