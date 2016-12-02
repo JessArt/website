@@ -51,66 +51,11 @@ export default class Header extends Component {
     hideOrder = true
   }
 
-  renderBigHeader() {
-    return (
-      <div className={styles.container}>
-        <div className={styles.backgroundContainer}>
-          <div className={styles.titleContainer}>
-            <h2 className={styles.title}>
-              <Link className={styles.titleLink} to={{ pathname: '/' }}>
-                <div className={'container'}>
-                  <span className={styles.colored}>
-                    {'Jess'}
-                  </span>
-                  <span className={styles.noncolored}>
-                    {'Zaikova'}
-                  </span>
-                </div>
-              </Link>
-            </h2>
-          </div>
-        </div>
-        <div className={styles.linksContainer}>
-          <div className={`${styles.links} container`}>
-            <div className={styles.internal}>
-              <Link to={{ pathname: '/art' }} className={styles.link}>
-                {'Art'}
-              </Link>
-              <Link to={{ pathname: '/photo' }} className={styles.link}>
-                {'Photography'}
-              </Link>
-              <Link to={{ pathname: '/music' }} className={styles.link}>
-                {'Music'}
-              </Link>
-              <Link to={{ pathname: '/about' }} className={styles.link}>
-                {'About'}
-              </Link>
-            </div>
-            <div className={styles.external}>
-              <a className={styles.iconContainer} href={'//jessellisart.tumblr.com'} target={'_blank'}>
-                <img className={styles.icon} src={tumblrIcon} alt={'My Tumbler account'} />
-              </a>
-              <a className={styles.iconContainer} href={'https://www.facebook.com/jessellisart'} target={'_blank'}>
-                <img className={styles.icon} src={fbIcon} alt={'My Facebook account'} />
-              </a>
-              <a className={styles.iconContainer} href={'//www.flickr.com/jessellisart'} target={'_blank'}>
-                <img className={styles.icon} src={flickrIcon} alt={'My Flickr account'} />
-              </a>
-              <a className={styles.iconContainer} href={'//www.twitter.com/jessellisart'} target={'_blank'}>
-                <img className={styles.icon} src={twitterIcon} alt={'My Twitter account'} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  renderSmallHeader() {
+  renderSmallHeader({ invisible = false } = {}) {
     const { menu, order } = this.state
 
     return (
-      <div className={styles.smallHeader}>
+      <div className={`${styles.smallHeader} ${invisible ? styles.invisible : ''}`}>
         <div className={styles.smallRow}>
           <div
             className={`${styles.hamburger} ${menu ? styles.active: ''}`}
@@ -215,8 +160,11 @@ export default class Header extends Component {
   }
 
   render () {
-    const { small } = this.props
-
-    return small ? this.renderSmallHeader() : this.renderBigHeader()
+    return (
+      <div>
+        {this.renderSmallHeader({ invisible: true })}
+        {this.renderSmallHeader()}
+      </div>
+    )
   }
 }

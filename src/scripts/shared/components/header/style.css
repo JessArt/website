@@ -80,6 +80,11 @@
   @media (max-width: 680px) {
     display: initial;
   }
+
+  &.invisible {
+    position: static;
+    visibility: hidden;
+  }
 }
 
 .smallRow {
@@ -239,7 +244,7 @@
   font-size: 20px;
   padding: 5px;
 
-  @media (max-width: 680px) {
+  @media (max-width: 440px) {
     padding: 20px;
     right: -10px;
     top: -15px;
