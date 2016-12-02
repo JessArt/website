@@ -8,6 +8,7 @@ import PageFrame from '../page'
 import Loader from '../../components/loader'
 import Grid from '../../components/grid'
 import Media from '../../components/media'
+import Subscribe from '../../components/subscribe'
 
 @observer(['images'])
 export default class ArtPage extends Component {
@@ -65,9 +66,12 @@ export default class ArtPage extends Component {
         <Loader />
       </div>
     ) : (
-      <Grid>
-        {photosElements}
-      </Grid>
+      <div>
+        <Grid>
+          {photosElements}
+        </Grid>
+        <Subscribe />
+      </div>
     )
 
     const meta = this.createMeta()

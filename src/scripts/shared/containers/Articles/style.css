@@ -1,6 +1,17 @@
 .container {
   min-height: calc(100vh - 100px);
-  padding: 100px 150px!important;
+  padding: 100px 150px 10px!important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+.subscribe {
+  flex: 0;
 }
 
 .article {

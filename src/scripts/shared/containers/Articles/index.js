@@ -5,6 +5,7 @@ import { observer } from 'mobx-react'
 import { Link } from 'react-router'
 import PageFrame from '../page'
 import Loader from '../../components/loader'
+import Subscribe from '../../components/subscribe'
 
 import './style.css'
 import styles from './style.css.json'
@@ -41,8 +42,13 @@ export default class ArticlesPage extends Component {
     return (
       <PageFrame small>
         <div className={`container ${styles.container}`} style={{ background: '#fff' }}>
-          {loading && <Loader />}
-          {!loading && articles && articles.map(this.renderArticle.bind(this))}
+          <div className={styles.content}>
+            {loading && <Loader />}
+            {!loading && articles && articles.map(this.renderArticle.bind(this))}
+          </div>
+          <div className={styles.subscribe}>
+            <Subscribe />
+          </div>
         </div>
       </PageFrame>
     )

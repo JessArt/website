@@ -9,6 +9,7 @@ import PageFrame from '../page'
 import PromoSection from '../../components/promo-section'
 import Loader from '../../components/loader'
 import GridBanner from '../../components/grid-banner'
+import Subscribe from '../../components/subscribe'
 
 // style declaration
 import styles from './style.css.json'
@@ -67,6 +68,7 @@ export default class HomePage extends Component {
           <div className={styles.sectionsContainer}>
             {sections}
           </div>
+          <Subscribe />
         </div>
       </PageFrame>
     )

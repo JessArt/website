@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 // components declaration
 import { Link } from 'react-router'
 import Loader from '../loader'
+import Subscribe from '../subscribe'
 
 // utils declaration
 import { preload } from 'pic-loader'
@@ -96,6 +97,7 @@ export default class MediaBanner extends Component {
               {item.description}
             </div>
             {commentsMarkup}
+            <Subscribe className={styles.subscribe} />
           </div>
         </div>
       </div>

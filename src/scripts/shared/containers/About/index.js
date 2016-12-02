@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react'
 import PageFrame from '../page'
 import Poster from '../../components/poster'
 import Feedback from '../../components/feedback'
+import Subscribe from '../../components/subscribe'
 
 // utils declaration
 import { autobind } from 'core-decorators'
@@ -116,6 +117,7 @@ export default class AboutPage extends Component {
           <div className={styles.paragraph}>
             {fourthParagraph}
           </div>
+          <Subscribe />
         </div>
       </PageFrame>
     )

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 // components declaration
 import Button from '../button'
+import Input from '../input'
 
 // style declaration
 import './style.css'
@@ -92,19 +93,21 @@ export default class FeedbackForm extends Component {
       return (
         <form onSubmit={this.onSubmit}>
           <div className={styles.inputContainer}>
-            <input
+            <Input
               ref={this.refInput}
               placeholder={'Name'}
-              className={`${styles.input} ${nameError ? styles.error : ''}`}
+              error={nameError}
+              dark
               type="text"
               value={name}
               onChange={this.handleValue.bind(this, 'name')} />
           </div>
           <div className={styles.inputContainer}>
-            <input
+            <Input
               placeholder={'Email (optional)'}
-              className={`${styles.input} ${emailError ? styles.error : ''}`}
+              error={emailError}
               type="email"
+              dark
               value={email}
               onChange={this.handleValue.bind(this, 'email')} />
           </div>
