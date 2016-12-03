@@ -15,14 +15,14 @@ export default class Media extends Component {
   render() {
     const { item } = this.props
 
-    const to = { pathname: `/media/${item.id}`, query: { type: item.type } }
+    const to = { pathname: `/media/${item.ID}`, query: { type: item.Type } }
     return (
       <div className={styles.container}>
         <Link className={styles.link} to={to}>
-          <img className={styles.image} alt={item.title} src={item.small_url} />
+          <img className={styles.image} alt={item.Title} src={item.SmallURL} />
           <div className={styles.overlay}>
             <div className={styles.title}>
-              {item.title}
+              {item.Title}
             </div>
           </div>
         </Link>

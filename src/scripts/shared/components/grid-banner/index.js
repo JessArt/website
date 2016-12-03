@@ -86,7 +86,7 @@ export default class GridBanner extends Component {
   renderMobileVersion(items) {
     return (
       <div className={styles.mobileContainer} onClick={this.rearrange}>
-        <FadingImage url={sample(items).small_url} />
+        <FadingImage url={sample(items).SmallURL} />
       </div>
     )
   }
@@ -95,7 +95,7 @@ export default class GridBanner extends Component {
     const { number } = this.state
     const { items } = this.props
     const processedItems = shuffle(items)
-      .filter(x => Boolean(x.originalWidth) && x.originalWidth > x.originalHeight)
+      .filter(x => Boolean(x.OriginalWidth) && x.OriginalWidth > x.OriginalHeight)
       .slice(FIRST_INDEX, number)
 
     const images = processedItems.map((item, i) => {
@@ -104,10 +104,10 @@ export default class GridBanner extends Component {
         const width = random(MIN_WIDTH, MAX_WIDTH)
 
       return (
-        <Link to={{ pathname: `/media/${item.id}`, query: { type: item.type }}}
+        <Link to={{ pathname: `/media/${item.ID}`, query: { type: item.Type }}}
           className={styles.elem} key={`grid_banner_${i}`}
           style={{ left: `${leftPosition}%`, top: `${topPosition}px`, width: `${width}px`}}>
-          <img className={styles.image} src={item.small_url} alt={item.title} />
+          <img className={styles.image} src={item.SmallURL} alt={item.Title} />
         </Link>
       )
     })

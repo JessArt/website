@@ -4,11 +4,19 @@ import React, { Component } from 'react'
 import { observer } from 'mobx-react'
 
 // components declaration
+import { Link } from 'react-router'
 import PageFrame from '../page'
 import Loader from '../../components/loader'
 import Grid from '../../components/grid'
 import Media from '../../components/media'
 import Subscribe from '../../components/subscribe'
+
+// utils declaration
+import { intersection } from 'lodash'
+
+// styles declaration
+import './style.css'
+import styles from './style.css.json'
 
 @observer(['images'])
 export default class ArtPage extends Component {
@@ -52,13 +60,62 @@ export default class ArtPage extends Component {
   }
 
   render() {
-    const isLoading = this.props.images.isLoading('photo')
-    const photos = this.props.images.getData('photo')
-    const photosElements = (photos || []).map(x => {
+    const { images, location: { query, query: { tags: originalTags = [] }, pathname } } = this.props
+    const isLoading = images.isLoading('photo')
+    const photos = images.getData('photo')
+    const tags = typeof originalTags === 'string' ? [originalTags] : originalTags
+    const tagsObject = {}
+    photos.forEach(x => {
+      x.Tags.forEach(tag => {
+        if (tagsObject[tag] === undefined) {
+          tagsObject[tag] = 0
+        }
+
+        tagsObject[tag]++
+      })
+    })
+
+    const sortedTags = Object
+      .keys(tagsObject)
+      .map(tag => {
+        const freq = tagsObject[tag]
+
+        return { freq, tag }
+      })
+      .sort((a, b) => a.freq < b.freq ? 1 : -1)
+      .map(({ tag }) => tag)
+
+    const tagsMarkup = sortedTags.map(tag => {
+      const isActive = tags.includes(tag)
+      const url = {
+        pathname,
+        query: {
+          ...query,
+          tags: isActive ? tags.filter(x => tag !== x) : tags.concat(tag)
+        }
+      }
+
       return (
-        <Media key={x.id} item={x} />
+        <Link
+          to={url}
+          key={tag}
+          className={`${styles.tag} ${isActive ? styles.active : ''}`}>
+          {tag}
+        </Link>
       )
     })
+
+    const areTagsEmpty = tags.length === 0
+    const photosElements = photos.map(x => {
+      const isShown = areTagsEmpty || intersection(x.Tags, tags).length > 0
+
+      if (isShown) {
+        return (
+          <Media key={x.ID} item={x} />
+        )
+      }
+    })
+    .filter(Boolean)
 
     const content = isLoading ? (
       <div>
@@ -66,6 +123,9 @@ export default class ArtPage extends Component {
       </div>
     ) : (
       <div>
+        <div className={styles.tagsContainer}>
+          {tagsMarkup}
+        </div>
         <Grid>
           {photosElements}
         </Grid>

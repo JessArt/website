@@ -14,6 +14,9 @@ import MediaBanner from '../../components/media-banner'
 import Loader from '../../components/loader'
 import Disqus from '../../components/disqus'
 
+// utils declaration
+import { autobind } from 'core-decorators'
+
 @observer(['images'])
 export default class MediaPage extends Component {
   static propTypes = {
@@ -27,12 +30,6 @@ export default class MediaPage extends Component {
     return stores.images.fetchImages({ params: { type }})
   }
 
-  constructor(props) {
-    super(props)
-
-    this.handleKeys = this._handleKeys.bind(this)
-  }
-
   componentDidMount() {
     const { location: { query: { type } }, images } = this.props
     images.fetchImages({ params: { type } })
@@ -44,23 +41,24 @@ export default class MediaPage extends Component {
     document.removeEventListener('keydown', this.handleKeys)
   }
 
+  @autobind
   _handleKeys(e) {
     const { params: { id }, location: { query: { type } }, images } = this.props
     const items = images.getData(type)
-    const index = items.findIndex((x) => x.id === id)
+    const index = items.findIndex((x) => x.ID === id)
     const previous = items[index - 1]
     const next = items[index + 1]
     if (e.keyCode === 37 && previous) {
-      browserHistory.push({ pathname: `/media/${previous.id}`, query: { type: previous.type } })
+      browserHistory.push({ pathname: `/media/${previous.ID}`, query: { type: previous.Type } })
     } else if (e.keyCode === 39 && next) {
-      browserHistory.push({ pathname: `/media/${next.id}`, query: { type: next.type } })
+      browserHistory.push({ pathname: `/media/${next.ID}`, query: { type: next.Type } })
     }
   }
 
   getItem() {
     const { params: { id }, location: { query: { type } }, images } = this.props
     const items = images.getData(type)
-    const index = items.findIndex((x) => x.id === id)
+    const index = items.findIndex((x) => x.ID === id)
     const item = items[index]
 
     return item
@@ -71,23 +69,23 @@ export default class MediaPage extends Component {
 
     if (item) {
       const meta = {
-        title: item.title,
-        description: item.description,
+        title: item.Title,
+        description: item.Description,
         meta: {
           name: {
-            keywords: item.keywords
+            keywords: item.Keywords
           },
           itemProp: {
-            name: item.title,
-            description: item.description,
-            image: item.big_url
+            name: item.Title,
+            description: item.Description,
+            image: item.BigURL
           },
           property: {
-            'og:title': item.title,
-            'og:url': `//jess.gallery/media/${item.id}?type=${item.type}`,
-            'og:image': item.big_url,
+            'og:title': item.Title,
+            'og:url': `//jess.gallery/media/${item.ID}?type=${item.Type}`,
+            'og:image': item.BigURL,
             'og:image:type': 'image/jpeg',
-            'og:description': item.description
+            'og:description': item.Description
           }
         },
         auto: {
@@ -95,9 +93,9 @@ export default class MediaPage extends Component {
         }
       }
 
-      if (item.originalWidth && item.originalHeight) {
+      if (item.OriginalWidth && item.OriginalHeight) {
         meta.meta.property['og:image:width'] = 500
-        meta.meta.property['og:image:height'] = 500 / (item.originalWidth / item.originalHeight)
+        meta.meta.property['og:image:height'] = 500 / (item.OriginalWidth / item.OriginalHeight)
       }
 
       return meta
@@ -107,7 +105,7 @@ export default class MediaPage extends Component {
   renderItem() {
     const { params: { id }, location: { pathname, search, query: { type } }, images } = this.props
     const items = images.getData(type)
-    const index = items.findIndex((x) => x.id === id)
+    const index = items.findIndex((x) => x.ID === id)
     const item = items[index]
     const previous = items[index - 1]
     const next = items[index + 1]
@@ -120,7 +118,7 @@ export default class MediaPage extends Component {
           item={item}
           previous={previous}
           next={next}
-          comments={!__SERVER__ && <Disqus id={`${type}/${id}`} url={url} title={item.title} />} />
+          comments={!__SERVER__ && <Disqus id={`${type}/${id}`} url={url} title={item.Title} />} />
       </div>
     ) : this.renderLoader()
   }
@@ -135,6 +133,7 @@ export default class MediaPage extends Component {
     const isLoading = images.isLoading(type)
     const content = isLoading ? this.renderLoader() : this.renderItem()
     const meta = this.createMeta()
+
     return (
       <PageFrame small wide meta={meta}>
         {content}

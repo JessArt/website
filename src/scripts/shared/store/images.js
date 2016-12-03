@@ -41,14 +41,14 @@ export class ImagesStore extends Base {
       return Promise.resolve()
     } else {
       this.data[type].loading = true
-      const promise = get('/v1/api/images', { params })
+      const promise = get('/v2/api/images', { params })
       return delay({ fn: promise, time: 200 })
         .then((rawRes) => {
           const res = rawRes.map(x => {
             return {
               ...x,
-              description: x.description.replace(/"/g, '\"'),
-              title: x.title.replace(/"/g, '\"')
+              Description: x.Description.replace(/"/g, '\"'),
+              Title: x.Title.replace(/"/g, '\"')
             }
           })
           // preload only first 15 images
