@@ -1,3 +1,5 @@
+/* global __SERVER__ */
+
 import React, { Component } from 'react'
 
 import { observer } from 'mobx-react'
@@ -7,6 +9,7 @@ import { Link } from 'react-router'
 import PageFrame from '../page'
 import Loader from '../../components/loader'
 import Article from './article'
+import Disqus from '../../components/disqus'
 import Sharing from '../../components/sharing'
 
 // utils declaration
@@ -101,6 +104,9 @@ export default class ArticlesPage extends Component {
           {article.Subtitle}
         </h4>
         <Article text={article.Text} />
+        <div className={styles.comments}>
+          {!__SERVER__ && <Disqus id={`travel/${article.ID}`} url={url} title={article.Title} />}
+        </div>
       </div>
     )
   }
