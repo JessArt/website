@@ -7,6 +7,7 @@ import { Link } from 'react-router'
 import PageFrame from '../page'
 import Loader from '../../components/loader'
 import Article from './article'
+import Sharing from '../../components/sharing'
 
 // utils declaration
 import { articleLink } from '../../utils/links'
@@ -39,7 +40,7 @@ export default class ArticlesPage extends Component {
             description: article.Description
           },
           property: {
-            'og:title': article.title,
+            'og:title': article.Title,
             'og:url': `//jess.gallery/travel/${article.ID}`,
             'og:image': '//static.jess.gallery/photo_og.jpg',
             'og:image:type': 'image/jpeg',
@@ -85,8 +86,14 @@ export default class ArticlesPage extends Component {
   }
 
   renderArticle(article) {
+    const { location: { pathname, search } } = this.props
+    const url = `https://jess.gallery${pathname}${search}`
+
     return (
       <div className={styles.article} key={article.ID}>
+        <div className={styles.sharing}>
+          <Sharing url={url} text={article.Title} />
+        </div>
         <h2 className={styles.title}>
           {article.Title}
         </h2>

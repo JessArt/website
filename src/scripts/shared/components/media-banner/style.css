@@ -90,6 +90,12 @@
   justify-content: center;
 }
 
+.sharing {
+  margin-top: -15px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
 .originalLink {
   display: block;
   padding: 0 0 20px;

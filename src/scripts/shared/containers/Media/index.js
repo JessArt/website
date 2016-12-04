@@ -12,6 +12,7 @@ import { observer } from 'mobx-react'
 import PageFrame from '../page'
 import MediaBanner from '../../components/media-banner'
 import Loader from '../../components/loader'
+import Sharing from '../../components/sharing'
 import Disqus from '../../components/disqus'
 
 // utils declaration
@@ -116,6 +117,7 @@ export default class MediaPage extends Component {
       <div>
         <MediaBanner
           item={item}
+          sharing={<Sharing url={url} text={item.Title} />}
           previous={previous}
           next={next}
           comments={!__SERVER__ && <Disqus id={`${type}/${id}`} url={url} title={item.Title} />} />

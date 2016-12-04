@@ -19,7 +19,8 @@ export default class MediaBanner extends Component {
     item: PropTypes.object.isRequired,
     previous: PropTypes.object,
     next: PropTypes.object,
-    comments: PropTypes.element
+    comments: PropTypes.element,
+    sharing: PropTypes.element
   }
 
   state = {
@@ -64,7 +65,7 @@ export default class MediaBanner extends Component {
 
   render() {
     const { isLoading } = this.state
-    const { item, previous, next, comments } = this.props
+    const { item, previous, next, comments, sharing } = this.props
 
     const leftLink = previous ? (
       <Link to={{ pathname: `/media/${previous.ID}`, query: { type: previous.Type } }}
@@ -107,6 +108,9 @@ export default class MediaBanner extends Component {
             {content}
           </div>
           {rightLink}
+          <div className={styles.sharing}>
+            {sharing}
+          </div>
           {originalLink}
         </div>
         <div className={`${styles.textContainer} container`}>
