@@ -11,13 +11,14 @@ export default class PageFrame extends Component {
       PropTypes.node,
       PropTypes.arrayOf(PropTypes.node)
     ]),
+    header: PropTypes.element,
     meta: PropTypes.object,
     small: PropTypes.bool,
     wide: PropTypes.bool
   }
 
   render () {
-    const { children, meta, small, wide } = this.props
+    const { children, meta, small, wide, header } = this.props
 
     const content = wide ? children : (
       <div className={'container container__rel'}>
@@ -29,7 +30,9 @@ export default class PageFrame extends Component {
       <div className={'container-with-footer'}>
         <DocumentMeta {...meta} />
         <div className={'container-content'}>
-          <Header small={small} />
+          <Header small={small}>
+            {header}
+          </Header>
           {content}
         </div>
         <div className={'footer'}>

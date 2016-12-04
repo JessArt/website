@@ -20,7 +20,10 @@ let hideOrder = false
 
 export default class Header extends Component {
   static propTypes = {
-    small: PropTypes.bool
+    children: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.arrayOf(PropTypes.node)
+    ])
   }
 
   constructor(props) {
@@ -52,6 +55,7 @@ export default class Header extends Component {
   }
 
   renderSmallHeader({ invisible = false } = {}) {
+    const { children } = this.props
     const { menu, order } = this.state
 
     return (
@@ -155,6 +159,7 @@ export default class Header extends Component {
               {'x'}
             </div>
           </Link>}
+          {children}
       </div>
     )
   }

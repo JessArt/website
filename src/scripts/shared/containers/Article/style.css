@@ -47,3 +47,46 @@
     margin-bottom: 30px;
   }
 }
+
+.header {
+  width: 100%;
+  padding: 10px 25px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.headerLink {
+  flex: 0 0 auto;
+  color: #fff;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.invisible {
+    visibility: hidden;
+  }
+
+  @media (max-width: 768px) {
+    text-align: center;
+    padding: 7px;
+  }
+}
+
+.headerTitle {
+  width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    white-space: normal;
+  }
+}

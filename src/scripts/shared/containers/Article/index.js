@@ -2,10 +2,16 @@ import React, { Component } from 'react'
 
 import { observer } from 'mobx-react'
 
+// components declaration
+import { Link } from 'react-router'
 import PageFrame from '../page'
 import Loader from '../../components/loader'
 import Article from './article'
 
+// utils declaration
+import { articleLink } from '../../utils/links'
+
+// styles declaration
 import './style.css'
 import styles from './style.css.json'
 
@@ -92,14 +98,54 @@ export default class ArticlesPage extends Component {
     )
   }
 
+  getTitle(article) {
+    if (article) {
+      return article.Title
+      // return article.Title.split(' ').slice(0, 3).join(' ') + '...' // eslint-disable-line
+    }
+  }
+
+  renderHeader({ prev, next }) {
+    const prevLink = articleLink(prev)
+    const nextLink = articleLink(next)
+    return (
+      <div className={styles.header}>
+        <Link to={prevLink} className={`${styles.headerLink} ${styles.headerTitle} ${prev ? '' : styles.invisible}`}>
+          {'Previous: '}
+          {this.getTitle(prev)}
+        </Link>
+        <Link to={'/travel'} className={styles.headerLink}>
+          {'Back to the articles'}
+        </Link>
+        <Link to={nextLink} className={`${styles.headerLink} ${styles.headerTitle} ${next ? '' : styles.invisible}`}>
+          {'Next: '}
+          {this.getTitle(next)}
+        </Link>
+      </div>
+    )
+  }
+
   render() {
     const { articles: { data: { loading, articles } }, params: { id } } = this.props
 
-    const article = !loading && articles && articles.find(({ ID }) => ID === id)
+    let index
+    const article = !loading && articles && articles.length !== 0 && articles.find(({ ID }, i) => {
+      const found = ID === id
+
+      if (found) {
+        index = i
+      }
+
+      return found
+    })
+
+    const prevArticle = articles[index - 1]
+    const nextArticle = articles[index + 1]
     const meta = this.createMeta(article)
 
+    const headerMarkup = this.renderHeader({ prev: prevArticle, next: nextArticle })
     return (
-      <PageFrame small meta={meta}>
+      <PageFrame small meta={meta} header={headerMarkup}>
         <div className="container" style={{ background: '#fff' }}>
           {loading && <Loader />}
           {!loading && articles && this.renderArticle(article)}
