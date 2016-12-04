@@ -110,7 +110,7 @@ export default class MediaPage extends Component {
     const previous = items[index - 1]
     const next = items[index + 1]
 
-    const url = `https://jess.gallery/${pathname}${search}`
+    const url = `https://jess.gallery${pathname}${search}`
 
     return item ? (
       <div>
