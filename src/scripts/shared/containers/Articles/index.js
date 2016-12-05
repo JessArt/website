@@ -28,19 +28,25 @@ export default class ArticlesPage extends Component {
       description,
       meta: {
         name: {
-          keywords: 'jess zaikova, travel, blog, articles, russia, czech, prague, USA, travel blog'
+          keywords: 'jess zaikova, travel, blog, articles, russia, prague, czech republic, USA, travel blog'
         },
         itemProp: {
           name: title,
           description,
-          image: '//static.jess.gallery/photo_og.jpg'
+          image: 'https://static.jess.gallery/photo_og.jpg'
         },
         property: {
           'og:title': title,
-          'og:url': '//jess.gallery/travel',
-          'og:image': '//static.jess.gallery/photo_og.jpg',
+          'og:url': 'https://jess.gallery/travel',
+          'og:image': 'https://static.jess.gallery/photo_og.jpg',
           'og:image:type': 'image/jpeg',
-          'og:description': description
+          'og:description': description,
+          'twitter:card': 'summary_large_image',
+          'twitter:site': '@jessellisart',
+          'twitter:url': 'https://jess.gallery/travel',
+          'twitter:title': title,
+          'twitter:description': description,
+          'twitter:image': 'https://static.jess.gallery/photo_og.jpg'
         }
       },
       auto: {

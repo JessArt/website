@@ -41,14 +41,20 @@ export default class ArtPage extends Component {
         itemProp: {
           name: title,
           description,
-          image: '//static.jess.gallery/art_og.jpg'
+          image: 'https://static.jess.gallery/art_og.jpg'
         },
         property: {
           'og:title': title,
-          'og:url': '//jess.gallery/art',
-          'og:image': '//static.jess.gallery/art_og.jpg',
+          'og:url': 'https://jess.gallery/art',
+          'og:image': 'https://static.jess.gallery/art_og.jpg',
           'og:image:type': 'image/jpeg',
-          'og:description': description
+          'og:description': description,
+          'twitter:card': 'summary_large_image',
+          'twitter:site': '@jessellisart',
+          'twitter:url': 'https://jess.gallery/art',
+          'twitter:title': title,
+          'twitter:description': description,
+          'twitter:image': 'https://static.jess.gallery/art_og.jpg'
         }
       },
       auto: {

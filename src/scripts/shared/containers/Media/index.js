@@ -69,6 +69,7 @@ export default class MediaPage extends Component {
     const item = this.getItem()
 
     if (item) {
+      const url = `https://jess.gallery/media/${item.ID}?type=${item.Type}`
       const meta = {
         title: item.Title,
         description: item.Description,
@@ -83,10 +84,16 @@ export default class MediaPage extends Component {
           },
           property: {
             'og:title': item.Title,
-            'og:url': `//jess.gallery/media/${item.ID}?type=${item.Type}`,
+            'og:url': url,
             'og:image': item.BigURL,
             'og:image:type': 'image/jpeg',
-            'og:description': item.Description
+            'og:description': item.Description,
+            'twitter:card': 'summary_large_image',
+            'twitter:site': '@jessellisart',
+            'twitter:url': url,
+            'twitter:title': item.Title,
+            'twitter:description': item.Description,
+            'twitter:image': item.BigURL
           }
         },
         auto: {

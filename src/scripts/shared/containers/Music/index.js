@@ -38,19 +38,25 @@ export default class MusicPage extends Component {
       description,
       meta: {
         name: {
-          keywords: 'jess zaikova, music, guitar, tutorial, youtube, bio, order paint'
+          keywords: 'jess zaikova, music, guitar, tutorial, youtube, bio, order paint, travel, photo, art'
         },
         itemProp: {
           name: title,
           description,
-          image: '//static.jess.gallery/music_og.jpg'
+          image: 'https://static.jess.gallery/music_og.jpg'
         },
         property: {
           'og:title': title,
-          'og:url': '//jess.gallery/music',
-          'og:image': '//static.jess.gallery/music_og.jpg',
+          'og:url': 'https://jess.gallery/music',
+          'og:image': 'https://static.jess.gallery/music_og.jpg',
           'og:image:type': 'image/jpeg',
-          'og:description': description
+          'og:description': description,
+          'twitter:card': 'summary_large_image',
+          'twitter:site': '@jessellisart',
+          'twitter:url': 'https://jess.gallery/music',
+          'twitter:title': title,
+          'twitter:description': description,
+          'twitter:image': 'https://static.jess.gallery/music_og.jpg'
         }
       },
       auto: {

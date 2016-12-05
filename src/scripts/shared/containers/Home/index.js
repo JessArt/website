@@ -38,14 +38,36 @@ export default class HomePage extends Component {
       return <PromoSection key={type} type={type} style={style} position={position} />
     })
 
+    const metaTitle = 'Jess Zaikova Gallery'
+    const metaDescription = 'Jess Zaikova art, photos, travel, travel blog, my music and craft. Order paint!'
+    const metaImage = 'https://static.jess.gallery/site_og.jpg'
+
     const meta = {
-      title: 'Jess Zaikova Gallery',
-      description: 'Jess Zaikova art and photography',
-      canonical: '//jess.gallery',
+      title: metaTitle,
+      description: metaDescription,
+      canonical: 'https://jess.gallery',
       meta: {
         charset: 'utf-8',
         name: {
-          keywords: 'jess zaikova, art, drawing, paint, photo, photography, travel, blog, travel blog'
+          keywords: 'jess zaikova, art, portrait drawing, drawing, paint, photo, travel, blog, travel blog, photography, nature photos'
+        },
+        itemProp: {
+          name: metaTitle,
+          description: metaDescription,
+          image: metaImage
+        },
+        property: {
+          'og:title': metaTitle,
+          'og:url': 'https://jess.gallery',
+          'og:image': metaImage,
+          'og:image:type': 'image/jpeg',
+          'og:description': metaDescription,
+          'twitter:card': 'summary_large_image',
+          'twitter:site': '@jessellisart',
+          'twitter:url': 'https://jess.gallery',
+          'twitter:title': metaTitle,
+          'twitter:description': metaDescription,
+          'twitter:image': metaImage
         }
       }
     }

@@ -53,14 +53,20 @@ export default class AboutPage extends Component {
         itemProp: {
           name: title,
           description,
-          image: '//static.jess.gallery/contact_og.jpg'
+          image: 'https://static.jess.gallery/contact_og.jpg'
         },
         property: {
           'og:title': title,
-          'og:url': '//jess.gallery/about',
-          'og:image': '//static.jess.gallery/contact_og.jpg',
+          'og:url': 'https://jess.gallery/about',
+          'og:image': 'https://static.jess.gallery/contact_og.jpg',
           'og:image:type': 'image/jpeg',
-          'og:description': description
+          'og:description': description,
+          'twitter:card': 'summary_large_image',
+          'twitter:site': '@jessellisart',
+          'twitter:url': 'https://jess.gallery/about',
+          'twitter:title': title,
+          'twitter:description': description,
+          'twitter:image': 'https://static.jess.gallery/contact_og.jpg'
         }
       },
       auto: {

@@ -31,6 +31,8 @@ export default class ArticlesPage extends Component {
 
   createMeta(article) {
     if (article) {
+      const url = `https://jess.gallery/travel/${article.ID}`
+      const image = 'https://static.jess.gallery/photo_og.jpg'
       const meta = {
         title: article.Title,
         description: article.Description,
@@ -38,16 +40,23 @@ export default class ArticlesPage extends Component {
           name: {
             keywords: article.Keywords
           },
-          articleProp: {
+          itemProp: {
             name: article.Title,
-            description: article.Description
+            description: article.Description,
+            image
           },
           property: {
             'og:title': article.Title,
-            'og:url': `//jess.gallery/travel/${article.ID}`,
-            'og:image': '//static.jess.gallery/photo_og.jpg',
+            'og:url': url,
+            'og:image': image,
             'og:image:type': 'image/jpeg',
-            'og:description': article.Description
+            'og:description': article.Description,
+            'twitter:card': 'summary_large_image',
+            'twitter:site': '@jessellisart',
+            'twitter:url': url,
+            'twitter:title': article.Title,
+            'twitter:description': article.Description,
+            'twitter:image': image
           }
         },
         auto: {
@@ -69,14 +78,20 @@ export default class ArticlesPage extends Component {
           itemProp: {
             name: title,
             description,
-            image: '//static.jess.gallery/photo_og.jpg'
+            image: 'https://static.jess.gallery/photo_og.jpg'
           },
           property: {
             'og:title': title,
-            'og:url': '//jess.gallery/travel',
-            'og:image': '//static.jess.gallery/photo_og.jpg',
+            'og:url': 'https://jess.gallery/travel',
+            'og:image': 'https://static.jess.gallery/photo_og.jpg',
             'og:image:type': 'image/jpeg',
-            'og:description': description
+            'og:description': description,
+            'twitter:card': 'summary_large_image',
+            'twitter:site': '@jessellisart',
+            'twitter:url': 'https://jess.gallery/travel',
+            'twitter:title': title,
+            'twitter:description': description,
+            'twitter:image': 'https://static.jess.gallery/photo_og.jpg'
           }
         },
         auto: {

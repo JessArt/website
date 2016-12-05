@@ -97,7 +97,7 @@ export default class Header extends Component {
             <a className={styles.smallIconContainer} href={'//jessellisart.tumblr.com'} target={'_blank'}>
               <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
             </a>
-            <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessellisart'} target={'_blank'}>
+            <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessgalleryart'} target={'_blank'}>
               <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
             </a>
             <a className={styles.smallIconContainer} href={'//www.flickr.com/jessellisart'} target={'_blank'}>
