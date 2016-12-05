@@ -53,6 +53,7 @@ export default class ArticlesPage extends Component {
             'og:description': article.Description,
             'twitter:card': 'summary_large_image',
             'twitter:site': '@jessellisart',
+            'twitter:creator': '@jessellisart',
             'twitter:url': url,
             'twitter:title': article.Title,
             'twitter:description': article.Description,

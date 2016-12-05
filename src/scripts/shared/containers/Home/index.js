@@ -64,6 +64,7 @@ export default class HomePage extends Component {
           'og:description': metaDescription,
           'twitter:card': 'summary_large_image',
           'twitter:site': '@jessellisart',
+          'twitter:creator': '@jessellisart',
           'twitter:url': 'https://jess.gallery',
           'twitter:title': metaTitle,
           'twitter:description': metaDescription,

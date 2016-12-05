@@ -90,6 +90,7 @@ export default class MediaPage extends Component {
             'og:description': item.Description,
             'twitter:card': 'summary_large_image',
             'twitter:site': '@jessellisart',
+            'twitter:creator': '@jessellisart',
             'twitter:url': url,
             'twitter:title': item.Title,
             'twitter:description': item.Description,

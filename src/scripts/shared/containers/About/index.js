@@ -63,6 +63,7 @@ export default class AboutPage extends Component {
           'og:description': description,
           'twitter:card': 'summary_large_image',
           'twitter:site': '@jessellisart',
+          'twitter:creator': '@jessellisart',
           'twitter:url': 'https://jess.gallery/about',
           'twitter:title': title,
           'twitter:description': description,

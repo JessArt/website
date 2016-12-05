@@ -51,6 +51,7 @@ export default class ArtPage extends Component {
           'og:description': description,
           'twitter:card': 'summary_large_image',
           'twitter:site': '@jessellisart',
+          'twitter:creator': '@jessellisart',
           'twitter:url': 'https://jess.gallery/photo',
           'twitter:title': title,
           'twitter:description': description,

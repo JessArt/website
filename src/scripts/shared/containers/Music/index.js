@@ -53,6 +53,7 @@ export default class MusicPage extends Component {
           'og:description': description,
           'twitter:card': 'summary_large_image',
           'twitter:site': '@jessellisart',
+          'twitter:creator': '@jessellisart',
           'twitter:url': 'https://jess.gallery/music',
           'twitter:title': title,
           'twitter:description': description,
