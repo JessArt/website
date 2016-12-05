@@ -70,6 +70,7 @@ export default class MediaPage extends Component {
 
     if (item) {
       const url = `https://jess.gallery/media/${item.ID}?type=${item.Type}`
+      const image = item.BigURL.startsWith('//') ? `https:${item.BigURL}` : item.BigURL
       const meta = {
         title: item.Title,
         description: item.Description,
@@ -80,12 +81,12 @@ export default class MediaPage extends Component {
           itemProp: {
             name: item.Title,
             description: item.Description,
-            image: item.BigURL
+            image: image
           },
           property: {
             'og:title': item.Title,
             'og:url': url,
-            'og:image': item.BigURL,
+            'og:image': image,
             'og:image:type': 'image/jpeg',
             'og:description': item.Description,
             'twitter:card': 'summary_large_image',
@@ -94,7 +95,7 @@ export default class MediaPage extends Component {
             'twitter:url': url,
             'twitter:title': item.Title,
             'twitter:description': item.Description,
-            'twitter:image': item.BigURL
+            'twitter:image': image
           }
         },
         auto: {
