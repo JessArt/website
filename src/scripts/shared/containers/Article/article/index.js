@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 
+// utils declaration
+import { autobind } from 'core-decorators'
+
+// styles declaration
 import './style.css'
 import styles from './style.css.json'
 
@@ -7,8 +11,6 @@ function checkEl({ collection, touched, element }) {
   const parent = element && element.parentElement
   const nextEl = parent && parent.nextElementSibling
   const nextElImage = nextEl && nextEl.firstElementChild
-
-  // console.log(parent, nextEl, nextElImage)
 
   if (nextElImage && nextElImage.tagName === 'IMG') {
     touched.push(nextElImage)
@@ -23,10 +25,46 @@ function checkEl({ collection, touched, element }) {
 }
 
 export default class Article extends Component {
+  @autobind
+  clean() {
+    this.openedImg.classList = styles.magnified
+    this.img.classList += ` ${styles.fading}`
+
+    setTimeout(() => {
+      this.img.classList = styles.magnifiedContainer
+      this.img.innerHTML = ''
+
+      this.openedImg.removeEventListener('click', this.clean)
+      this.openedImg = undefined
+    }, 150)
+  }
+
+  @autobind
+  magnify(e) {
+    this.img.classList += ` ${styles.active}`
+    // console.log(e)
+    const img = e.target
+
+    const newImg = document.createElement('img')
+    newImg.src = img.src
+    newImg.classList = styles.magnified
+    this.openedImg = newImg
+
+    setTimeout(() => {
+      newImg.classList += ` ${styles.active}`
+    }, 0)
+
+    newImg.addEventListener('click', this.clean)
+
+    this.img.appendChild(newImg)
+  }
+
   componentDidMount() {
+    this.imgs = []
     const images = this.ref.querySelectorAll('img')
     const touchedImages = []
     for (const image of images) {
+      // check if it is first in the row – to pack them in a row
       if (!touchedImages.includes(image)) {
         const { collection } = checkEl({
           collection: [image],
@@ -38,6 +76,17 @@ export default class Article extends Component {
           this.createSlider(collection)
         }
       }
+
+      // add magnify handler
+      image.addEventListener('click', this.magnify)
+      this.imgs.push(image)
+    }
+  }
+
+  componentWillUnmount() {
+    this.imgs.forEach(image => image.removeEventListener('click', this.magnify))
+    if (this.openedImg) {
+      this.openedImg.removeEventListener('click', this.clean)
     }
   }
 
@@ -61,7 +110,10 @@ export default class Article extends Component {
 
   render() {
     return (
-      <div ref={node => this.ref = node} dangerouslySetInnerHTML={{ __html: this.props.text }} />
+      <div>
+        <div ref={node => this.ref = node} dangerouslySetInnerHTML={{ __html: this.props.text }} />
+        <div className={styles.magnifiedContainer} ref={node => this.img = node} />
+      </div>
     )
   }
 }

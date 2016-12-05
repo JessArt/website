@@ -81,6 +81,10 @@
 
   &.invisible {
     visibility: hidden;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 
   @media (max-width: 768px) {
@@ -98,5 +102,10 @@
   @media (max-width: 768px) {
     width: 100%;
     white-space: normal;
+  }
+
+  @media (max-width: 340px) {
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }

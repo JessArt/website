@@ -13,5 +13,47 @@
   img {
     max-width: 100%!important;
     max-height: 100%;
+    cursor: zoom-in;
+  }
+
+  @media (max-width: 340px) {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.magnifiedContainer {
+  transition: all 0.15s;
+  opacity: 0;
+
+  &.active {
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  &.fading {
+    opacity: 0;
+  }
+}
+
+.magnified {
+  user-select: none;
+  cursor: zoom-out;
+  transition: all 0.15s;
+  max-width: 55vw!important;
+  max-height: 55vh!important;
+
+  &.active {
+    max-width: 85vw!important;
+    max-height: 85vh!important;
   }
 }
