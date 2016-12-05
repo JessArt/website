@@ -33,16 +33,17 @@ export default class ArticlesPage extends Component {
     if (article) {
       const url = `https://jess.gallery/travel/${article.ID}`
       const image = 'https://static.jess.gallery/photo_og.jpg'
+      const description = article.Description || 'Travel articles of Jess Zaikova around the world. USA, Russia, Czech, Prague, Serbia and much more!' // eslint-disable-line
       const meta = {
         title: article.Title,
-        description: article.Description,
+        description: description,
         meta: {
           name: {
             keywords: article.Keywords
           },
           itemProp: {
             name: article.Title,
-            description: article.Description,
+            description: description,
             image
           },
           property: {
@@ -50,13 +51,13 @@ export default class ArticlesPage extends Component {
             'og:url': url,
             'og:image': image,
             'og:image:type': 'image/jpeg',
-            'og:description': article.Description,
+            'og:description': description,
             'twitter:card': 'summary_large_image',
             'twitter:site': '@jessellisart',
             'twitter:creator': '@jessellisart',
             'twitter:url': url,
             'twitter:title': article.Title,
-            'twitter:description': article.Description,
+            'twitter:description': description,
             'twitter:image': image
           }
         },

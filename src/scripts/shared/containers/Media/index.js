@@ -71,16 +71,17 @@ export default class MediaPage extends Component {
     if (item) {
       const url = `https://jess.gallery/media/${item.ID}?type=${item.Type}`
       const image = item.BigURL.startsWith('//') ? `https:${item.BigURL}` : item.BigURL
+      const description = item.Description || 'Jess Zaikova art, photos, travel, travel blog, my music and craft. Order paint!' // eslint-disable-line
       const meta = {
         title: item.Title,
-        description: item.Description,
+        description: description,
         meta: {
           name: {
             keywords: item.Keywords
           },
           itemProp: {
             name: item.Title,
-            description: item.Description,
+            description: description,
             image: image
           },
           property: {
@@ -88,13 +89,13 @@ export default class MediaPage extends Component {
             'og:url': url,
             'og:image': image,
             'og:image:type': 'image/jpeg',
-            'og:description': item.Description,
+            'og:description': description,
             'twitter:card': 'summary_large_image',
             'twitter:site': '@jessellisart',
             'twitter:creator': '@jessellisart',
             'twitter:url': url,
             'twitter:title': item.Title,
-            'twitter:description': item.Description,
+            'twitter:description': description,
             'twitter:image': image
           }
         },
