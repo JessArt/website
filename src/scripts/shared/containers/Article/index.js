@@ -32,7 +32,7 @@ export default class ArticlesPage extends Component {
   createMeta(article) {
     if (article) {
       const url = `https://jess.gallery/travel/${article.ID}`
-      const image = 'https://static.jess.gallery/photo_og.jpg'
+      const image = article.Cover || 'https://static.jess.gallery/photo_og.jpg'
       const description = article.Description || 'Travel articles of Jess Zaikova around the world. USA, Russia, Czech, Prague, Serbia and much more!' // eslint-disable-line
       const meta = {
         title: article.Title,
@@ -110,19 +110,25 @@ export default class ArticlesPage extends Component {
     const url = `https://jess.gallery${pathname}${search}`
 
     return (
-      <div className={styles.article} key={article.ID}>
-        <div className={styles.sharing}>
-          <Sharing url={url} text={article.Title} />
+      <div key={article.ID}>
+        <div style={{ backgroundImage: `url(${article.Cover})` }} className={styles.background}>
+          <div className={styles.article}>
+            <h2 className={styles.title}>
+              {article.Title}
+            </h2>
+            <h4 className={styles.subtitle}>
+              {article.Subtitle}
+            </h4>
+            <div className={styles.sharing}>
+              <Sharing url={url} text={article.Title} />
+            </div>
+          </div>
         </div>
-        <h2 className={styles.title}>
-          {article.Title}
-        </h2>
-        <h4 className={styles.subtitle}>
-          {article.Subtitle}
-        </h4>
-        <Article text={article.Text} />
-        <div className={styles.comments}>
-          {!__SERVER__ && <Disqus id={`travel/${article.ID}`} url={url} title={article.Title} />}
+        <div className={styles.article}>
+          <Article text={article.Text} />
+          <div className={styles.comments}>
+            {!__SERVER__ && <Disqus id={`travel/${article.ID}`} url={url} title={article.Title} />}
+          </div>
         </div>
       </div>
     )

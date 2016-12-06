@@ -94,16 +94,16 @@ export default class Header extends Component {
             </Link>
           </div>
           <div className={styles.smallExternal}>
-            <a className={styles.smallIconContainer} href={'//jessellisart.tumblr.com'} target={'_blank'}>
+            <a className={styles.smallIconContainer} href={'https://jessellisart.tumblr.com'} target={'_blank'}>
               <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
             </a>
             <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessgalleryart'} target={'_blank'}>
               <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
             </a>
-            <a className={styles.smallIconContainer} href={'//www.flickr.com/jessellisart'} target={'_blank'}>
+            <a className={styles.smallIconContainer} href={'https://www.flickr.com/jessellisart'} target={'_blank'}>
               <img className={styles.smallIcon} src={flickrIcon} alt={'My Flickr account'} />
             </a>
-            <a className={styles.smallIconContainer} href={'//www.twitter.com/jessellisart'} target={'_blank'}>
+            <a className={styles.smallIconContainer} href={'https://twitter.com/jesszaikova'} target={'_blank'}>
               <img className={styles.smallIcon} src={twitterIcon} alt={'My Twitter account'} />
             </a>
           </div>

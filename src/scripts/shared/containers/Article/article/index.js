@@ -60,6 +60,10 @@ export default class Article extends Component {
   }
 
   componentDidMount() {
+    const magnifiedContainer = document.createElement('div')
+    magnifiedContainer.classList = styles.magnifiedContainer
+    this.img = magnifiedContainer
+    document.body.appendChild(magnifiedContainer)
     this.imgs = []
     const images = this.ref.querySelectorAll('img')
     const touchedImages = []
@@ -112,7 +116,6 @@ export default class Article extends Component {
     return (
       <div>
         <div ref={node => this.ref = node} dangerouslySetInnerHTML={{ __html: this.props.text }} />
-        <div className={styles.magnifiedContainer} ref={node => this.img = node} />
       </div>
     )
   }
