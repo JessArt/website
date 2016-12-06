@@ -7,6 +7,11 @@ import PageFrame from '../page'
 import Loader from '../../components/loader'
 import Subscribe from '../../components/subscribe'
 
+// utils declaration
+import { autobind } from 'core-decorators'
+import { chunk } from 'lodash'
+
+// style declaration
 import './style.css'
 import styles from './style.css.json'
 
@@ -58,18 +63,44 @@ export default class ArticlesPage extends Component {
     return meta
   }
 
-  renderArticle(article) {
-    console.log(article)
+  @autobind
+  renderArticles(articles) {
+    if (articles.length) {
+      return (
+        <div className={styles.grid}>
+          <div className={styles.lead}>
+            {this.renderArticle(articles[0])}
+          </div>
+          <div className={styles.otherContainer}>
+            {articles.map((article, i) => {
+              return (
+                <div className={`${styles.otherElement} ${i === 0 ? styles.first : ''}`}>
+                  {this.renderArticle(article)}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )
+    }
+  }
 
+  @autobind
+  renderArticle(article) {
     return (
       <div className={styles.article} key={article.ID}>
-        <Link to={{ pathname: `/travel/${article.ID}` }}>
-          <h2 className={styles.title}>
-            {article.Title}
-          </h2>
-          <h4 className={styles.subtitle}>
-            {article.Subtitle}
-          </h4>
+        <div className={styles.image} style={{ backgroundImage: `url(${article.Cover})` }} />
+        <Link
+          to={{ pathname: `/travel/${article.ID}` }}
+          className={styles.articleLink}>
+          <div className={styles.articleContent}>
+            <h2 className={styles.title}>
+              {article.Title}
+            </h2>
+            <h4 className={styles.subtitle}>
+              {article.Subtitle}
+            </h4>
+          </div>
         </Link>
       </div>
     )
@@ -83,7 +114,7 @@ export default class ArticlesPage extends Component {
         <div className={`container ${styles.container}`} style={{ background: '#fff' }}>
           <div className={styles.content}>
             {loading && <Loader />}
-            {!loading && articles && articles.map(this.renderArticle.bind(this))}
+            {!loading && articles && chunk(articles, 5).map(this.renderArticles)}
           </div>
           <div className={styles.subscribe}>
             <Subscribe />
