@@ -4,7 +4,7 @@ const fs = require('fs')
 
 const nodeModules = {}
 
-const DEV = process.env.NODE_ENV !== 'production';
+const DEV = process.env.NODE_ENV !== 'production'
 fs.readdirSync('node_modules')
   .filter((x) => {
     return ['.bin'].indexOf(x) === -1
@@ -48,6 +48,7 @@ const config = {
   devtool: DEV ? 'eval' : 'source-map',
   entry: {
     server: [
+      'babel-polyfill',
       'isomorphic-fetch',
       './src/scripts/server/index.js'
     ]

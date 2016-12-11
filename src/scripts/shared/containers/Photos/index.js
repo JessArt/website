@@ -19,7 +19,7 @@ import './style.css'
 import styles from './style.css.json'
 
 @observer(['images'])
-export default class ArtPage extends Component {
+export default class PhotoPage extends Component {
   static willRender(stores) {
     return stores.images.fetchImages({ params: { type: 'photo' }})
   }
@@ -73,7 +73,7 @@ export default class ArtPage extends Component {
     const tags = typeof originalTags === 'string' ? [originalTags] : originalTags
     const tagsObject = {}
     photos.forEach(x => {
-      x.Tags.forEach(tag => {
+      (x.Tags || []).forEach(tag => {
         if (tagsObject[tag] === undefined) {
           tagsObject[tag] = 0
         }

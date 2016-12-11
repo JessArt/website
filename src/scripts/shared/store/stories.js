@@ -61,6 +61,7 @@ export class StoriesStore {
       return get('/v1/api/stories')
         .then(res => {
           transaction(() => {
+            this.data.storiesList.loaded = true
             this.data.storiesList.loading = false
             this.data.storiesList.data = res
           })
@@ -69,7 +70,9 @@ export class StoriesStore {
   }
 
   fetchStory(id) {
-    if (!this.storiesDict.get(id) || !this.storiesDict.get(id).loading) {
+    if (!this.storiesDict.get(id) ||
+       (!this.storiesDict.get(id).loading && this.storiesDict.get(id).data === null)
+     ) {
       this.storiesDict.set(id, {
         loading: true,
         data: null,
