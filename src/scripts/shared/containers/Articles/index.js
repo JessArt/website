@@ -47,8 +47,8 @@ export default class ArticlesPage extends Component {
           'og:image:type': 'image/jpeg',
           'og:description': description,
           'twitter:card': 'summary_large_image',
-          'twitter:site': '@jessellisart',
-          'twitter:creator': '@jessellisart',
+          'twitter:site': '@jesszaikova',
+          'twitter:creator': '@jesszaikova',
           'twitter:url': 'https://jess.gallery/travel',
           'twitter:title': title,
           'twitter:description': description,
@@ -64,17 +64,22 @@ export default class ArticlesPage extends Component {
   }
 
   @autobind
-  renderArticles(articles) {
+  renderArticles(articles, i) {
     if (articles.length) {
+      const isEven = i % 2 === 1
       return (
-        <div className={styles.grid}>
+        <div key={`chunk_${i}`} className={`${styles.grid} ${isEven ? styles.even : ''}`}>
           <div className={styles.lead}>
             {this.renderArticle(articles[0])}
           </div>
           <div className={styles.otherContainer}>
             {articles.map((article, i) => {
               return (
-                <div className={`${styles.otherElement} ${i === 0 ? styles.first : ''}`}>
+                <div key={article.ID}
+                     className={`
+                       ${styles.otherElement} ${i === 0 ? styles.first : ''}
+                       ${isEven ? styles.even: ''}
+                    `}>
                   {this.renderArticle(article)}
                 </div>
               )
@@ -113,6 +118,14 @@ export default class ArticlesPage extends Component {
       <PageFrame small meta={meta}>
         <div className={`container ${styles.container}`} style={{ background: '#fff' }}>
           <div className={styles.content}>
+            <div>
+              <h1 className={styles.pageTitle}>
+                {'My adventures'}
+              </h1>
+              <div className={styles.description}>
+                {'Here\'s a place for me to document places I\'ve been; things I\'ve seen; and lessons I\'ve learned. There is no rhyme, reason, or order, so just find a picture that you fancy and give it a click! Dive in to the wormhole.'}
+              </div>
+            </div>
             {loading && <Loader />}
             {!loading && articles && chunk(articles, 5).map(this.renderArticles)}
           </div>

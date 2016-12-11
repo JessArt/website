@@ -39,7 +39,7 @@ export default class HomePage extends Component {
     })
 
     const metaTitle = 'Jess Zaikova Gallery'
-    const metaDescription = 'Jess Zaikova art, photos, travel, travel blog, my music and craft. Order paint!'
+    const metaDescription = 'Jess Zaikova art, photography, travel blog, my music and craft. Write to order prints!'
     const metaImage = 'https://static.jess.gallery/site_og.jpg'
 
     const meta = {
@@ -49,7 +49,7 @@ export default class HomePage extends Component {
       meta: {
         charset: 'utf-8',
         name: {
-          keywords: 'jess zaikova, art, portrait drawing, drawing, paint, photo, travel, blog, travel blog, photography, nature photos'
+          keywords: 'jess zaikova, art, portrait drawing, drawing, photography, travel blog, nature photos'
         },
         itemProp: {
           name: metaTitle,
@@ -63,8 +63,8 @@ export default class HomePage extends Component {
           'og:image:type': 'image/jpeg',
           'og:description': metaDescription,
           'twitter:card': 'summary_large_image',
-          'twitter:site': '@jessellisart',
-          'twitter:creator': '@jessellisart',
+          'twitter:site': '@jesszaikova',
+          'twitter:creator': '@jesszaikova',
           'twitter:url': 'https://jess.gallery',
           'twitter:title': metaTitle,
           'twitter:description': metaDescription,

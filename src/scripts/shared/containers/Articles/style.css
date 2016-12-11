@@ -21,6 +21,14 @@
   }
 }
 
+.pageTitle {
+  text-align: center;
+}
+
+.description {
+
+}
+
 .content {
   flex: 1;
 }
@@ -103,6 +111,17 @@
 .grid {
   display: flex;
   margin: 20px 0;
+
+  &.even {
+    .lead {
+      order: 2;
+    }
+
+    .otherContainer {
+      padding-left: 0;
+      padding-right: 2.5%;
+    }
+  }
 }
 
 .lead {
@@ -133,6 +152,15 @@
     margin-right: 0;
   }
 
+  &.even {
+    margin-left: 15px;
+    margin-right: 0;
+
+    &:nth-child(2n) {
+      margin-left: 0;
+    }
+  }
+
   @media (max-width: 1000px) {
     /*width: 100%;
     margin-right: 0;*/
@@ -146,6 +174,17 @@
 
     &:nth-child(2n + 1) {
       margin-right: 15px;
+    }
+
+    &.even {
+      margin-right: 0;
+      &:nth-child(2n + 1) {
+        margin-left: 0;
+      }
+
+      &:nth-child(2n) {
+        margin-left: 15px;
+      }
     }
   }
 

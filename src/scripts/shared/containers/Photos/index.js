@@ -30,13 +30,13 @@ export default class ArtPage extends Component {
 
   createMeta() {
     const title = 'Jess\' Photos'
-    const description = 'Photos made during my travels in different countries'
+    const description = 'Photos taken during my various travels around the world (Czech Republic, USA, Russia, Serbia)'
     const meta = {
       title,
       description,
       meta: {
         name: {
-          keywords: 'jess zaikova, photos, travel, usa, russia, prague'
+          keywords: 'jess zaikova, photos, travel, prague, usa, russia, czech republic, serbia, europe'
         },
         itemProp: {
           name: title,
@@ -50,8 +50,8 @@ export default class ArtPage extends Component {
           'og:image:type': 'image/jpeg',
           'og:description': description,
           'twitter:card': 'summary_large_image',
-          'twitter:site': '@jessellisart',
-          'twitter:creator': '@jessellisart',
+          'twitter:site': '@jesszaikova',
+          'twitter:creator': '@jesszaikova',
           'twitter:url': 'https://jess.gallery/photo',
           'twitter:title': title,
           'twitter:description': description,

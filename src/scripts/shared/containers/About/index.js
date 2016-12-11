@@ -41,14 +41,14 @@ export default class AboutPage extends Component {
   }
 
   createMeta() {
-    const title = 'All About Jess'
+    const title = 'All About Jess Zaikova'
     const description = 'Story of my life and my hobbies, place to leave feedback'
     const meta = {
       title,
       description,
       meta: {
         name: {
-          keywords: 'jess zaikova, about, bio, story, feedback, contact, order paint, order draw'
+          keywords: 'jess zaikova, about, bio, story, feedback, contact, order prints'
         },
         itemProp: {
           name: title,
@@ -62,8 +62,8 @@ export default class AboutPage extends Component {
           'og:image:type': 'image/jpeg',
           'og:description': description,
           'twitter:card': 'summary_large_image',
-          'twitter:site': '@jessellisart',
-          'twitter:creator': '@jessellisart',
+          'twitter:site': '@jesszaikova',
+          'twitter:creator': '@jesszaikova',
           'twitter:url': 'https://jess.gallery/about',
           'twitter:title': title,
           'twitter:description': description,

@@ -1,0 +1,58 @@
+.title {
+  text-align: center;
+  font-size: 44px;
+  margin-bottom: 50px;
+}
+
+.description {
+  line-height: 1.584;
+  font-size: 22px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sharing {
+  margin-top: 70px;
+  text-align: center;
+}
+
+.storyContainer {
+  min-height: 60vh;
+  padding: 50px;
+  position: relative;
+
+   &:before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background: rgba(0, 0, 0, 0.8);
+   }
+
+   * {
+    position: relative;
+    z-index: 1;
+    color: $color-primary;
+   }
+}
+
+.commentaries {
+  padding: 75px 35px 35px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  @media (max-width: 800px) {
+    padding: 50px 20px 20px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 30px 15px 15px;
+  }
+
+  @media (max-width: 320px) {
+    padding: 20px 10px 10px;
+  }
+}

@@ -86,6 +86,9 @@ export default class Header extends Component {
             <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/travel' }}>
               {'Travel'}
             </Link>
+            <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/collections' }}>
+              {'Collections'}
+            </Link>
             <Link className={styles.smallLink} activeClassName={styles.active} to={{ pathname: '/music' }}>
               {'Music'}
             </Link>
@@ -122,6 +125,11 @@ export default class Header extends Component {
               <div className={styles.menuRow}>
                 <Link className={styles.smallLink} to={{ pathname: '/travel' }}>
                   {'Travel'}
+                </Link>
+              </div>
+              <div className={styles.menuRow}>
+                <Link className={styles.smallLink} to={{ pathname: '/collections' }}>
+                  {'Collections'}
                 </Link>
               </div>
               <div className={styles.menuRow}>

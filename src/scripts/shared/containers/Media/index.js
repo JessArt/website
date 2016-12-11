@@ -43,7 +43,7 @@ export default class MediaPage extends Component {
   }
 
   @autobind
-  _handleKeys(e) {
+  handleKeys(e) {
     const { params: { id }, location: { query: { type } }, images } = this.props
     const items = images.getData(type)
     const index = items.findIndex((x) => x.ID === id)
@@ -71,31 +71,32 @@ export default class MediaPage extends Component {
     if (item) {
       const url = `https://jess.gallery/media/${item.ID}?type=${item.Type}`
       const image = item.BigURL.startsWith('//') ? `https:${item.BigURL}` : item.BigURL
-      const description = item.Description || 'Jess Zaikova art, photos, travel, travel blog, my music and craft. Order paint!' // eslint-disable-line
+      const metaTitle = item.MetaTitle || item.Title
+      const metaDescription = item.MetaDescription || item.Description || 'Jess Zaikova art, photos, travel, travel blog, my music and craft. Order paint!' // eslint-disable-line
       const meta = {
-        title: item.Title,
-        description: description,
+        title: metaTitle,
+        description: metaDescription,
         meta: {
           name: {
             keywords: item.Keywords
           },
           itemProp: {
-            name: item.Title,
-            description: description,
+            name: metaTitle,
+            description: metaDescription,
             image: image
           },
           property: {
-            'og:title': item.Title,
+            'og:title': metaTitle,
             'og:url': url,
             'og:image': image,
             'og:image:type': 'image/jpeg',
-            'og:description': description,
+            'og:description': metaDescription,
             'twitter:card': 'summary_large_image',
-            'twitter:site': '@jessellisart',
-            'twitter:creator': '@jessellisart',
+            'twitter:site': '@jesszaikova',
+            'twitter:creator': '@jesszaikova',
             'twitter:url': url,
-            'twitter:title': item.Title,
-            'twitter:description': description,
+            'twitter:title': metaTitle,
+            'twitter:description': metaDescription,
             'twitter:image': image
           }
         },

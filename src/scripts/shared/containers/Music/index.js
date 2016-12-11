@@ -32,13 +32,13 @@ export default class MusicPage extends Component {
 
   createMeta() {
     const title = 'Jess\' Music'
-    const description = 'Tutorials and my story in music'
+    const description = 'My favourite covers with chords on screen and how to play them'
     const meta = {
       title,
       description,
       meta: {
         name: {
-          keywords: 'jess zaikova, music, guitar, tutorial, youtube, bio, order paint, travel, photo, art'
+          keywords: 'jess zaikova, how to play, music, guitar, tutorial, youtube, bio, order prints, travel, photo, art'
         },
         itemProp: {
           name: title,
@@ -52,8 +52,8 @@ export default class MusicPage extends Component {
           'og:image:type': 'image/jpeg',
           'og:description': description,
           'twitter:card': 'summary_large_image',
-          'twitter:site': '@jessellisart',
-          'twitter:creator': '@jessellisart',
+          'twitter:site': '@jesszaikova',
+          'twitter:creator': '@jesszaikova',
           'twitter:url': 'https://jess.gallery/music',
           'twitter:title': title,
           'twitter:description': description,
