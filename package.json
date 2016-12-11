@@ -92,5 +92,8 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.1",
     "xmlbuilder": "^8.2.2"
+  },
+  "optionalDependencies": {
+    "fsevents": "1.0.15"
   }
 }
