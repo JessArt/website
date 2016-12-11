@@ -12,31 +12,43 @@ const staticLinks = [
   },
   {
     path: '/art',
-    lastmod: '2016-11-03',
+    lastmod: '2016-12-11',
     changefreq: 'weekly',
     priority: 0.8
   },
   {
     path: '/photo',
-    lastmod: '2016-11-03',
+    lastmod: '2016-12-11',
+    changefreq: 'weekly',
+    priority: 0.8
+  },
+  {
+    path: '/travel',
+    lastmod: '2016-12-11',
+    changefreq: 'weekly',
+    priority: 0.8
+  },
+  {
+    path: '/collections',
+    lastmod: '2016-12-11',
     changefreq: 'weekly',
     priority: 0.8
   },
   {
     path: '/about',
-    lastmod: '2016-11-03',
+    lastmod: '2016-12-11',
     changefreq: 'monthly',
     priority: 0.5
   },
   {
     path: '/music',
-    lastmod: '2016-11-03',
+    lastmod: '2016-12-11',
     changefreq: 'monthly',
     priority: 0.5
   }
 ]
 
-const prefix = 'http://jess.gallery'
+const prefix = 'https://jess.gallery'
 
 function createPath(path) {
   return `${prefix}${encodeURI(path)}`
@@ -44,7 +56,7 @@ function createPath(path) {
 
 function loadImages(type) {
   return new Promise((resolve, reject) => {
-    request(`http://cms.jess.gallery/v1/api/images?type=${type}`, function(err, res, body) {
+    request(`http://cms.jess.gallery/v1/api/images?type=${type}`, (err, res, body) => {
       if (err) {
         reject(err)
       } else {
@@ -54,11 +66,45 @@ function loadImages(type) {
   })
 }
 
+function loadArticles() {
+  return new Promise((resolve, reject) => {
+    request('http://cms.jess.gallery/v1/api/articles', (err, res, body) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(JSON.parse(body))
+      }
+    })
+  })
+}
+
+function loadCollections() {
+  return new Promise((resolve, reject) => {
+    request('http://cms.jess.gallery/v1/api/stories', (err, res, body) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(JSON.parse(body))
+      }
+    })
+  })
+}
+
+function fixURL(url) {
+  if (/static\.jess\.gallery/.test(url)) {
+    if (url.startsWith('//')) {
+      return `https:${url}`
+    }
+  }
+
+  return url
+}
+
 function createImage(params) {
   const elem = params.elem
   const value = params.value
   const image = elem.ele('image:image')
-  image.ele('image:loc', null, value.big_url)
+  image.ele('image:loc', null, fixURL(value.big_url))
 
   if (value.description) {
     image.ele('image:caption', null, value.description)
@@ -100,7 +146,10 @@ function build() {
   const photoPromise = loadImages('photo')
   const artPromise = loadImages('art')
 
-  Promise.all([ photoPromise, artPromise ])
+  const articlesPromise = loadArticles()
+  const collectionsPromise = loadCollections()
+
+  const imagesPromise = Promise.all([ photoPromise, artPromise ])
     .then(arrayOfValues => {
       console.log('images were loaded')
       const values = arrayOfValues.reduce((arr, newValues) => arr.concat(newValues), [])
@@ -114,15 +163,51 @@ function build() {
         url.ele('changefreq', null, 'monthly')
         url.ele('priority', null, 0.5)
       })
-
-
-      const xml = urlset.end({ pretty: true })
-      console.log(__dirname)
-      fs.writeFileSync(path.join(__dirname, '..', 'build', 'public', 'sitemap.xml'), xml)
     })
     .catch(err => {
       console.log('error during loading images: ', err)
     })
+
+  const articlesSitemapPromise = articlesPromise.then((res) => {
+    res.forEach(value => {
+      const url = urlset.ele('url')
+      url.ele('loc', null, createPath(`/travel/${value.ID}`))
+      const changedValue = {
+        title: value.MetaTitle || value.Title,
+        description: value.MetaDescription || value.Description,
+        big_url: value.Cover
+      }
+
+      createImage({ elem: url, value: changedValue })
+      url.ele('changefreq', null, 'monthly')
+      url.ele('priority', null, 0.5)
+    })
+  })
+
+  const collectionsSitemapPromise = collectionsPromise.then(res => {
+    res.forEach(value => {
+      const url = urlset.ele('url')
+      url.ele('loc', null, createPath(`/collections/${value.ID}`))
+      const changedValue = {
+        title: value.MetaTitle || value.Title,
+        description: value.MetaDescription || value.Description,
+        big_url: value.Cover
+      }
+
+      createImage({ elem: url, value: changedValue })
+      url.ele('changefreq', null, 'monthly')
+      url.ele('priority', null, 0.5)
+    })
+  })
+
+  Promise
+    .all([ imagesPromise, articlesSitemapPromise, collectionsSitemapPromise ])
+    .then(() => {
+      const xml = urlset.end({ pretty: true })
+      console.log(__dirname)
+      fs.writeFileSync(path.join(__dirname, '..', 'build', 'public', 'sitemap.xml'), xml)
+    })
+    .catch(err => console.log('error happened!', err))
 }
 
 build()
