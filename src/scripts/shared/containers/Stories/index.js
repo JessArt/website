@@ -85,8 +85,9 @@ export default class StoriesPage extends Component {
     const { stories } = this.props
     const isLoading = stories.areStoriesLoading()
     const storiesData = stories.getStories()
+    const meta = this.createMeta()
     return (
-      <PageFrame wide>
+      <PageFrame wide meta={meta}>
         {isLoading && <Loader />}
         {!isLoading &&
         <div className={styles.grid}>

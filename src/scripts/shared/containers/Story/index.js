@@ -97,11 +97,6 @@ export default class StoryPage extends Component {
         }
       }
 
-      if (item.OriginalWidth && item.OriginalHeight) {
-        meta.meta.property['og:image:width'] = 500
-        meta.meta.property['og:image:height'] = 500 / (item.OriginalWidth / item.OriginalHeight)
-      }
-
       return meta
     }
   }
@@ -112,8 +107,10 @@ export default class StoryPage extends Component {
     const isLoading = stories.isStoryLoading(id)
     const story = stories.getStory(id)
 
+    const meta = this.createMeta()
+
     return (
-      <PageFrame wide>
+      <PageFrame wide meta={meta}>
         {(isLoading || !story) && <Loader />}
         {story && this.renderStory(story)}
       </PageFrame>
