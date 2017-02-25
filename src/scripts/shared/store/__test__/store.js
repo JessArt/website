@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import { Store } from '../store'
+import { ImagesStore } from '../images'
 import { toJS } from 'mobx'
 
 test.before(() => {
@@ -8,7 +8,7 @@ test.before(() => {
 })
 
 test('it should serialize correcty', t => {
-  const store = new Store()
+  const store = new ImagesStore()
 
   t.deepEqual(store.serialize(), {
     art: {
@@ -25,18 +25,18 @@ test('it should serialize correcty', t => {
 })
 
 test('it should return loading status correctly', t => {
-  const store = new Store()
+  const store = new ImagesStore()
 
-  store.images.art.loading = true
+  store.data.art.loading = true
 
   t.true(store.isLoading('art'))
   t.false(store.isLoading('photo'))
 })
 
 test('it should return correct data', t => {
-  const store = new Store()
+  const store = new ImagesStore()
 
-  store.images.art.data = [1, 2, 3]
+  store.data.art.data = [1, 2, 3]
 
   t.deepEqual(toJS(store.getData('art')), [1, 2, 3])
 })
