@@ -15,6 +15,7 @@ import fbIcon from './images/fb.png'
 import flickrIcon from './images/flickr.png'
 import tumblrIcon from './images/tumblr.png'
 import twitterIcon from './images/twitter.png'
+import instagramIcon from './images/instagram.png'
 
 let hideOrder = false
 
@@ -58,6 +59,42 @@ export default class Header extends Component {
     const { children } = this.props
     const { menu, order } = this.state
 
+    const TUMBLR_URL = 'https://jesszaikova.tumblr.com/'
+    const FACEBOOK_URL = 'https://www.facebook.com/jesszaikova'
+    const FLICKR_URL = 'https://www.flickr.com/jessellisart'
+    const TWITTER_URL = 'https://twitter.com/jesszaikova'
+    const INSTAGRAM_URL = 'https://www.instagram.com/jesszaikova/'
+
+    const facebookIconMarkup = (
+      <a className={styles.smallIconContainer} href={FACEBOOK_URL} target={'_blank'}>
+        <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
+      </a>
+    )
+    
+    const instagramIconMarkup = (
+      <a className={`${styles.smallIconContainer} ${styles.instagramIconContainer}`} href={INSTAGRAM_URL} target={'_blank'}>
+        <img className={`${styles.smallIcon} ${styles.instagramIcon}`} src={instagramIcon} alt={'My Instagram account'} />
+      </a>
+    )
+
+    const tumblerIconMarkup = (
+      <a className={styles.smallIconContainer} href={TUMBLR_URL} target={'_blank'}>
+        <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
+      </a>
+    )
+
+    const twitterIconMarkup = (
+      <a className={styles.smallIconContainer} href={TWITTER_URL} target={'_blank'}>
+        <img className={styles.smallIcon} src={twitterIcon} alt={'My Twitter account'} />
+      </a>
+    )
+
+    const flickrIconMarkup = (
+      <a className={styles.smallIconContainer} href={FLICKR_URL} target={'_blank'}>
+        <img className={styles.smallIcon} src={flickrIcon} alt={'My Flickr account'} />
+      </a>
+    )
+    
     return (
       <div className={`${styles.smallHeader} ${invisible ? styles.invisible : ''}`}>
         <div className={styles.smallRow}>
@@ -97,18 +134,11 @@ export default class Header extends Component {
             </Link>
           </div>
           <div className={styles.smallExternal}>
-            <a className={styles.smallIconContainer} href={'https://jessellisart.tumblr.com'} target={'_blank'}>
-              <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
-            </a>
-            <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessgalleryart'} target={'_blank'}>
-              <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
-            </a>
-            <a className={styles.smallIconContainer} href={'https://www.flickr.com/jessellisart'} target={'_blank'}>
-              <img className={styles.smallIcon} src={flickrIcon} alt={'My Flickr account'} />
-            </a>
-            <a className={styles.smallIconContainer} href={'https://twitter.com/jesszaikova'} target={'_blank'}>
-              <img className={styles.smallIcon} src={twitterIcon} alt={'My Twitter account'} />
-            </a>
+            {facebookIconMarkup}
+            {instagramIconMarkup}
+            {tumblerIconMarkup}
+            {twitterIconMarkup}
+            {flickrIconMarkup}
           </div>
           {menu &&
             <div className={styles.hamburgerMenu}>
@@ -143,18 +173,11 @@ export default class Header extends Component {
                 </Link>
               </div>
               <div className={`${styles.menuRow} ${styles.list}`}>
-                <a className={styles.smallIconContainer} href={'//jessellisart.tumblr.com'} target={'_blank'}>
-                  <img className={styles.smallIcon} src={tumblrIcon} alt={'My Tumbler account'} />
-                </a>
-                <a className={styles.smallIconContainer} href={'https://www.facebook.com/jessellisart'} target={'_blank'}>
-                  <img className={styles.smallIcon} src={fbIcon} alt={'My Facebook account'} />
-                </a>
-                <a className={styles.smallIconContainer} href={'//www.flickr.com/jessellisart'} target={'_blank'}>
-                  <img className={styles.smallIcon} src={flickrIcon} alt={'My Flickr account'} />
-                </a>
-                <a className={styles.smallIconContainer} href={'//www.twitter.com/jessellisart'} target={'_blank'}>
-                  <img className={styles.smallIcon} src={twitterIcon} alt={'My Twitter account'} />
-                </a>
+                {facebookIconMarkup}
+                {instagramIconMarkup}
+                {tumblerIconMarkup}
+                {twitterIconMarkup}
+                {flickrIconMarkup}
               </div>
             </div>}
           </div>

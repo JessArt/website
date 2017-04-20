@@ -216,9 +216,21 @@
   margin-right: 7px;
 }
 
+.instagramIconContainer {
+  background: #fff;
+  border-radius: 100%;
+}
+
 .smallIcon {
   display: block;
   width: 100%;
+}
+
+.instagramIcon {
+  width: 80%;
+  position: relative;
+  top: 10%;
+  left: 10%;
 }
 
 .order {
