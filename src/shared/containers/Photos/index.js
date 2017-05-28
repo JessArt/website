@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
-// mobx declaration
-import { observer } from 'mobx-react'
+// redux declaration
+import { connect } from 'react-redux'
+import { actions, selectors } from '../../../shared/store/redux'
 
 // components declaration
 import { Link } from 'react-router'
@@ -18,14 +19,18 @@ import { intersection } from 'lodash'
 
 import styles from './style.sass'
 
-@observer(['images'])
-export default class PhotoPage extends Component {
-  static willRender(stores) {
-    return stores.images.fetchImages({ params: { type: 'photo' }})
-  }
+const mapStateToProps = state => ({
+  images: selectors.api.images(state, { type: 'photo' })
+})
 
-  componentDidMount() {
-    this.props.images.fetchImages({ params: { type: 'photo' }})
+const mapDispatchToProps = {
+  fetchImages: actions.api.images
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class PhotoPage extends Component {
+  componentWillMount() {
+    this.props.fetchImages({ type: 'photo' })
   }
 
   createMeta() {
@@ -68,11 +73,11 @@ export default class PhotoPage extends Component {
 
   render() {
     const { images, location: { query, query: { tags: originalTags = [] }, pathname } } = this.props
-    const isLoading = images.isLoading('photo')
-    const photos = images.getData('photo')
+    const isLoading = images.isPending
+    const photos = images.data || []
     const tags = typeof originalTags === 'string' ? [originalTags] : originalTags
     const tagsObject = {}
-    photos.forEach(x => {
+    ;(photos || []).forEach(x => {
       (x.Tags || []).forEach(tag => {
         if (tagsObject[tag] === undefined) {
           tagsObject[tag] = 0

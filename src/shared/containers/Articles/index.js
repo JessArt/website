@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
-import { observer } from 'mobx-react'
+// redux declaration
+import { connect } from 'react-redux'
+import { actions, selectors } from '../../../shared/store/redux'
 
 import { Link } from 'react-router'
 import PageFrame from '../page'
@@ -15,14 +17,18 @@ import { chunk } from 'lodash'
 
 import styles from './style.sass'
 
-@observer(['articles'])
-export default class ArticlesPage extends Component {
-  static willRender(stores) {
-    return stores.articles.fetchArticles()
-  }
+const mapStateToProps = state => ({
+  articles: selectors.api.articles(state)
+})
 
-  componentDidMount() {
-    this.props.articles.fetchArticles()
+const mapDispatchToProps = {
+  fetchArticles: actions.api.articles
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class ArticlesPage extends Component {
+  componentWillMount() {
+    this.props.fetchArticles()
   }
 
   createMeta() {
@@ -112,7 +118,7 @@ export default class ArticlesPage extends Component {
   }
 
   render() {
-    const { articles: { data: { loading, articles } } } = this.props
+    const { articles: { isPending: loading, data: articles } } = this.props
     const meta = this.createMeta()
     return (
       <PageFrame small meta={meta}>

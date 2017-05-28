@@ -6,7 +6,8 @@ import React, { Component, PropTypes } from 'react'
 import { browserHistory } from 'react-router'
 
 // mobx declaration
-import { observer } from 'mobx-react'
+import { connect } from 'react-redux'
+import { actions, selectors } from '../../../shared/store/redux'
 
 // components declaration
 import PageFrame from '../page'
@@ -18,7 +19,15 @@ import Disqus from '../../components/disqus'
 // utils declaration
 import { autobind } from 'core-decorators'
 
-@observer(['images'])
+const mapStateToProps = (state, { location: { query: { type = 'photo' } }}) => ({
+  images: selectors.api.images(state, { type })
+})
+
+const mapDispatchToProps = {
+  fetchImages: actions.api.images
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class MediaPage extends Component {
   static propTypes = {
     params: PropTypes.object.isRequired,
@@ -26,15 +35,12 @@ export default class MediaPage extends Component {
     location: PropTypes.object.isRequired
   }
 
-  static willRender(stores, props) {
-    const { location: { query: { type = 'photo' } = {} } = {} } = props
-    return stores.images.fetchImages({ params: { type }})
+  componentWillMount() {
+    const { location: { query: { type = 'photo' } }, fetchImages } = this.props
+    fetchImages({ type })
   }
 
   componentDidMount() {
-    const { location: { query: { type } }, images } = this.props
-    images.fetchImages({ params: { type } })
-
     document.addEventListener('keydown', this.handleKeys)
   }
 
@@ -44,8 +50,8 @@ export default class MediaPage extends Component {
 
   @autobind
   handleKeys(e) {
-    const { params: { id }, location: { query: { type } }, images } = this.props
-    const items = images.getData(type)
+    const { params: { id }, images } = this.props
+    const items = images.data || []
     const index = items.findIndex((x) => x.ID === id)
     const previous = items[index - 1]
     const next = items[index + 1]
@@ -57,8 +63,8 @@ export default class MediaPage extends Component {
   }
 
   getItem() {
-    const { params: { id }, location: { query: { type } }, images } = this.props
-    const items = images.getData(type)
+    const { params: { id }, images } = this.props
+    const items = images.data || []
     const index = items.findIndex((x) => x.ID === id)
     const item = items[index]
 
@@ -116,7 +122,7 @@ export default class MediaPage extends Component {
 
   renderItem() {
     const { params: { id }, location: { pathname, search, query: { type } }, images } = this.props
-    const items = images.getData(type)
+    const items = images.data || []
     const index = items.findIndex((x) => x.ID === id)
     const item = items[index]
     const previous = items[index - 1]
@@ -141,9 +147,9 @@ export default class MediaPage extends Component {
   }
 
   render() {
-    const { location: { query: { type } }, images } = this.props
+    const { images } = this.props
 
-    const isLoading = images.isLoading(type)
+    const isLoading = images.isPending
     const content = isLoading ? this.renderLoader() : this.renderItem()
     const meta = this.createMeta()
 

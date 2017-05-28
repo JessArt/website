@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
-// mobx declaration
-import { observer } from 'mobx-react'
+// redux declaration
+import { connect } from 'react-redux'
+import { actions, selectors } from '../../../shared/store/redux'
 
 // components declaration
 import { Link } from 'react-router'
@@ -15,17 +16,20 @@ import Subscribe from '../../components/subscribe'
 import { intersection } from 'lodash'
 
 // styles declaration
-
 import styles from './style.sass'
 
-@observer(['images'])
-export default class ArtPage extends Component {
-  static willRender(stores) {
-    return stores.images.fetchImages({ params: { type: 'art' }})
-  }
+const mapStateToProps = state => ({
+  images: selectors.api.images(state, { type: 'art' })
+})
 
-  componentDidMount() {
-    this.props.images.fetchImages({ params: { type: 'art' }})
+const mapDispatchToProps = {
+  fetchImages: actions.api.images
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class ArtPage extends Component {
+  componentWillMount() {
+    this.props.fetchImages({ type: 'art' })
   }
 
   createMeta() {
@@ -69,10 +73,10 @@ export default class ArtPage extends Component {
   render() {
     const { images, location: { query, query: { tags: originalTags = [] }, pathname } } = this.props
     const tags = typeof originalTags === 'string' ? [originalTags] : originalTags
-    const isLoading = images.isLoading('art')
-    const photos = images.getData('art')
+    const isLoading = images.isPending
+    const photos = images.data
     const tagsObject = {}
-    photos.forEach(x => {
+    ;(photos || []).forEach(x => {
       x.Tags.forEach(tag => {
         if (tagsObject[tag] === undefined) {
           tagsObject[tag] = 0
@@ -109,7 +113,7 @@ export default class ArtPage extends Component {
     })
 
     const areTagsEmpty = tags.length === 0
-    const photosElements = photos.map(x => {
+    const photosElements = (photos || []).map(x => {
       const isShown = areTagsEmpty || intersection(x.Tags, tags).length > 0
 
       if (isShown) {

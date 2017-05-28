@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 
-// mobx declaration
-import { toJS } from 'mobx'
-import { observer } from 'mobx-react'
+// redux declaration
+import { connect } from 'react-redux'
+import { actions, selectors } from '../../../shared/store/redux'
 
 // components declaration
 import PageFrame from '../page'
@@ -14,21 +14,29 @@ import Subscribe from '../../components/subscribe'
 // style declaration
 import styles from './style.sass'
 
+const mapStateToProps = state => ({
+  photos: selectors.api.images(state, { type: 'photo' }),
+  art: selectors.api.images(state, { type: 'art' })
+})
 
-@observer(['images'])
+const mapDispatchToProps = {
+  fetchImages: actions.api.images
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class HomePage extends Component {
   static propTypes = {
     images: PropTypes.object
   }
 
   componentDidMount() {
-    const { images } = this.props
-    images.fetchImages({ params: { type: 'art'}})
-    images.fetchImages({ params: { type: 'photo'}})
+    const { fetchImages } = this.props
+    fetchImages({ type: 'art' })
+    fetchImages({ type: 'photo' })
   }
 
   render () {
-    const { images } = this.props
+    const { art, photos } = this.props
     const sections = ['art', 'photo', 'blog', 'contact'].map((type, i) => {
       const EVEN_DIVIDER = 2
       const EVEN_REMINDER = 0
@@ -73,15 +81,16 @@ export default class HomePage extends Component {
       }
     }
 
-    const isArtLoading = images.isLoading('art')
-    const isPhotosLoading = images.isLoading('photo')
-    const art = images.getData('art')
-    const photos = images.getData('photo')
+    const isArtLoading = art.isPending
+    const isPhotosLoading = photos.isPending
+    const artData = art.data || []
+    const photosData = photos.data || []
 
-    const banner = isArtLoading || isPhotosLoading || (art.length === 0 && photos.length === 0) ? (
+    const banner = isArtLoading || isPhotosLoading ||
+      (artData.length === 0 && photosData.length === 0) ? (
       <Loader />
     ) : (
-      <GridBanner items={art.concat(toJS(photos))} />
+      <GridBanner items={artData.concat(photosData)} />
     )
 
     return (

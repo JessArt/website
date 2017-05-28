@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-import { observer } from 'mobx-react'
+import { connect } from 'react-redux'
+import { actions, selectors } from '../../../shared/store/redux'
 
 // components declaration
 import PageFrame from '../page'
@@ -11,14 +12,18 @@ import Loader from '../../components/loader'
 
 import styles from './style.sass'
 
-@observer(['stories'])
-export default class StoriesPage extends Component {
-  componentDidMount() {
-    this.props.stories.fetchStories()
-  }
+const mapStateToProps = state => ({
+  stories: selectors.api.stories(state)
+})
 
-  static willRender(stores) {
-    return stores.stories.fetchStories()
+const mapDispatchToProps = {
+  fetchStories: actions.api.stories
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class StoriesPage extends Component {
+  componentWillMount() {
+    this.props.fetchStories()
   }
 
   renderStories(stories) {
@@ -83,8 +88,8 @@ export default class StoriesPage extends Component {
 
   render() {
     const { stories } = this.props
-    const isLoading = stories.areStoriesLoading()
-    const storiesData = stories.getStories()
+    const isLoading = stories.isPending
+    const storiesData = stories.data || []
     const meta = this.createMeta()
     return (
       <PageFrame wide meta={meta}>

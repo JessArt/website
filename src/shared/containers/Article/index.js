@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react'
 
-import { observer } from 'mobx-react'
+// redux declaration
+import { connect } from 'react-redux'
+import { actions, selectors } from '../../../shared/store/redux'
 
 // components declaration
 import { Link } from 'react-router'
@@ -16,17 +18,20 @@ import Sharing from '../../components/sharing'
 import { articleLink } from '../../utils/links'
 
 // styles declaration
-
 import styles from './style.sass'
 
-@observer(['articles'])
-export default class ArticlesPage extends Component {
-  static willRender(stores) {
-    return stores.articles.fetchArticles()
-  }
+const mapStateToProps = state => ({
+  articles: selectors.api.articles(state)
+})
 
-  componentDidMount() {
-    this.props.articles.fetchArticles()
+const mapDispatchToProps = {
+  fetchArticles: actions.api.articles
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class ArticlesPage extends Component {
+  componentWillMount() {
+    this.props.fetchArticles()
   }
 
   createMeta(article) {
@@ -162,7 +167,7 @@ export default class ArticlesPage extends Component {
   }
 
   render() {
-    const { articles: { data: { loading, articles } }, params: { id } } = this.props
+    const { articles: { isPending: loading, data: articles }, params: { id } } = this.props
 
     let index
     const article = !loading && articles && articles.length !== 0 && articles.find(({ ID }, i) => {

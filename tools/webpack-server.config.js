@@ -20,7 +20,7 @@ const commonLoaders = [
      * Read more http://babeljs.io/docs/usage/experimental/
      */
     test: /\.js$|\.jsx$/,
-    loader: 'babel',
+    loader: 'babel-loader',
     // Reason why we put this here instead of babelrc
     // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
     options: {
@@ -33,7 +33,7 @@ const commonLoaders = [
   },
   {
     test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-    loader: 'url',
+    loader: 'url-loader',
     options: {
       name: '[hash].[ext]',
       limit: 10000
@@ -66,14 +66,26 @@ const config = {
     libraryTarget: 'commonjs2'
   },
   module: {
-    loaders: commonLoaders.concat([
+    rules: commonLoaders.concat([
       {
         test: /\/.pug$/,
         loader: 'pug-loader'
       },
       {
         test: /\.css$/,
-        loader: 'css/locals?module&localIdentName=[name]__[local]___[hash:base64:5]'
+        loader: 'css-loader/locals?module&localIdentName=[name]__[local]___[hash:base64:5]'
+      },
+      {
+        test: /\.sass$/,
+        loader: [
+          'css-loader/locals?module&localIdentName=[name]__[local]___[hash:base64:5]',
+          {
+            loader: 'sass-loader',
+            options: {
+              indentedSyntax: true
+            }
+          }
+        ]
       }
     ])
   },

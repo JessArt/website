@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react'
 
-import { observer } from 'mobx-react'
+// redux declaration
+import { connect } from 'react-redux'
+import { actions, selectors } from '../../../shared/store/redux'
 
 // components declaration
 import PageFrame from '../page'
@@ -12,20 +14,22 @@ import Sharing from '../../components/sharing'
 import Disqus from '../../components/disqus'
 
 // style declaration
-
 import styles from './style.sass'
 
-@observer(['stories'])
+const mapStateToProps = (state, props) => ({
+  storyData: selectors.api.story(state, { id: props.params.id })
+})
+
+const mapDispatchToProps = {
+  fetchStory: actions.api.story
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class StoryPage extends Component {
-  componentDidMount() {
-    const { stories, params: { id } } = this.props
+  componentWillMount() {
+    const { fetchStory, params: { id } } = this.props
 
-    stories.fetchStory(id)
-  }
-
-  static willRender(stores, props) {
-    const { params: { id } } = props
-    return stores.stories.fetchStory(id)
+    fetchStory(id)
   }
 
   renderStory(story) {
@@ -56,10 +60,7 @@ export default class StoryPage extends Component {
     )
   }
 
-  createMeta() {
-    const { stories, params: { id } } = this.props
-    const story = stories.getStory(id)
-
+  createMeta(story) {
     if (story) {
       const url = `https://jess.gallery/collections/${story.ID}`
       const image = story.Cover
@@ -102,12 +103,12 @@ export default class StoryPage extends Component {
   }
 
   render() {
-    const { stories, params: { id } } = this.props
+    const { storyData } = this.props
 
-    const isLoading = stories.isStoryLoading(id)
-    const story = stories.getStory(id)
+    const isLoading = storyData.isPending
+    const story = storyData.data
 
-    const meta = this.createMeta()
+    const meta = this.createMeta(story)
 
     return (
       <PageFrame wide meta={meta}>
