@@ -1,0 +1,47 @@
+.container
+  position: relative
+  height: 100%
+  overflow: hidden
+
+.link
+  display: block
+  width: 100%
+  height: 100%
+
+.image
+  height: 100%
+  display: block
+
+  @media (max-width: 430px)
+    width: 100%
+    height: auto
+
+.overlay
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  opacity: 0
+  transition: opacity .25s linear
+
+  &:hover
+    opacity: 1
+    background-image: linear-gradient(transparent 65%,rgba(0,0,0,.35))
+
+.title
+  position: absolute
+  width: 90%
+  text-align: left
+  bottom: 0
+  color: #fff
+  padding: 5px 8px
+  font-size: 14px
+  font-weight: 600
+  min-height: 17px
+  display: block
+  margin: 2px 0
+  text-shadow: 0 0 2px #000
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden

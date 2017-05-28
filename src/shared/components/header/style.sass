@@ -1,0 +1,238 @@
+@import "../../styles/variables.sass"
+
+.titleContainer
+  height: 70px
+
+.backgroundContainer
+  background-image: url('./images/background.jpg')
+  min-height: 300px
+
+.title
+  background-color: rgba(58, 58, 58, 0.45)
+  margin: 0
+  font-size: 60px
+  text-transform: uppercase
+
+.titleLink
+  text-decoration: none
+
+.noncolored
+  color: #fff
+
+.colored
+  color: $color-primary-dark
+
+.linksContainer
+  background-color: $color-primary-dark
+
+.links
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  padding: 10px
+
+.link
+  color: #fff
+  text-transform: uppercase
+  font-size: 24px
+  font-weight: bold
+  margin-right: 17px
+  text-decoration: none
+  transition: color 0.4s
+
+  &:hover
+    color: $color-primary
+
+.external
+  display: flex
+
+.iconContainer
+  width: 35px
+  height: 35px
+  margin-right: 12px
+
+.icon
+  display: block
+  width: 100%
+
+.smallHeader
+  position: fixed
+  width: 100%
+  top: 0
+  z-index: 3
+  background: $color-primary-dark
+  color: #fff
+  box-sizing: border-box
+  box-shadow: 0 2px 4px rgba(0,0,0,.5)
+
+  @media (max-width: 680px)
+    display: initial
+
+  &.invisible
+    position: static
+    visibility: hidden
+
+.smallRow
+  padding: 15px 25px
+  display: flex
+  justify-content: space-between
+
+  @media (max-width: 680px)
+    display: initial
+
+.smallTitle
+  color: #fff
+  text-transform: uppercase
+  font-size: 20px
+
+  > span
+    border-bottom: 1px solid
+
+  .coloured
+    color: $color-primary
+
+  @media (max-width: 680px)
+    display: block
+    text-align: center
+
+.hamburger
+  display: none
+
+  user-select: none
+  position: absolute
+  right: 15px
+  top: 20px
+  cursor: pointer
+
+  > span
+    height: 2px
+    background: #b1b9bd
+    margin-bottom: 4px
+    display: block
+    width: 22px
+    transition: all .2s
+    position: relative
+
+  &.active
+    > span:nth-child(1)
+      transform: rotate(45deg)
+      top: 6px
+
+    > span:nth-child(2)
+      opacity: 0
+
+
+    > span:nth-child(3)
+      transform: rotate(-45deg)
+      top: -6px
+
+  @media (max-width: 680px)
+    display: block
+
+
+.hamburgerMenu
+  display: none
+
+  background: $color-primary-dark
+  padding-top: 15px
+  @media (max-width: 680px)
+    display: block
+
+
+
+.menuRow
+  color: #fff
+  padding: 10px
+  background: $color-primary-dark
+  border-bottom: 1px solid $color-primary
+
+  &.list
+    display: flex
+    .smallIconContainer
+      width: 30px
+      height: 30px
+      margin-right: 10px
+
+
+
+
+.smallLinks
+  display: flex
+
+  @media (max-width: 680px)
+    display: none
+
+
+
+.smallLink
+  color: #fff
+  margin: 0 5px
+  border-bottom: 1px solid transparent
+  transition: border-color 0.2s
+  font-size: 20px
+
+  &:hover, &.active
+    border-bottom-color: #fff
+
+
+
+.smallExternal
+  display: flex
+
+  @media (max-width: 680px)
+    display: none
+
+
+
+.smallIconContainer
+  width: 22px
+  height: 22px
+  margin-right: 7px
+
+
+.instagramIconContainer
+  background: #fff
+  border-radius: 100%
+
+
+.smallIcon
+  display: block
+  width: 100%
+
+
+.instagramIcon
+  width: 80%
+  position: relative
+  top: 10%
+  left: 10%
+
+
+.order
+  color: #fff
+  display: block
+  text-decoration: underline
+  text-align: center
+  padding: 5px 10px
+  flex: 0 0 100%
+  background: $color-primary2
+  position: relative
+
+  @media (max-width: 680px)
+    padding: 5px 40px
+
+
+
+.close
+  color: '#fff'
+  position: absolute
+  right: 10px
+  top: -5px
+  font-size: 20px
+  padding: 5px
+
+  @media (max-width: 440px)
+    padding: 20px
+    right: -10px
+    top: -15px
+    font-size: 30px

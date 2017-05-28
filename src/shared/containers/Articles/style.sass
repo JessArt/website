@@ -1,0 +1,152 @@
+.container
+  min-height: calc(100vh - 100px)
+  padding: 15px 20px 10px!important
+  height: 100%
+  display: flex
+  flex-direction: column
+
+  @media (max-width: 900px)
+    padding-left: 15px!important
+    padding-right: 15px!important
+
+  @media (max-width: 550px)
+    padding-left: 10px!important
+    padding-right: 10px!important
+
+  @media (max-width: 360px)
+    padding-left: 3px!important
+    padding-right: 3px!important
+
+.pageTitle
+  text-align: center
+
+.description
+
+.content
+  flex: 1
+
+.subscribe
+  flex: 0
+
+.article
+  position: relative
+  overflow: hidden
+  height: 0
+  padding-bottom: 56.25%
+  &:hover
+    .image
+      transform: scale(1.1)
+
+    .articleContent
+      top: 0
+
+.articleLink
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 2
+
+.articleContent
+  transition: all 0.2s
+  overflow: hidden
+  position: absolute
+  width: 100%
+  top: 0
+  z-index: 2
+  color: #fff
+  padding-left: 15px
+  padding-right: 15px
+  background: rgba(0, 0, 0, 0.85)
+
+.image
+  transition: all .2s ease-in-out
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background-size: cover
+
+  &:before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+
+.title
+  font-size: 16px
+
+.subtitle
+  margin-top: -15px
+  font-size: 12px
+  opacity: 0.44
+  font-style: italic
+
+.grid
+  display: flex
+  margin: 20px 0
+
+  &.even
+    .lead
+      order: 2
+
+    .otherContainer
+      padding-left: 0
+      padding-right: 2.5%
+
+.lead
+  width: 49.25%
+
+  @media (max-width: 1000px)
+    display: none
+
+.otherContainer
+  padding-left: 2.5%
+  flex: 1
+  display: flex
+  flex-wrap: wrap
+
+.otherElement
+  width: calc(100% / 2 - 7.5px)
+  margin-right: 15px
+  margin-bottom: 15px
+
+  &.first
+    display: none
+
+  &:nth-child(2n + 1)
+    margin-right: 0
+
+  &.even
+    margin-left: 15px
+    margin-right: 0
+
+    &:nth-child(2n)
+      margin-left: 0
+
+
+  @media (max-width: 1000px)
+    &.first
+      display: block
+
+    &:nth-child(2n)
+      margin-right: 0
+
+    &:nth-child(2n + 1)
+      margin-right: 15px
+
+    &.even
+      margin-right: 0
+      &:nth-child(2n + 1)
+        margin-left: 0
+
+      &:nth-child(2n)
+        margin-left: 15px
+
+  @media (max-width: 660px)
+    width: 100%
+    margin-right: 0

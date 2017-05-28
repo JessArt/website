@@ -1,0 +1,63 @@
+.container
+  max-width: 700px
+  margin: 50px auto 0
+
+  @media (max-width: 1050px)
+    margin: 0 auto
+
+.description
+  font-size: 20px
+  line-height: 1.584
+  padding-bottom: 30px
+
+  &:first-letter
+    color: red
+    font-size: 110px
+    line-height: 50px
+    padding: 22px 5px 7px 0
+    float: left
+
+  @media (max-width: 680px)
+    padding-left: 20px
+    padding-right: 20px
+
+.learn
+  text-decoration: underline
+  font-size: 20px
+  text-align: center
+  margin-top: 40px
+  padding-bottom: 30px
+  cursor: pointer
+
+.subscribeLink
+  display: block
+  text-align: center
+
+.subscribe
+  width: 200px
+
+.list
+  text-align: center
+
+.elemContainer
+  display: inline-block
+  width: 30%
+  height: 0
+  margin: 25px 10px
+  position: relative
+  padding-bottom: calc(100% / 3 * .6 - 35px)
+
+  @media (max-width: 680px)
+    width: 45%
+    padding-bottom: calc(100% / 2 * .6 - 30px)
+
+  @media (max-width: 440px)
+    width: calc(100% - 20px)
+    padding-bottom: calc(100% * .6 - 30px)
+
+.elem
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
