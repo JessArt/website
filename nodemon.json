@@ -1,9 +1,9 @@
 {
   "verbose": false,
   "watch": [
-    "src/scripts/server/index.js",
-    "src/scripts/views/index.pug",
-    "src/scripts/shared/router/routes.js"
+    "src/server/index.js",
+    "src/views/index.pug",
+    "src/shared/router/routes.js"
   ],
   "exec": "npm run build:dev && node build/server.js"
 }

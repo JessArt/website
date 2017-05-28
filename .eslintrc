@@ -34,7 +34,7 @@
     "prefer-template": 2,
     "prefer-const": 2,
 
-    "react/jsx-no-bind": 1,
+    "react/jsx-no-bind": 0,
     "react/jsx-filename-extension": 0,
     "react/react-in-jsx-scope": 2,
     "react/no-unused-prop-types": 1,
