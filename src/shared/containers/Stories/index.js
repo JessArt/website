@@ -5,11 +5,10 @@ import { actions, selectors } from '../../../shared/store/redux'
 
 // components declaration
 import PageFrame from '../page'
-import { Link } from 'react-router'
 import Loader from '../../components/loader'
+import BigGrid from '../../layouts/big-grid'
 
 // style declaration
-
 import styles from './style.sass'
 
 const mapStateToProps = state => ({
@@ -27,24 +26,15 @@ export default class StoriesPage extends Component {
   }
 
   renderStories(stories) {
-    return stories.map(story => {
-      return (
-        <Link
-          className={styles.elem}
-          key={story.ID}
-          to={{ pathname: `/collections/${story.ID}` }}>
-          <img className={styles.elemImage} src={story.Cover} />
-          <div className={styles.elemContent}>
-            <h4 className={styles.elemTitle}>
-              {story.Title}
-            </h4>
-            <div className={styles.elemSubtitle}>
-              {story.Subtitle}
-            </div>
-          </div>
-        </Link>
-      )
-    })
+    const processedStories = stories.map(story => ({
+      id: story.ID,
+      img: story.Cover,
+      title: story.Title,
+      subtitle: story.Subtitle,
+      link: { pathname: `/collections/${story.ID}` }
+    }))
+
+    return <BigGrid elements={processedStories} />
   }
 
   createMeta() {
@@ -94,10 +84,7 @@ export default class StoriesPage extends Component {
     return (
       <PageFrame wide meta={meta}>
         {isLoading && <Loader />}
-        {!isLoading &&
-        <div className={styles.grid}>
-          {this.renderStories(storiesData)}
-        </div>}
+        {!isLoading && this.renderStories(storiesData)}
       </PageFrame>
     )
   }

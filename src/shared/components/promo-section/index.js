@@ -27,7 +27,7 @@ const config = {
     description: 'Wedding photography; portraits for high school, deployment, and family; concert photography; as well as a large collection of cityscape and landscape photography of North America, Europe, and Asia. Photoshoots can also lead to references for drawings of special moments.'
   },
   blog: {
-    link: 'https://www.facebook.com/jessellisart',
+    link: 'https://www.facebook.com/jesszaikova',
     image: blogImage,
     title: 'Progress',
     description: 'Visit tumblr or facebook to watch the progress of my art from sketches to finished pieces.'

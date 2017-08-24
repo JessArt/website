@@ -11,7 +11,6 @@ import { preload } from 'pic-loader'
 import { delay } from 'delounce'
 
 // styles declaration
-
 import styles from './style.sass'
 
 export default class MediaBanner extends Component {

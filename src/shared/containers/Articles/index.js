@@ -8,10 +8,10 @@ import { Link } from 'react-router'
 import PageFrame from '../page'
 import Loader from '../../components/loader'
 import Subscribe from '../../components/subscribe'
+import BigGrid from '../../layouts/big-grid'
 
 // utils declaration
 import { autobind } from 'core-decorators'
-import { chunk } from 'lodash'
 
 // style declaration
 
@@ -32,8 +32,8 @@ export default class ArticlesPage extends Component {
   }
 
   createMeta() {
-    const title = 'Jess\' Zaikova Travel Articles'
-    const description = 'Travel articles of Jess Zaikova around the world. USA, Russia, Czech, Prague, Serbia and much more!'
+    const title = 'Jess\' Travel Articles'
+    const description = 'Travel articles (and anything else of interest) of Jess Zaikova around the world. USA, Russia, Czech, Prague, Serbia and much more!'
     const meta = {
       title,
       description,
@@ -69,31 +69,16 @@ export default class ArticlesPage extends Component {
     return meta
   }
 
-  @autobind
-  renderArticles(articles, i) {
-    if (articles.length) {
-      const isEven = i % 2 === 1
-      return (
-        <div key={`chunk_${i}`} className={`${styles.grid} ${isEven ? styles.even : ''}`}>
-          <div className={styles.lead}>
-            {this.renderArticle(articles[0])}
-          </div>
-          <div className={styles.otherContainer}>
-            {articles.map((article, i) => {
-              return (
-                <div key={article.ID}
-                     className={`
-                       ${styles.otherElement} ${i === 0 ? styles.first : ''}
-                       ${isEven ? styles.even: ''}
-                    `}>
-                  {this.renderArticle(article)}
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      )
-    }
+  renderArticles(articles) {
+    const processedArticles = articles.map(article => ({
+      id: article.ID,
+      link: `/travel/${article.ID}`,
+      img: article.Cover,
+      title: article.Title,
+      subtitle: article.Subscribe
+    }))
+
+    return <BigGrid elements={processedArticles} />
   }
 
   @autobind
@@ -121,19 +106,11 @@ export default class ArticlesPage extends Component {
     const { articles: { isPending: loading, data: articles } } = this.props
     const meta = this.createMeta()
     return (
-      <PageFrame small meta={meta}>
-        <div className={`container ${styles.container}`} style={{ background: '#fff' }}>
+      <PageFrame wide meta={meta}>
+        <div>
           <div className={styles.content}>
-            <div>
-              <h1 className={styles.pageTitle}>
-                {'My adventures'}
-              </h1>
-              <div className={styles.description}>
-                {'Here\'s a place for me to document places I\'ve been; things I\'ve seen; and lessons I\'ve learned. There is no rhyme, reason, or order, so just find a picture that you fancy and give it a click! Dive in to the wormhole.'}
-              </div>
-            </div>
             {loading && <Loader />}
-            {!loading && articles && chunk(articles, 5).map(this.renderArticles)}
+            {!loading && articles && this.renderArticles(articles)}
           </div>
           <div className={styles.subscribe}>
             <Subscribe />

@@ -29,7 +29,7 @@ export default class StoryPage extends Component {
   componentWillMount() {
     const { fetchStory, params: { id } } = this.props
 
-    fetchStory(id)
+    fetchStory({ id })
   }
 
   renderStory(story) {

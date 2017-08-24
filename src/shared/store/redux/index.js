@@ -13,7 +13,7 @@ export default function createStoreInstance({ initialState = {} } = {}) {
   const store = createStore(
     reducer,
     initialState,
-    applyMiddleware(middlewares)
+    applyMiddleware(...middlewares)
   )
 
   return { store, waitTiles }
