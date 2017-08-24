@@ -8,9 +8,6 @@ import PageFrame from '../page'
 import Loader from '../../components/loader'
 import BigGrid from '../../layouts/big-grid'
 
-// style declaration
-import styles from './style.sass'
-
 const mapStateToProps = state => ({
   stories: selectors.api.stories(state)
 })
