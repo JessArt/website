@@ -1,0 +1,51 @@
+.mobileContainer
+  display: none
+
+  @media (max-width: 767px)
+    display: block
+
+.container
+  margin-top: 50px
+  height: 400px
+  margin-bottom: 100px
+  position: relative
+
+  @media (max-width: 767px)
+    display: none
+
+.elem
+  position: absolute
+  border: 2px solid #ccc
+  border-radius: 15px
+  overflow: hidden
+  cursor: pointer
+  transition: all 0.5s
+  opacity: 0.8
+
+  &:hover
+    z-index: 3
+    opacity: 1
+    transform: scale(1.5)
+
+.image
+  width: 100%
+  display: block
+
+.rearrange
+  user-select: none
+  display: flex
+  color: #333
+  text-align: center
+  position: absolute
+  bottom: -15px
+  width: 100%
+  cursor: pointer
+  justify-content: center
+
+  > div
+    border-bottom: 1px solid transparent
+    transition: border-color .2s
+    margin: 0 15px
+
+    &:hover
+      border-bottom-color: #444

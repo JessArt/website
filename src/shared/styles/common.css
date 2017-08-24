@@ -1,0 +1,28 @@
+.container {
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.container__rel {
+  position: relative;
+}
+
+.container-with-footer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container-content {
+  flex: 1 1 auto;
+}
+
+.footer {
+  flex: 0 1 auto;
+}
+
+a {
+  text-decoration: none;
+}

@@ -1,0 +1,143 @@
+@import "../../styles/variables.sass"
+
+.container
+
+.imagesContainer
+  background: $color-primary-dark
+  padding: 30px
+
+  @media (max-width: 320px)
+    padding: 10px
+
+.thumbnailContainer
+  &.active
+    border: 2px solid #a6ddec
+
+.thumbnailsContainer
+  white-space: nowrap
+
+  &:before
+    content: ''
+    z-index: 3
+    position: absolute
+    left: 30px
+    margin-top: 30px
+    height: 195px
+    width: 30px
+    background: linear-gradient(to right, rgba(197,197,197, 1), rgba(197,197,197, 0))
+
+  &:after
+    content: ''
+    z-index: 3
+    position: absolute
+    right: 30px
+    margin-top: 30px
+    height: 195px
+    width: 30px
+    background: linear-gradient(to left, rgba(197,197,197, 1), rgba(197,197,197, 0))
+
+  @media (max-width: 320px)
+    &:before
+      height: 150px
+      left: 10px
+
+    &:after
+      height: 150px
+      right: 10px
+
+.activeContainer
+  display: flex
+  overflow: hidden
+
+  @media (max-width: 1200px)
+    flex-direction: column
+
+.mainImageContainer
+  flex: 1 0 auto
+  max-width: 60%
+
+  @media (max-width: 1200px)
+    max-width: 100%
+
+
+.mainImage
+  cursor: pointer
+  display: block
+  width: 100%
+
+  @media (max-width: 1200px)
+    max-width: 800px
+    margin: 0 auto
+
+.activeText
+  flex: 1 1 auto
+  padding: 0 30px
+  color: $color-primary
+  position: relative
+
+  @media (max-width: 1200px)
+    padding: 0 0 50px
+
+.activeTitle
+  font-size: 30px
+
+.activeDescription
+  line-height: 1.584
+  font-size: 18px
+
+.thumbnailsWrapper
+  overflow: hidden
+  overflow-x: scroll
+
+.thumbnailContainer
+  margin-top: 30px
+  display: inline-block
+  height: 195px
+  overflow: hidden
+  cursor: pointer
+
+  &:hover
+    .thumbnailImage
+      transform: scale(1.1)
+
+  @media (max-width: 320px)
+    height: 150px
+
+
+.thumbnailImage
+  display: block
+  height: 100%
+  transition: all 0.2s
+
+
+.navigationContainer
+
+.navigationLinks
+  display: flex
+  margin-top: 30px
+  justify-content: center
+
+.navigationLink
+  color: $color-primary
+  text-decoration: underline
+  cursor: pointer
+
+  &:first-child
+    margin-right: 20px
+
+  &.invisible
+    display: none
+
+
+.navigationTip
+  position: absolute
+  bottom: 0
+  font-size: 12px
+
+.arrowContainer
+  cursor: pointer
+  border: 1px solid $color-primary
+  border-radius: 1px
+  padding: 2px 5px
+  margin: 0 5px
+  display: inline-block

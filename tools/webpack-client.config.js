@@ -4,42 +4,9 @@ const path = require('path')
 const cwd = process.cwd()
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const variables = require('../src/scripts/shared/variables')
 
 module.exports = function getConfig (params) {
   const dev = params.dev
-  console.log('VARIABLES:')
-  console.log(variables)
-  const postCSSConfig = function () {
-    return [
-      require('postcss-import')({
-        path: path.join(__dirname, '..', 'src', 'scripts', 'shared'),
-        // addDependencyTo is used for hot-reloading in webpack
-        addDependencyTo: webpack
-      }),
-      // Note: you must set postcss-mixins before simple-vars and nested
-      require('postcss-mixins')(),
-      require('postcss-simple-vars')({
-        // to allow hot reload:
-        // https://github.com/postcss/postcss-simple-vars
-        variables
-      }),
-      // Unwrap nested rules like how Sass does it
-      require('postcss-nested')(),
-      //  parse CSS and add vendor prefixes to CSS rules
-      require('autoprefixer')({
-        browsers: ['last 2 versions', 'IE > 8']
-      }),
-      require('postcss-modules')({
-        generateScopedName: '[name]__[local]___[hash:base64:5]'
-      }),
-      // A PostCSS plugin to console.log() the messages registered by other
-      // PostCSS plugins
-      require('postcss-reporter')({
-        clearMessages: true
-      })
-    ]
-  }
 
   const devEntries = dev
     ? [
@@ -49,32 +16,52 @@ module.exports = function getConfig (params) {
     ] : []
 
   const devPlugins = [
-    // Webpack 1.0
-    new webpack.optimize.OccurenceOrderPlugin(),
-    // Webpack 2.0 fixed this mispelling
-    // new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 
   const buildPlugins = [
-    new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.DedupePlugin(),
+    new ExtractTextPlugin({ filename: 'styles.css' }),
     new webpack.optimize.UglifyJsPlugin(),
     // Copy directory contents to {output}/to/directory/
     new CopyWebpackPlugin([
       {
-        from: path.join(__dirname, '..', 'src', 'scripts', 'assets', 'favicons'),
+        from: path.join(__dirname, '..', 'src', 'assets', 'favicons'),
         to: path.join(__dirname, '..', 'build', 'public')
       }
     ])
   ]
 
   const cssLoader = dev
-    ? 'style-loader!css-loader!postcss-loader'
-    : ExtractTextPlugin.extract(
-        'style-loader',
-        'css-loader!postcss-loader')
+    ? ['style-loader', 'css-loader', 'postcss-loader']
+    : ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: ['css-loader', 'postcss-loader']
+    })
+
+  const sassLoader = dev
+    ? [
+      'style-loader',
+      'css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]',
+      {
+        loader: 'sass-loader',
+        options: {
+          indentedSyntax: true
+        }
+      }
+    ]: ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: [
+        'css-loader?modules&localIdentName=[name]__[local]___[hash:base64:5]',
+        {
+          loader: 'sass-loader',
+          options: {
+            indentedSyntax: true
+          }
+        }
+      ]
+    })
 
   const config = {
     // eval - Each module is executed with eval and //@ sourceURL.
@@ -85,29 +72,30 @@ module.exports = function getConfig (params) {
       .concat('isomorphic-fetch')
       .concat('babel-polyfill')
       .concat(devEntries)
-      .concat('./src/scripts/client/index.js'),
+      .concat('./src/client/index.js'),
     output: {
       path: path.resolve(cwd, 'build/public'),
       publicPath: '/',
       filename: 'client.js'
     },
     module: {
-      loaders: [
+      rules: [
         {
           /*
            * TC39 categorises proposals for babel in 4 stages
            * Read more http://babeljs.io/docs/usage/experimental/
            */
           test: /\.js$|\.jsx$/,
-          loader: 'babel-loader',
           exclude: /(node_modules|bower_components)/,
-          // Reason why we put this here instead of babelrc
-          // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
-          query: {
-            presets: []
-            .concat(dev ? 'react-hmre' : [])
-            .concat(['react', 'es2015', 'stage-1']),
-            plugins: ['transform-decorators-legacy']
+          use: {
+            loader: 'babel-loader',
+            options: {
+              // https://github.com/gaearon/react-transform-hmr/issues/5#issuecomment-142313637
+              presets: []
+              .concat(dev ? 'react-hmre' : [])
+              .concat(['react', 'es2015', 'stage-1']),
+              plugins: ['transform-decorators-legacy']
+            }
           }
         },
         {
@@ -115,13 +103,13 @@ module.exports = function getConfig (params) {
           loader: cssLoader
         },
         {
-          test: /\.json$/,
-          loader: 'json'
+          test: /\.sass$/,
+          use: sassLoader
         },
         {
           test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-          loader: 'url',
-          query: {
+          loader: 'url-loader',
+          options: {
             name: '[hash].[ext]',
             limit: 10000
           }
@@ -138,8 +126,7 @@ module.exports = function getConfig (params) {
           // This has effect on the react lib size
           NODE_ENV: JSON.stringify(dev ?  'development' : 'production')
         }
-      })),
-    postcss: postCSSConfig
+      }))
   }
 
   return config
