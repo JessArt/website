@@ -29,7 +29,7 @@ const mapDispatchToProps = {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class ArticlesPage extends Component {
+export default class ArticlePage extends Component {
   componentWillMount() {
     this.props.fetchArticles()
   }
@@ -111,32 +111,34 @@ export default class ArticlesPage extends Component {
   }
 
   renderArticle(article) {
-    const { location: { pathname, search } } = this.props
-    const url = `https://jess.gallery${pathname}${search}`
+    if (article) {
+      const { location: { pathname, search } } = this.props
+      const url = `https://jess.gallery${pathname}${search}`
 
-    return (
-      <div key={article.ID}>
-        <div style={{ backgroundImage: `url(${article.Cover})` }} className={styles.background}>
+      return (
+        <div key={article.ID}>
+          <div style={{ backgroundImage: `url(${article.Cover})` }} className={styles.background}>
+            <div className={styles.article}>
+              <h2 className={styles.title}>
+                {article.Title}
+              </h2>
+              <h4 className={styles.subtitle}>
+                {article.Subtitle}
+              </h4>
+              <div className={styles.sharing}>
+                <Sharing url={url} text={article.Title} />
+              </div>
+            </div>
+          </div>
           <div className={styles.article}>
-            <h2 className={styles.title}>
-              {article.Title}
-            </h2>
-            <h4 className={styles.subtitle}>
-              {article.Subtitle}
-            </h4>
-            <div className={styles.sharing}>
-              <Sharing url={url} text={article.Title} />
+            <Article text={article.Text} />
+            <div className={styles.comments}>
+              {!__SERVER__ && <Disqus id={`travel/${article.ID}`} url={url} title={article.Title} />}
             </div>
           </div>
         </div>
-        <div className={styles.article}>
-          <Article text={article.Text} />
-          <div className={styles.comments}>
-            {!__SERVER__ && <Disqus id={`travel/${article.ID}`} url={url} title={article.Title} />}
-          </div>
-        </div>
-      </div>
-    )
+      )
+    }
   }
 
   getTitle(article) {
@@ -180,11 +182,11 @@ export default class ArticlesPage extends Component {
       return found
     })
 
-    const prevArticle = articles[index - 1]
-    const nextArticle = articles[index + 1]
+    const prevArticle = articles && articles[index - 1]
+    const nextArticle = articles && articles[index + 1]
     const meta = this.createMeta(article)
 
-    const headerMarkup = this.renderHeader({ prev: prevArticle, next: nextArticle })
+    const headerMarkup = articles && this.renderHeader({ prev: prevArticle, next: nextArticle })
     return (
       <PageFrame small meta={meta} header={headerMarkup}>
         <div className="container" style={{ background: '#fff' }}>
