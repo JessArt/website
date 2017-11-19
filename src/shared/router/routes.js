@@ -1,5 +1,8 @@
+/* global __SERVER__ */
+
 import React from 'react'
-import { Router, IndexRoute, Route, browserHistory, Redirect } from 'react-router'
+import { Router, IndexRoute, Route, browserHistory, Redirect, applyRouterMiddleware } from 'react-router'
+import { useScroll } from 'react-router-scroll'
 
 import App from '../containers/App'
 import Home from '../containers/Home'
@@ -15,7 +18,7 @@ import Stories from '../containers/Stories'
 import Story from '../containers/Story'
 
 export default (
-  <Router history={browserHistory}>
+  <Router history={browserHistory} render={!__SERVER__ && applyRouterMiddleware(useScroll())}>
     <Route path={'/'} component={App}>
       <IndexRoute component={Home} />
       <Route path={'art'} component={Art} />
