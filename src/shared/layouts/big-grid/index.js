@@ -10,7 +10,7 @@ export default class BigGrid extends Component {
           className={styles.elem}
           key={element.id}
           to={element.link}>
-          <img className={styles.elemImage} src={element.img} />
+          <div className={styles.elemImage} style={{ backgroundImage: `url(${element.img})`}} />
           <div className={styles.elemContent}>
             <h4 className={styles.elemTitle}>
               {element.title}
@@ -23,7 +23,7 @@ export default class BigGrid extends Component {
       )
     })
   }
-  
+
   render() {
     return (
       <div className={styles.grid}>
