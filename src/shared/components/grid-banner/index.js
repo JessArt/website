@@ -15,7 +15,7 @@ import { random, shuffle, sample } from 'lodash'
 const TRANSITION_TIME = 5000
 const MIN_IMAGES_NUMBER = 20
 const MAX_IMAGES_NUMBER = 60
-const INITIAL_NUMBER_OF_IMAGES = 45
+const INITIAL_NUMBER_OF_IMAGES = 32
 const FIRST_INDEX = 0
 const MIN_LEFT_POSITION = 0
 const MAX_LEFT_POSITION = 80
