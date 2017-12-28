@@ -8,6 +8,7 @@
   bottom: 0
   right: 0
   z-index: 0
+  background: #222
   transition: all 0.2s
 
   .textContainer
@@ -48,16 +49,15 @@
 .smallContainer
   padding: 15px 0 5px
   &.bright
-    background-color: #fff
+    background-color: #ccc
 
   &.dark
-    background-color: $color-primary-dark
+    background-color: #777
 
 .smallImage
   height: 135px
   display: block
   margin: 0 auto
-
 
 .smallTitle
   text-align: center
@@ -67,8 +67,6 @@
   &.dark
     color: #fff
 
-
-
 .container
   display: flex
   flex-direction: row
@@ -76,23 +74,19 @@
   padding: 20px 25px
   margin-bottom: 25px
   height: 100%
+  overflow: hidden
 
   &.bright
-    background-color: #fff
-
+    background-color: #777
 
   &.dark
-    background-color: $color-primary-dark
-
-
+    background-color: #ccc
 
 .logoContainer
   flex: 0 0 200px
 
   &.right
     order: 2
-
-
 
 .image
   display: block
@@ -106,11 +100,8 @@
   &.left
     order: 1
 
-
-  &.dark
+  &.bright
     color: #fff
-
-
 
 .title
   font-size: 24px

@@ -17,7 +17,7 @@
   text-decoration: none
 
 .noncolored
-  color: #fff
+  color: #333
 
 .colored
   color: $color-primary-dark
@@ -33,7 +33,7 @@
   padding: 10px
 
 .link
-  color: #fff
+  color: #333
   text-transform: uppercase
   font-size: 24px
   font-weight: bold
@@ -60,9 +60,9 @@
   position: fixed
   width: 100%
   top: 0
-  z-index: 3
+  z-index: 11
   background: $color-primary-dark
-  color: #fff
+  color: #333
   box-sizing: border-box
   box-shadow: 0 2px 4px rgba(0,0,0,.5)
 
@@ -82,7 +82,9 @@
     display: initial
 
 .smallTitle
-  color: #fff
+  display: flex
+  align-items: center
+  color: #333
   text-transform: uppercase
   font-size: 20px
 
@@ -90,7 +92,7 @@
     border-bottom: 1px solid
 
   .coloured
-    color: $color-primary
+    color: #888
 
   @media (max-width: 680px)
     display: block
@@ -142,7 +144,7 @@
 
 
 .menuRow
-  color: #fff
+  color: #333
   padding: 10px
   background: $color-primary-dark
   border-bottom: 1px solid $color-primary
@@ -155,10 +157,9 @@
       margin-right: 10px
 
 
-
-
 .smallLinks
   display: flex
+  align-items: center
 
   @media (max-width: 680px)
     display: none
@@ -166,19 +167,22 @@
 
 
 .smallLink
-  color: #fff
+  color: #333
   margin: 0 5px
   border-bottom: 1px solid transparent
   transition: border-color 0.2s
   font-size: 20px
 
   &:hover, &.active
-    border-bottom-color: #fff
+    border-bottom-color: #333
 
 
 
 .smallExternal
   display: flex
+  background: #333
+  padding: 10px
+  border-radius: 20px
 
   @media (max-width: 680px)
     display: none
@@ -189,6 +193,9 @@
   width: 22px
   height: 22px
   margin-right: 7px
+
+  &:last-child
+    margin-right: 0
 
 
 .instagramIconContainer
@@ -209,7 +216,7 @@
 
 
 .order
-  color: #fff
+  color: #333
   display: block
   text-decoration: underline
   text-align: center
@@ -224,7 +231,7 @@
 
 
 .close
-  color: '#fff'
+  color: '#333'
   position: absolute
   right: 10px
   top: -5px

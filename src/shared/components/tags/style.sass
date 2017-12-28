@@ -1,0 +1,102 @@
+.container
+  margin-top: 20px
+  display: flex
+  justify-content: center
+
+  > .tag
+    padding: 20px 0
+    margin: 5px 15px
+    font-size: 20px
+
+    &.withNesting
+
+      &:after
+        display: none
+
+      > .tagName
+        border-bottom: 1px dashed #333
+
+        &.active
+          border-bottom: 1px solid #333
+
+    > a
+      color: #000
+
+    > .nested
+      left: -50px
+      margin-top: 10px
+
+    &:hover
+      > .tagName
+        border-bottom: 1px solid #333
+
+  > .tag
+    > .tagName.active
+      border-bottom: 1px solid #333
+
+.tag
+  display: inline-block
+  color: #000
+  position: relative
+  padding: 15px 0
+  cursor: pointer
+  margin-top: -20px
+
+  &:nth-child(1)
+    z-index: 10
+
+  &:nth-child(2)
+    z-index: 9
+
+  &:nth-child(3)
+    z-index: 8
+
+  &:nth-child(4)
+    z-index: 7
+
+  &:nth-child(5)
+    z-index: 6
+
+  &.withNesting
+    &:after
+      content: ''
+      position: absolute
+      width: 0
+      height: 0
+      right: 10px
+      top: calc(50% - 8px)
+      border: 8px solid #000
+      border-left-color: #fff
+
+    > .tagName
+      border-bottom: 1px dashed #ddd
+
+      &.active
+        border-bottom: 1px solid #ddd
+
+  &:hover
+    
+    > .nested
+      display: flex
+
+    > .tagName
+      border-bottom: 1px solid #ddd
+
+.tagName.active
+  border-bottom: 1px solid #ddd
+
+.nested
+  z-index: 2
+  margin-top: -30px
+  min-width: 200px
+  border: 1px solid #ccc
+  border-radius: 5px
+  padding: 15px 25px 0
+  position: absolute
+  left: 75%
+  background: #000
+  flex-direction: column
+  display: none
+
+  > *, a
+    color: #fff

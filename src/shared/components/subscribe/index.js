@@ -1,63 +1,69 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import RPT from "prop-types";
+
+import { connect } from "react-redux";
+import { actions } from "../../store/redux";
 
 // components declaration
-import Button from '../button'
-import Input from '../input'
+import Button from "../button";
+import Input from "../input";
 
 // utils declaration
-import { autobind } from 'core-decorators'
-import { post } from '../../utils/fetch'
+import { autobind } from "core-decorators";
 
 // styles declaration
 
-import styles from './style.sass'
+import styles from "./style.sass";
 
+const mapDispatchToProps = {
+  subscribe: actions.api.subscribe
+};
+
+@connect(null, mapDispatchToProps)
 export default class Subscribe extends Component {
-
   state = {
-    email: '',
-    emailError: '',
+    email: "",
+    emailError: "",
     pending: false,
     sent: false
-  }
+  };
 
   @autobind
   onSubmit(e) {
-    e.preventDefault()
-    const { email } = this.state
+    e.preventDefault();
 
     if (this.validate()) {
       this.setState({ pending: true }, () => {
-        post('/v1/api/subscribe', { params: { email } }).then(() => {
-          this.setState({ pending: false, sent: true })
-        })
-      })
+        this.props.subscribe(this.state).then(() => {
+          this.setState({ pending: false, sent: true });
+        });
+      });
     }
 
-    return false
+    return false;
   }
 
   validate() {
-    const { email } = this.state
+    const { email } = this.state;
 
-    const emailError = /@/.test(email) ? '' : 'Incorrect email'
+    const emailError = /@/.test(email) ? "" : "Incorrect email";
 
-    this.setState({ emailError })
+    this.setState({ emailError });
 
-    return !emailError
+    return !emailError;
   }
 
   @autobind
   onChange(e) {
-    this.setState({ email: e.target.value })
+    this.setState({ email: e.target.value });
   }
 
   render() {
-    const { email, pending, emailError, sent } = this.state
+    const { email, pending, emailError, sent } = this.state;
 
     const content = sent ? (
       <div className={styles.sent}>
-        {'Thank you very much! No spam, only my updates with love!'}
+        {"Thank you very much! No spam, only my updates with love!"}
       </div>
     ) : (
       <form onSubmit={this.onSubmit} className={styles.form}>
@@ -65,24 +71,25 @@ export default class Subscribe extends Component {
           <Input
             error={emailError}
             onChange={this.onChange}
-            placeholder={'Email'}
-            value={email} />
+            placeholder={"Email"}
+            value={email}
+          />
         </div>
         <div className={styles.row}>
-          <Button className={styles.button} type={'submit'} disabled={pending}>
-            {pending ? 'Subscribing...' : 'Subscribe'}
+          <Button className={styles.button} type={"submit"} disabled={pending}>
+            {pending ? "Subscribing..." : "Subscribe"}
           </Button>
         </div>
       </form>
-    )
+    );
 
     return (
       <div className={`${styles.container} ${this.props.className}`}>
         <h3 className={styles.title}>
-          {'Subscribe and get all my new updates!'}
+          {"Subscribe and get all my new updates!"}
         </h3>
         {content}
       </div>
-    )
+    );
   }
 }
