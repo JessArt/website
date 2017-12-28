@@ -1,65 +1,34 @@
 .container
+  text-align: center
+  margin-top: 20px
 
-.grid
+.link
+  position: relative
+  display: inline-block
+  margin: 15px
+
+.iconWrapper
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
   display: flex
-  flex-wrap: wrap
+  align-items: center
   justify-content: center
 
-.elem
-  position: relative
-  width: calc(100% / 3)
-  padding-bottom: calc(88% / 3)
-  overflow: hidden
+.image
+  height: 480px
 
-  &:before
-    content: ''
-    z-index: 1
-    position: absolute
-    bottom: 0
-    top: 0
-    right: 0
-    left: 0
-    transition: background 0.35s
-    background: rgba(0, 0, 0, 0)
+.icon
+  background-size: 152px 135px
+  background-position: 0 0
+  width: 135px
+  height: 135px
 
-  &:hover
-    .elemImage
-      transform: translateX(-50%) scale(1.05)
-
-    &:before
-      background: rgba(16, 176, 184, 0.6)
-
-  @media (max-width: 1020px)
-    width: calc(100% / 2)
-    padding-bottom: calc(88% / 2)
-
-  @media (max-width: 565px)
-    width: calc(100%)
-    padding-bottom: calc(88%)
-
-.elemContent
-  z-index: 2
+.summary
   position: absolute
-  bottom: 0
+  bottom: 10px
   width: 100%
-  background: rgba(0, 0, 0, 0.25)
-  padding: 5px 0 15px
-
-.elemImage
-  position: absolute
-  height: 100%
-  transition: all 0.2s
-  left: 50%
-  transform: translateX(-50%)
-
-.elemTitle
-  padding: 6px 24px
-  margin: 0
-  text-align: center
-  font-size: 22px
   color: #fff
-
-.elemSubtitle
   text-align: center
-  font-size: 14px
-  color: #fff
