@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/JessArt/website.svg?branch=master)](https://travis-ci.org/JessArt/website)
 
-This is a source code for web application at [jess.gallery](http://jess.gallery).
+This is a source code for web-application at [jess.gallery](http://jess.gallery).
 
 [![Example](example.jpg)](http://jess.gallery)
 
@@ -41,4 +41,4 @@ npm run test
 This is an isomorphic application built in React.js, with dynamic prefetch of needed resources, for better mobile access and SEO. It uses [mobx](https://github.com/mobxjs/mobx) instead of de-facto standard [Redux](https://github.com/reactjs/redux) approach, due to my interest to this technology and also due to the fact, that this should be quite small project – so far it shows itself as much more lightweight and less strict solution.
 
 For bundling I use webpack and webpack-dev-server for development, which with [react hot reload preset](https://github.com/danmartinez101/babel-preset-react-hmre) gives wonderful development experience.
-I use PostCSS mostly out of curiousity, because I feel that all modern CSS processors are capable about basically the same possilities. Maybe PostCSS is more flexible, but definitely it requires more setup.
+I use PostCSS mostly out of curiousity, because I feel that all modern CSS processors are capable about basically the same possibilities. Maybe PostCSS is more flexible, but definitely it requires more setup.
